@@ -2,8 +2,7 @@ package org.roof.im.handler.online;
 
 import org.roof.im.handler.AbstractRequestHandler;
 import org.roof.im.request.OnlineRequest;
-import org.roof.im.response.Response;
-import org.roof.im.route.NodeNameBuilder;
+import org.roof.im.route.ServiceNameBuilder;
 import org.roof.im.user.UserService;
 import org.roof.im.user.UserStatus;
 import org.roof.im.user.UserStatusService;
@@ -20,14 +19,14 @@ public class OnlineHandler extends AbstractRequestHandler<OnlineRequest> {
 
     private UserService userService;
 
-    private NodeNameBuilder nodeNameBuilder;
+    private ServiceNameBuilder serviceNameBuilder;
 
     public String receive(OnlineRequest onlineRequest) {
         String username = onlineRequest.getUsername();
         if (!userService.exist(username)) {
             return USER_NOT_EXISTS;
         }
-        String nodeName = nodeNameBuilder.getNodeName();
+        String nodeName = serviceNameBuilder.getName();
         UserStatus userStatus = userStatusService.getStatus(username);
         if (userStatus != null) {
             if (nodeName.equals(userStatus.getNodeName())) {
@@ -60,7 +59,7 @@ public class OnlineHandler extends AbstractRequestHandler<OnlineRequest> {
         this.userService = userService;
     }
 
-    public void setNodeNameBuilder(NodeNameBuilder nodeNameBuilder) {
-        this.nodeNameBuilder = nodeNameBuilder;
+    public void setServiceNameBuilder(ServiceNameBuilder serviceNameBuilder) {
+        this.serviceNameBuilder = serviceNameBuilder;
     }
 }
