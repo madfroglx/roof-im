@@ -1,8 +1,14 @@
-package org.roof.im.websocket;
+package org.roof.im.gateway.websocket;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.roof.chain.api.Chain;
 import com.roof.chain.api.ValueStack;
 import com.roof.chain.support.GenericValueStack;
+import org.roof.im.chain.ImValueStackConstant;
+import org.roof.im.gateway.RequestEnterPoint;
+import org.roof.im.request.Request;
+import org.roof.im.session.SessionStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.socket.CloseStatus;
@@ -12,9 +18,9 @@ import org.springframework.web.socket.handler.ConcurrentWebSocketSessionDecorato
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 
-public class WebSocketAcceptEndPoint extends TextWebSocketHandler {
-    private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketAcceptEndPoint.class);
-    private WebSocketSessionStore webSocketSessionStore;
+public class WebSocketRequestEnterPoint extends TextWebSocketHandler implements RequestEnterPoint {
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketRequestEnterPoint.class);
+    private SessionStore webSocketSessionStore;
 
     private int sendTimeLimit = 10 * 1000;
     private int sendBufferSizeLimit = 512 * 1024;
@@ -22,8 +28,18 @@ public class WebSocketAcceptEndPoint extends TextWebSocketHandler {
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) {
+        String textMessage = message.getPayload();
+        String sessionID = session.getId();
+        receive(sessionID, textMessage);
+    }
+
+    @Override
+    public void receive(String sessionID, String message) {
         ValueStack valueStack = new GenericValueStack();
-        valueStack.set("textMessage", message);
+        valueStack.set(ImValueStackConstant.TEXT_MESSAGE, message);
+        valueStack.set(ImValueStackConstant.SESSION_ID, sessionID);
+        JSONObject jsonObjectMessage = JSON.parseObject(message);
+        valueStack.set(ImValueStackConstant.JSON_OBJECT_MESSAGE, jsonObjectMessage);
         try {
             enterChain.doChain(valueStack);
         } catch (Exception e) {
@@ -48,11 +64,11 @@ public class WebSocketAcceptEndPoint extends TextWebSocketHandler {
         LOGGER.error(exception.getMessage(), exception);
     }
 
-    public void setWebSocketSessionStore(WebSocketSessionStore webSocketSessionStore) {
+    public void setWebSocketSessionStore(SessionStore webSocketSessionStore) {
         this.webSocketSessionStore = webSocketSessionStore;
     }
 
-    public WebSocketSessionStore getWebSocketSessionStore() {
+    public SessionStore getWebSocketSessionStore() {
         return webSocketSessionStore;
     }
 
@@ -71,5 +87,6 @@ public class WebSocketAcceptEndPoint extends TextWebSocketHandler {
     public void setSendBufferSizeLimit(int sendBufferSizeLimit) {
         this.sendBufferSizeLimit = sendBufferSizeLimit;
     }
+
 
 }
