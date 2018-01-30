@@ -10,6 +10,7 @@
     <version>${im.version}</version>
     <modules>
         <module>roof-im-service</module>
+        <module>roof-im-webapp</module>
     </modules>
     <packaging>pom</packaging>
 
