@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <import resource="spring.xml"/>
+    <!--<websocket:handlers allowed-origins="*">-->
+    <!--<websocket:mapping path="/webscoket.ws" handler="websocketEndPoint"/>-->
+    <!--</websocket:handlers>-->
+    <!--<bean id="myInterceptor" class="org.roof.oc.message.websocket.HandshakeInterceptor"/>-->
+
+
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+    <bean id="handlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <map>
+                <entry key="*.ws">
+                    <bean class="org.springframework.web.socket.server.support.WebSocketHttpRequestHandler">
+                        <constructor-arg ref="webSocketEndPoint"/>
+                        <property name="handshakeInterceptors">
+                            <array>
+                                <bean class="org.roof.oc.message.websocket.HandshakeInterceptor"/>
+                            </array>
+                        </property>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <!-- <bean
+             class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+         <property name="viewResolvers">
+             <list>
+                 <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+                 <bean
+                         class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                     <property name="viewClass"
+                               value="org.springframework.web.servlet.view.JstlView"/>
+                     <property name="redirectHttp10Compatible" value="false"/>
+                 </bean>
+             </list>
+         </property>
+         <property name="defaultViews">
+             <list>
+                 <bean
+                         class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+             </list>
+         </property>
+     </bean>-->
+
+    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
+    <!--<property name="defaultEncoding" value="UTF-8"/>-->
+    <!--&lt;!&ndash; 指定所上传文件的总大小不能超过20MB。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 &ndash;&gt;-->
+    <!--<property name="maxUploadSize" value="20000000"/>-->
+    <!--</bean>-->
+
+    <!--<bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"/>-->
+</beans>

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/roof-im.iml" filepath="$PROJECT_DIR$/roof-im.iml" />
       <module fileurl="file://$PROJECT_DIR$/roof-im-service/roof-im-service.iml" filepath="$PROJECT_DIR$/roof-im-service/roof-im-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/roof-im-webapp/roof-im-webapp.iml" filepath="$PROJECT_DIR$/roof-im-webapp/roof-im-webapp.iml" />
     </modules>
   </component>
 </project>
