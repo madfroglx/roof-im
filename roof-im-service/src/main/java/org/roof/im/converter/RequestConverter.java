@@ -8,7 +8,7 @@ import org.roof.im.request.Request;
  *
  * @author liuxin
  */
-public interface RequestConverter {
+public interface RequestConverter<T extends Request> {
     /**
      * 是否支持该类型消息
      *
@@ -23,5 +23,5 @@ public interface RequestConverter {
      * @param jsonObjectMessage JSON类型的消息
      * @return 消息对象
      */
-    Request toMessage(JSONObject jsonObjectMessage);
+    T toMessage(JSONObject jsonObjectMessage, Class<T> type);
 }

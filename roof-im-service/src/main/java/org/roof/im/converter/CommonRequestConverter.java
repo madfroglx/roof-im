@@ -2,8 +2,9 @@ package org.roof.im.converter;
 
 import com.alibaba.fastjson.JSONObject;
 import org.roof.im.request.MessageRequest;
+import org.roof.im.request.Request;
 
-public class CommonRequestConverter implements RequestConverter {
+public class CommonRequestConverter implements RequestConverter<Request> {
 
     @Override
     public boolean support(String messageType) {
@@ -11,7 +12,7 @@ public class CommonRequestConverter implements RequestConverter {
     }
 
     @Override
-    public Object toMessage(JSONObject jsonObjectMessage) {
+    public Request toMessage(JSONObject jsonObjectMessage, Class<Request> type) {
         return jsonObjectMessage.toJavaObject(MessageRequest.class);
     }
 }

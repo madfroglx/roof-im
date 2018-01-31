@@ -23,13 +23,13 @@ public class RequestConverterNode {
         if (converters != null) {
             for (RequestConverter converter : converters) {
                 if (converter.support(requestType)) {
-                    request = converter.toMessage(jsonObjectMessage);
+//                    request = converter.toMessage(jsonObjectMessage);
                     break;
                 }
             }
         }
         if (request == null) {
-            request = defaultConverter.toMessage(jsonObjectMessage);
+//            request = defaultConverter.toMessage(jsonObjectMessage);
         }
         if (request == null) {
             return REQUEST_CONVERT_ERROR;
