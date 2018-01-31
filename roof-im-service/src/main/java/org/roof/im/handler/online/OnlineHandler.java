@@ -36,7 +36,7 @@ public class OnlineHandler extends AbstractRequestHandler<OnlineRequest> {
         }
         userStatus = new UserStatus();
         userStatus.setUsername(onlineRequest.getUsername());
-        userStatus.setSessionID(onlineRequest.getSessionID());
+        userStatus.setSessionID(onlineRequest.getConnectID());
         if (userStatusService.online(onlineRequest.getUsername(), userStatus)) {
             return ONLINE_FAIL;
         }

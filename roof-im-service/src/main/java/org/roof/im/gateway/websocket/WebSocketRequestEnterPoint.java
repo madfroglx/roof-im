@@ -7,7 +7,7 @@ import com.roof.chain.api.ValueStack;
 import com.roof.chain.support.GenericValueStack;
 import org.roof.im.chain.ImValueStackConstant;
 import org.roof.im.gateway.RequestEnterPoint;
-import org.roof.im.client.ClientStore;
+import org.roof.im.connect.ConnectStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.socket.CloseStatus;
@@ -19,7 +19,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 public class WebSocketRequestEnterPoint extends TextWebSocketHandler implements RequestEnterPoint {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketRequestEnterPoint.class);
-    private ClientStore webSocketClientStore;
+    private ConnectStore webSocketConnectStore;
 
     private int sendTimeLimit = 10 * 1000;
     private int sendBufferSizeLimit = 512 * 1024;
@@ -50,12 +50,12 @@ public class WebSocketRequestEnterPoint extends TextWebSocketHandler implements 
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         ConcurrentWebSocketSessionDecorator socketSessionDecorator
                 = new ConcurrentWebSocketSessionDecorator(session, getSendTimeLimit(), getSendBufferSizeLimit());
-        webSocketClientStore.set(socketSessionDecorator);
+        webSocketConnectStore.set(socketSessionDecorator);
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        webSocketClientStore.remove(session.getId());
+        webSocketConnectStore.remove(session.getId());
     }
 
     @Override
@@ -63,12 +63,12 @@ public class WebSocketRequestEnterPoint extends TextWebSocketHandler implements 
         LOGGER.error(exception.getMessage(), exception);
     }
 
-    public void setWebSocketClientStore(ClientStore webSocketClientStore) {
-        this.webSocketClientStore = webSocketClientStore;
+    public void setWebSocketConnectStore(ConnectStore webSocketConnectStore) {
+        this.webSocketConnectStore = webSocketConnectStore;
     }
 
-    public ClientStore getWebSocketClientStore() {
-        return webSocketClientStore;
+    public ConnectStore getWebSocketConnectStore() {
+        return webSocketConnectStore;
     }
 
     public int getSendTimeLimit() {

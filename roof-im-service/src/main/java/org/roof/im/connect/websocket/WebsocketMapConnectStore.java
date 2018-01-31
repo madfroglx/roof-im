@@ -1,12 +1,12 @@
-package org.roof.im.client.websocket;
+package org.roof.im.connect.websocket;
 
-import org.roof.im.client.ClientStore;
+import org.roof.im.connect.ConnectStore;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class WebsocketMapClientStore implements ClientStore<WebSocketSession> {
+public class WebsocketMapConnectStore implements ConnectStore<WebSocketSession> {
     private Map<String, WebSocketSession> webSocketSessionMap = new ConcurrentHashMap<>();
 
     @Override

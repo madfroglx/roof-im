@@ -2,10 +2,11 @@ package org.roof.im.request;
 
 public class Request {
     private String id;
-    private String sessionID;
-    private String requestType;
-    private String token;
-    private String username;
+    private String connectID; // 连接ID
+    private String requestType; //请求类型
+    private String token; // 授权token
+    private String username; //用户名
+    private String clinetType; //客户端类型
 
     public String getId() {
         return id;
@@ -15,12 +16,12 @@ public class Request {
         this.id = id;
     }
 
-    public String getSessionID() {
-        return sessionID;
+    public String getConnectID() {
+        return connectID;
     }
 
-    public void setSessionID(String sessionID) {
-        this.sessionID = sessionID;
+    public void setConnectID(String connectID) {
+        this.connectID = connectID;
     }
 
     public String getRequestType() {
