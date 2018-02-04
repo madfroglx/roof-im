@@ -12,7 +12,7 @@ public class UserState {
     /**
      * 节点名称
      */
-    private String nodeName;
+    private String serverName;
     /**
      * 客户端类型
      */
@@ -34,12 +34,12 @@ public class UserState {
         this.connectID = connectID;
     }
 
-    public String getNodeName() {
-        return nodeName;
+    public String getServerName() {
+        return serverName;
     }
 
-    public void setNodeName(String nodeName) {
-        this.nodeName = nodeName;
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
     }
 
     public String getClientType() {

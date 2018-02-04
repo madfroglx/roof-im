@@ -12,7 +12,7 @@
                         <bean class="org.roof.im.handler.impl.OnlineHandler">
                             <property name="userService" ref="userService"/>
                             <property name="userStateService" ref="userStateService"/>
-                            <property name="serviceNameBuilder" ref="serviceNameBuilder"/>
+                            <property name="serverNameBuilder" ref="serverNameBuilder"/>
                         </bean>
                     </property>
                     <property name="forwards">

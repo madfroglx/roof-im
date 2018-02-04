@@ -3,11 +3,10 @@ package org.roof.im.handler.impl;
 import org.apache.commons.lang3.StringUtils;
 import org.roof.im.handler.AbstractRequestHandler;
 import org.roof.im.request.OnlineRequest;
-import org.roof.im.route.ServiceNameBuilder;
+import org.roof.im.route.ServerNameBuilder;
 import org.roof.im.user.UserService;
 import org.roof.im.user.UserState;
 import org.roof.im.user.UserStateService;
-import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,7 @@ public class OnlineHandler extends AbstractRequestHandler<OnlineRequest> {
 
     private UserService userService;
 
-    private ServiceNameBuilder serviceNameBuilder;
+    private ServerNameBuilder serverNameBuilder;
 
     public String receive(OnlineRequest onlineRequest) {
         String username = onlineRequest.getUsername();
@@ -44,12 +43,12 @@ public class OnlineHandler extends AbstractRequestHandler<OnlineRequest> {
     }
 
     private UserState createUserState(OnlineRequest onlineRequest) {
-        String nodeName = serviceNameBuilder.getName();
+        String nodeName = serverNameBuilder.getName();
         UserState userState = new UserState();
         userState.setUsername(onlineRequest.getUsername());
         userState.setConnectID(onlineRequest.getConnectID());
         userState.setClientType(onlineRequest.getClientType());
-        userState.setNodeName(nodeName);
+        userState.setServerName(nodeName);
         return userState;
     }
 
@@ -69,7 +68,7 @@ public class OnlineHandler extends AbstractRequestHandler<OnlineRequest> {
         this.userService = userService;
     }
 
-    public void setServiceNameBuilder(ServiceNameBuilder serviceNameBuilder) {
-        this.serviceNameBuilder = serviceNameBuilder;
+    public void setServerNameBuilder(ServerNameBuilder serverNameBuilder) {
+        this.serverNameBuilder = serverNameBuilder;
     }
 }

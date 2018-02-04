@@ -2,8 +2,7 @@ package org.roof.im.route.redis;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Joiner;
-import com.google.common.net.InetAddresses;
-import org.roof.im.route.ServiceNameBuilder;
+import org.roof.im.route.ServerNameBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,8 +14,8 @@ import java.net.UnknownHostException;
  *
  * @ 替换ip . 变为  _
  */
-public class HostAddressServiceNameBuilder implements ServiceNameBuilder {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HostAddressServiceNameBuilder.class);
+public class HostAddressServerNameBuilder implements ServerNameBuilder {
+    private static final Logger LOGGER = LoggerFactory.getLogger(HostAddressServerNameBuilder.class);
     private String serviceNamePrefix; //外部系统服务名称
 
     @Override
