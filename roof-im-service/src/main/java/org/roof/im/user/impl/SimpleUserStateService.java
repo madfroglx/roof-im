@@ -1,17 +1,19 @@
 package org.roof.im.user.impl;
 
-import org.roof.im.user.UserStatus;
-import org.roof.im.user.UserStatusService;
+import org.roof.im.user.UserState;
+import org.roof.im.user.UserStateService;
 import org.roof.im.user.UserStatusStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SimpleUserStatusService implements UserStatusService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleUserStatusService.class);
+import java.util.List;
+
+public class SimpleUserStateService implements UserStateService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleUserStateService.class);
     private UserStatusStore userStatusStore;
 
     @Override
-    public UserStatus getStatus(String username) {
+    public List<UserState> getStatus(String username) {
         try {
             return userStatusStore.get(username);
         } catch (Exception e) {
@@ -26,9 +28,9 @@ public class SimpleUserStatusService implements UserStatusService {
     }
 
     @Override
-    public boolean online(String username, UserStatus userStatus) {
+    public boolean online(String username, List<UserState> userStates) {
         try {
-            userStatusStore.set(userStatus);
+            userStatusStore.set(username, userStates);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
             return false;

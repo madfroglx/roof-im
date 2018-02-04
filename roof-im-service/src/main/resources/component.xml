@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="connectStore" class="org.roof.im.connect.websocket.WebSocketMapConnectStore"/>
+    <bean id="tokenUsernameStore" class="org.roof.im.user.impl.MapTokenUsernameStore"/>
+    <bean id="userStatusStore" class="org.roof.im.user.impl.MapUserStatusStore"/>
+    <bean id="userService" class="org.roof.im.user.impl.MockUserService"/>
+    <bean id="userStateService" class="org.roof.im.user.impl.SimpleUserStateService">
+        <property name="userStatusStore" ref="userStatusStore"/>
+    </bean>
+    <bean id="serviceNameBuilder" class="org.roof.im.route.redis.HostAddressServiceNameBuilder">
+        <property name="serviceNamePrefix" value="im:"/>
+    </bean>
+</beans>

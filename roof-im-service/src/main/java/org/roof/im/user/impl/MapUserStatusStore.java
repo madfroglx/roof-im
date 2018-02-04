@@ -1,22 +1,23 @@
 package org.roof.im.user.impl;
 
-import org.roof.im.user.UserStatus;
+import org.roof.im.user.UserState;
 import org.roof.im.user.UserStatusStore;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MapUserStatusStore implements UserStatusStore {
 
-    private Map<String, UserStatus> userStatusMap = new ConcurrentHashMap<>();
+    private Map<String, List<UserState>> userStatusMap = new ConcurrentHashMap<>();
 
     @Override
-    public void set(UserStatus userStatus) throws Exception {
-        userStatusMap.put(userStatus.getUsername(), userStatus);
+    public void set(String username, List<UserState> userStates) throws Exception {
+        userStatusMap.put(username, userStates);
     }
 
     @Override
-    public UserStatus get(String username) throws Exception {
+    public List<UserState> get(String username) throws Exception {
         return userStatusMap.get(username);
     }
 

@@ -5,13 +5,19 @@ package org.roof.im.chain;
  *
  * @author liuxin
  */
-public class ImValueStackConstant {
+public class ImConstant {
     /**
-     * 消息Map
+     * 请求
      */
     public static final String REQUEST = "request";
-
+    /**
+     * 返回
+     */
     public static final String RESPONSE = "response";
+    /**
+     *  当前登录用户
+     */
+    public static final String CURRENT_USER = "currentUser";
     /**
      * 消息类型
      */
@@ -28,4 +34,8 @@ public class ImValueStackConstant {
      * 会话ID
      */
     public static final String SESSION_ID = "sessionID";
+    /**
+     * 连接ID
+     */
+    public static final String CONNECT_ID = "connectID";
 }

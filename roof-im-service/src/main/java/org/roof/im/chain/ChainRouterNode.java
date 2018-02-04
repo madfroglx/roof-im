@@ -12,6 +12,8 @@ import java.util.Map;
 public class ChainRouterNode {
     private String valueStackKey;
     private Map<String, Chain> mapping;
+    private static final String ROUTE_SUCCESS = "routeSuccess";
+    private static final String ROUTE_FAIL = "routeSuccess";
 
     public Object doNode(ValueStack valueStack) throws Exception {
         Assert.notNull(valueStack, "ValueStack cannot null");
@@ -19,7 +21,8 @@ public class ChainRouterNode {
         Assert.hasText(chainName, "ValueStack cannot found key " + valueStackKey);
         Chain chain = mapping.get(chainName);
         Assert.notNull(chain, "Chain mapping cannot key" + chainName);
-        return chain.doChain(valueStack);
+        chain.doChain(valueStack);
+        return ROUTE_SUCCESS;
     }
 
     public String getValueStackKey() {

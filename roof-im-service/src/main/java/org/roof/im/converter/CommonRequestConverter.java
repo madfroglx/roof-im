@@ -12,7 +12,7 @@ public class CommonRequestConverter implements RequestConverter<Request> {
     }
 
     @Override
-    public Request toMessage(JSONObject jsonObjectMessage, Class<Request> type) {
+    public Request toMessage(JSONObject jsonObjectMessage) {
         return jsonObjectMessage.toJavaObject(MessageRequest.class);
     }
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="onlineChain" class="com.roof.chain.support.GenericChain">
+        <property name="startNodeName" value="onlineHandler"/>
+        <property name="nodes">
+            <list>
+                <bean class="com.roof.chain.support.NodeFactoryBean">
+                    <property name="methodName" value="receive"/>
+                    <property name="target">
+                        <bean class="org.roof.im.handler.impl.OnlineHandler">
+                            <property name="userService" ref="userService"/>
+                            <property name="userStateService" ref="userStateService"/>
+                            <property name="serviceNameBuilder" ref="serviceNameBuilder"/>
+                        </bean>
+                    </property>
+                    <property name="forwards">
+                        <map>
+                            <entry key="onlineSuccess" value="successResponseCreateNode"/>
+                        </map>
+                    </property>
+                </bean>
+                <ref bean="successReturnCodeResponseCreateNode"/>
+                <ref bean="failReturnCodeResponseCreateNode"/>
+                <ref bean="errorReturnCodeResponseCreateNode"/>
+                <ref bean="webSocketResponseEndPointNode"/>
+            </list>
+        </property>
+    </bean>
+</beans>

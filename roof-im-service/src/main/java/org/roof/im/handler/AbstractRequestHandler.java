@@ -2,13 +2,13 @@ package org.roof.im.handler;
 
 import org.roof.im.request.Request;
 import org.roof.im.user.UserService;
-import org.roof.im.user.UserStatusService;
+import org.roof.im.user.UserStateService;
 
 public abstract class AbstractRequestHandler<T extends Request> implements RequestHandler<T> {
     //用户不存在
     protected String USER_NOT_EXISTS = "userNotExists";
     protected UserService userService;
-    protected UserStatusService userStatusService;
+    protected UserStateService userStateService;
 
 
     public UserService getUserService() {
@@ -19,11 +19,11 @@ public abstract class AbstractRequestHandler<T extends Request> implements Reque
         this.userService = userService;
     }
 
-    public UserStatusService getUserStatusService() {
-        return userStatusService;
+    public UserStateService getUserStateService() {
+        return userStateService;
     }
 
-    public void setUserStatusService(UserStatusService userStatusService) {
-        this.userStatusService = userStatusService;
+    public void setUserStateService(UserStateService userStateService) {
+        this.userStateService = userStateService;
     }
 }

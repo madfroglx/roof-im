@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="enterChain" class="com.roof.chain.support.GenericChain">
+        <property name="startNodeName" value="requestConverterNode"/>
+        <property name="nodes">
+            <list>
+                <!-- 反序列化请求 -->
+                <bean class="com.roof.chain.support.NodeFactoryBean">
+                    <property name="target">
+                        <bean class="org.roof.im.chain.RequestConverterNode">
+                            <property name="commonRequestConverter" ref="commonRequestConverter"/>
+                            <property name="requestConverters" ref="requestConverters"/>
+                        </bean>
+                    </property>
+                    <property name="forwards">
+                        <map>
+                            <entry key="requestConvertError" value="error"/>
+                            <entry key="requestConvertSuccess" value="tokenUsernameStoreNode"/>
+                        </map>
+                    </property>
+                </bean>
+                <!-- 根据token查询当前登录用户-->
+                <bean class="com.roof.chain.support.NodeFactoryBean">
+                    <property name="target">
+                        <bean class="org.roof.im.chain.TokenUsernameStoreNode">
+                            <property name="tokenUsernameStore" ref="tokenUsernameStore"/>
+                        </bean>
+                    </property>
+                    <property name="forwards">
+                        <map>
+                            <entry key="inStore" value="success"/>
+                            <entry key="notInStore" value="authNode"/>
+                        </map>
+                    </property>
+                </bean>
+                <!-- 验证登录token并获取登录用户-->
+                <bean class="com.roof.chain.support.NodeFactoryBean">
+                    <property name="target">
+                        <bean class="org.roof.im.chain.AuthNode">
+                            <property name="tokenUsernameStore" ref="tokenUsernameStore"/>
+                            <property name="userService" ref="userService"/>
+                        </bean>
+                    </property>
+                    <property name="forwards">
+                        <map>
+                            <entry key="authSuccess" value="router"/>
+                            <entry key="authError" value="error"/>
+                            <entry key="authFail" value="fail"/>
+                        </map>
+                    </property>
+                </bean>
+                <!--根据消息类型路由到消息处理Chain-->
+                <bean class="com.roof.chain.support.NodeFactoryBean">
+                    <property name="name" value="router"/>
+                    <property name="target">
+                        <bean class="org.roof.im.chain.ChainRouterNode">
+                            <property name="mapping">
+                                <map>
+                                    <entry key="online">
+                                        <ref bean="onlineChain"/>
+                                    </entry>
+                                </map>
+                            </property>
+                            <property name="valueStackKey" value="requestType"/>
+                        </bean>
+                    </property>
+                </bean>
+                <ref bean="successReturnCodeResponseCreateNode"/>
+                <ref bean="failReturnCodeResponseCreateNode"/>
+                <ref bean="errorReturnCodeResponseCreateNode"/>
+                <ref bean="webSocketResponseEndPointNode"/>
+            </list>
+        </property>
+    </bean>
+</beans>

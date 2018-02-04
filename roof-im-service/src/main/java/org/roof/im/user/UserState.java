@@ -1,6 +1,6 @@
 package org.roof.im.user;
 
-public class UserStatus {
+public class UserState {
     /**
      * 用户名
      */
@@ -8,11 +8,15 @@ public class UserStatus {
     /**
      * 会话ID
      */
-    private String sessionID;
+    private String connectID;
     /**
      * 节点名称
      */
     private String nodeName;
+    /**
+     * 客户端类型
+     */
+    private String clientType;
 
     public String getUsername() {
         return username;
@@ -22,12 +26,12 @@ public class UserStatus {
         this.username = username;
     }
 
-    public String getSessionID() {
-        return sessionID;
+    public String getConnectID() {
+        return connectID;
     }
 
-    public void setSessionID(String sessionID) {
-        this.sessionID = sessionID;
+    public void setConnectID(String connectID) {
+        this.connectID = connectID;
     }
 
     public String getNodeName() {
@@ -36,5 +40,13 @@ public class UserStatus {
 
     public void setNodeName(String nodeName) {
         this.nodeName = nodeName;
+    }
+
+    public String getClientType() {
+        return clientType;
+    }
+
+    public void setClientType(String clientType) {
+        this.clientType = clientType;
     }
 }

@@ -1,11 +1,10 @@
-package org.roof.im.response;
+package org.roof.im.chain;
 
 import com.roof.chain.api.ValueStack;
 import com.roof.chain.support.NodeResult;
-import org.roof.im.chain.ChainConstant;
-import org.roof.im.chain.ImValueStackConstant;
+import org.roof.im.response.Response;
 
-public class ReturnMessageResponseCreateNode {
+public class ReturnCodeResponseCreateNode {
     private String state = Response.SUCCESS;
     public static final String RESPONSE_CREATE_SUCCESS = "responseCreateSuccess";
 
@@ -14,7 +13,7 @@ public class ReturnMessageResponseCreateNode {
         Response response = new Response();
         response.setState(state);
         response.setMessage(nodeResult.getNext());
-        valueStack.set(ImValueStackConstant.RESPONSE, response);
+        valueStack.set(ImConstant.RESPONSE, response);
         return RESPONSE_CREATE_SUCCESS;
     }
 

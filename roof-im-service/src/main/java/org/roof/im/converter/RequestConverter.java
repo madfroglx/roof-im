@@ -23,5 +23,5 @@ public interface RequestConverter<T extends Request> {
      * @param jsonObjectMessage JSON类型的消息
      * @return 消息对象
      */
-    T toMessage(JSONObject jsonObjectMessage, Class<T> type);
+    T toMessage(JSONObject jsonObjectMessage);
 }

@@ -7,9 +7,9 @@ package org.roof.im.connect;
  */
 public interface ConnectStore<T> {
 
-    T get(String sessionID);
+    T get(String connectID);
 
-    void set(T session);
+    void set(T connect);
 
-    boolean remove(String sessionID);
+    boolean remove(String connectID);
 }

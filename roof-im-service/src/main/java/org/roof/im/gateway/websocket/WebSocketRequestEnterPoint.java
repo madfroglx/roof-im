@@ -5,18 +5,26 @@ import com.alibaba.fastjson.JSONObject;
 import com.roof.chain.api.Chain;
 import com.roof.chain.api.ValueStack;
 import com.roof.chain.support.GenericValueStack;
-import org.roof.im.chain.ImValueStackConstant;
+import org.roof.im.chain.ImConstant;
 import org.roof.im.gateway.RequestEnterPoint;
 import org.roof.im.connect.ConnectStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.ConcurrentWebSocketSessionDecorator;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-
+/**
+ * 接受WebSocket连接,并接收客户端请求
+ *
+ * @author liuxin
+ */
+@Component
 public class WebSocketRequestEnterPoint extends TextWebSocketHandler implements RequestEnterPoint {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketRequestEnterPoint.class);
     private ConnectStore webSocketConnectStore;
@@ -35,10 +43,10 @@ public class WebSocketRequestEnterPoint extends TextWebSocketHandler implements 
     @Override
     public void receive(String sessionID, String message) {
         ValueStack valueStack = new GenericValueStack();
-        valueStack.set(ImValueStackConstant.TEXT_MESSAGE, message);
-        valueStack.set(ImValueStackConstant.SESSION_ID, sessionID);
+        valueStack.set(ImConstant.TEXT_MESSAGE, message);
+        valueStack.set(ImConstant.CONNECT_ID, sessionID);
         JSONObject jsonObjectMessage = JSON.parseObject(message);
-        valueStack.set(ImValueStackConstant.JSON_OBJECT_MESSAGE, jsonObjectMessage);
+        valueStack.set(ImConstant.JSON_OBJECT_MESSAGE, jsonObjectMessage);
         try {
             enterChain.doChain(valueStack);
         } catch (Exception e) {
@@ -87,5 +95,12 @@ public class WebSocketRequestEnterPoint extends TextWebSocketHandler implements 
         this.sendBufferSizeLimit = sendBufferSizeLimit;
     }
 
+    public Chain getEnterChain() {
+        return enterChain;
+    }
 
+    @Autowired
+    public void setEnterChain(@Qualifier("enterChain") Chain enterChain) {
+        this.enterChain = enterChain;
+    }
 }

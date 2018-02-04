@@ -32,4 +32,7 @@ public class HostAddressServiceNameBuilder implements ServiceNameBuilder {
         return serviceName;
     }
 
+    public void setServiceNamePrefix(String serviceNamePrefix) {
+        this.serviceNamePrefix = serviceNamePrefix;
+    }
 }

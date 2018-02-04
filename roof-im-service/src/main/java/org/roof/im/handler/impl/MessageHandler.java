@@ -1,8 +1,7 @@
-package org.roof.im.handler.online;
+package org.roof.im.handler.impl;
 
 import org.roof.im.handler.AbstractRequestHandler;
 import org.roof.im.request.MessageRequest;
-import org.roof.im.user.UserStatus;
 
 public class MessageHandler extends AbstractRequestHandler<MessageRequest> {
 
@@ -18,10 +17,10 @@ public class MessageHandler extends AbstractRequestHandler<MessageRequest> {
         if (!userService.exist(receiver)) {
             return RECEIVER_NOT_EXISTS;
         }
-        UserStatus userStatus = userStatusService.getStatus(receiver);
-        if (userStatus == null) {
-            return RECEIVER_OFFLINE;
-        }
+//        UserState userState = userStateService.getStatus(receiver);
+//        if (userState == null) {
+//            return RECEIVER_OFFLINE;
+//        }
 
         return null;
     }
