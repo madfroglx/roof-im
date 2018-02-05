@@ -26,9 +26,13 @@ public class WebSocketMapConnectManager implements ConnectManager<WebSocketSessi
 
     @Override
     public WebSocketSession close(String connectId) throws IOException {
-        WebSocketSession webSocketSession = get(connectId);
-        remove(connectId);
-        webSocketSession.close();
+        WebSocketSession webSocketSession;
+        try {
+            webSocketSession = get(connectId);
+            webSocketSession.close();
+        } finally {
+            webSocketSessionConnectStore.remove(connectId);
+        }
         return webSocketSession;
     }
 
