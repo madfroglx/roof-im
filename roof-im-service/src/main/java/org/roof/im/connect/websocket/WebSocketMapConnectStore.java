@@ -10,17 +10,17 @@ public class WebSocketMapConnectStore implements ConnectStore<WebSocketSession> 
     private Map<String, WebSocketSession> webSocketSessionMap = new ConcurrentHashMap<>();
 
     @Override
-    public WebSocketSession get(String connectID) {
-        return webSocketSessionMap.get(connectID);
+    public WebSocketSession get(String connectId) {
+        return webSocketSessionMap.get(connectId);
     }
 
     @Override
-    public void set(WebSocketSession connect) {
-        webSocketSessionMap.put(connect.getId(), connect);
+    public void put(String connectId, WebSocketSession connect) {
+        webSocketSessionMap.put(connectId, connect);
     }
 
     @Override
-    public boolean remove(String connectID) {
-        return !(webSocketSessionMap.remove(connectID) == null);
+    public boolean remove(String connectId) {
+        return !(webSocketSessionMap.remove(connectId) == null);
     }
 }

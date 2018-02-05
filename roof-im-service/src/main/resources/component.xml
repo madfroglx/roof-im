@@ -3,6 +3,9 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="connectStore" class="org.roof.im.connect.websocket.WebSocketMapConnectStore"/>
+    <bean id="connectManager" class="org.roof.im.connect.websocket.WebSocketMapConnectManager">
+        <property name="webSocketSessionConnectStore" ref="connectStore"/>
+    </bean>
     <bean id="tokenUsernameStore" class="org.roof.im.user.impl.MapTokenUsernameStore"/>
     <bean id="userStatusStore" class="org.roof.im.user.impl.MapUserStatusStore"/>
     <bean id="userService" class="org.roof.im.user.impl.MockUserService"/>

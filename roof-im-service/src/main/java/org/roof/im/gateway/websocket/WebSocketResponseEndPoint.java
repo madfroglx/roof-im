@@ -1,6 +1,7 @@
 package org.roof.im.gateway.websocket;
 
 import com.alibaba.fastjson.JSON;
+import org.roof.im.connect.ConnectManager;
 import org.roof.im.connect.ConnectStore;
 import org.roof.im.gateway.ResponseEndpoint;
 import org.roof.im.response.Response;
@@ -16,11 +17,10 @@ import java.io.IOException;
 @Component
 public class WebSocketResponseEndPoint implements ResponseEndpoint {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketResponseEndPoint.class);
-    private ConnectStore<WebSocketSession> webSocketConnectStore;
-
+    private ConnectManager<WebSocketSession> webSocketSessionConnectManager;
     @Override
     public void send(String connectID, Response response) throws IOException {
-        WebSocketSession webSocketSession = webSocketConnectStore.get(connectID);
+        WebSocketSession webSocketSession = webSocketSessionConnectManager.get(connectID);
         if (webSocketSession == null) {
             return;
         }
@@ -31,12 +31,12 @@ public class WebSocketResponseEndPoint implements ResponseEndpoint {
         webSocketSession.sendMessage(textMessage);
     }
 
-    public ConnectStore<WebSocketSession> getWebSocketConnectStore() {
-        return webSocketConnectStore;
+    public ConnectManager<WebSocketSession> getWebSocketSessionConnectManager() {
+        return webSocketSessionConnectManager;
     }
 
     @Autowired
-    public void setWebSocketConnectStore(ConnectStore<WebSocketSession> webSocketConnectStore) {
-        this.webSocketConnectStore = webSocketConnectStore;
+    public void setWebSocketSessionConnectManager(ConnectManager<WebSocketSession> webSocketSessionConnectManager) {
+        this.webSocketSessionConnectManager = webSocketSessionConnectManager;
     }
 }
