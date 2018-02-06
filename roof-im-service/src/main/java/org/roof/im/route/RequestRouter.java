@@ -7,5 +7,5 @@ import org.roof.im.request.Request;
  */
 public interface RequestRouter {
 
-    boolean route(Request request);
+    boolean route(Request request) throws Throwable;
 }

@@ -7,7 +7,7 @@
         <version>4.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>roof-im</artifactId>
-    <version>${im.version}</version>
+    <version>1.0.0-SNAPSHOT</version>
     <modules>
         <module>roof-im-service</module>
         <module>roof-im-webapp</module>
@@ -54,6 +54,11 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>21.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.retry</groupId>
+                <artifactId>spring-retry</artifactId>
+                <version>1.2.2.RELEASE</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
