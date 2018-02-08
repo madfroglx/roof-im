@@ -2,8 +2,8 @@ package org.roof.im.route.redis;
 
 import org.roof.im.request.Request;
 import org.roof.im.route.OfferIndexPolicy;
-import org.roof.im.route.ServiceNameBuilder;
 import org.roof.im.route.RequestRouter;
+import org.roof.im.route.ServerNameBuilder;
 import org.springframework.data.redis.support.collections.RedisList;
 import org.springframework.retry.RetryCallback;
 import org.springframework.retry.RetryContext;
@@ -23,7 +23,7 @@ public class RedisRequestRouter implements RequestRouter {
     /**
      * 服务名称
      */
-    private ServiceNameBuilder serviceNameBuilder;
+    private ServerNameBuilder serverNameBuilder;
     /**
      * offerIndexPolicy
      */
@@ -39,7 +39,7 @@ public class RedisRequestRouter implements RequestRouter {
 
     @Override
     public boolean route(Request request) throws Throwable {
-        String nodeName = serviceNameBuilder.getName();
+        String nodeName = serverNameBuilder.getName();
 
         retryTemplate.execute(new RetryCallback<Boolean, Throwable>() {
             @Override

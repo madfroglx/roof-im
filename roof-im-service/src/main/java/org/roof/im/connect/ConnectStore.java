@@ -4,6 +4,7 @@ package org.roof.im.connect;
  * 连接服务器客户存储
  *
  * @param <T> 客户端对象
+ * @author liuxin
  */
 public interface ConnectStore<T> {
     /**

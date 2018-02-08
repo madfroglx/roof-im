@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--下线-->
+    <bean id="offlineChain" class="com.roof.chain.support.GenericChain">
+        <property name="startNodeName" value="onlineHandler"/>
+        <property name="nodes">
+            <list>
+                <bean class="com.roof.chain.support.NodeFactoryBean">
+                    <property name="methodName" value="receive"/>
+                    <property name="target">
+                        <bean class="org.roof.im.handler.impl.OfflineHandler">
+                            <property name="userService" ref="userService"/>
+                            <property name="userStateService" ref="userStateService"/>
+                            <property name="serverNameBuilder" ref="serverNameBuilder"/>
+                        </bean>
+                    </property>
+                    <property name="forwards">
+                        <map>
+                            <entry key="userNotOnline" value="failReturnCodeResponseCreateNode"/>
+                            <entry key="offlineSuccess" value="failReturnCodeResponseCreateNode"/>
+                        </map>
+                    </property>
+                </bean>
+                <!-- 关闭连接-->
+                <bean class="com.roof.chain.support.NodeFactoryBean">
+                    <property name="target">
+                        <bean class="org.roof.im.chain.CloseWebSocketConnectNode">
+                            <property name="connectManager" ref="connectManager"/>
+                        </bean>
+                    </property>
+                    <property name="forwards">
+                        <map>
+                            <entry key="closeSuccess" value="successReturnCodeResponseCreateNode"/>
+                            <entry key="closeError" value="errorReturnCodeResponseCreateNode"/>
+                        </map>
+                    </property>
+                </bean>
+                <ref bean="successReturnCodeResponseCreateNode"/>
+                <ref bean="failReturnCodeResponseCreateNode"/>
+                <ref bean="errorReturnCodeResponseCreateNode"/>
+                <ref bean="webSocketResponseEndPointNode"/>
+            </list>
+        </property>
+    </bean>
+</beans>

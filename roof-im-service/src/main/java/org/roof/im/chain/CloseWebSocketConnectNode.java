@@ -6,6 +6,9 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
+/**
+ * 关闭当前请求连接
+ */
 public class CloseWebSocketConnectNode {
     private static final Logger LOGGER = LoggerFactory.getLogger(CloseWebSocketConnectNode.class);
     private ConnectManager connectManager;
