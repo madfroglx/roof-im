@@ -6,7 +6,7 @@ public class Message {
      */
     private Long id;
     /**
-     * 发送这
+     * 发送者
      */
     private String sender;
     /**
