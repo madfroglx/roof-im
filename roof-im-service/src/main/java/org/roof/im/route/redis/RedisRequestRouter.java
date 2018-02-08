@@ -52,4 +52,44 @@ public class RedisRequestRouter implements RequestRouter {
 
         return false;
     }
+
+    public List<RedisList> getLists() {
+        return lists;
+    }
+
+    public void setLists(List<RedisList> lists) {
+        this.lists = lists;
+    }
+
+    public ServerNameBuilder getServerNameBuilder() {
+        return serverNameBuilder;
+    }
+
+    public void setServerNameBuilder(ServerNameBuilder serverNameBuilder) {
+        this.serverNameBuilder = serverNameBuilder;
+    }
+
+    public OfferIndexPolicy getOfferIndexPolicy() {
+        return offerIndexPolicy;
+    }
+
+    public void setOfferIndexPolicy(OfferIndexPolicy offerIndexPolicy) {
+        this.offerIndexPolicy = offerIndexPolicy;
+    }
+
+    public RetryTemplate getRetryTemplate() {
+        return retryTemplate;
+    }
+
+    public void setRetryTemplate(RetryTemplate retryTemplate) {
+        this.retryTemplate = retryTemplate;
+    }
+
+    public Long getRedisListOfferTimeout() {
+        return redisListOfferTimeout;
+    }
+
+    public void setRedisListOfferTimeout(Long redisListOfferTimeout) {
+        this.redisListOfferTimeout = redisListOfferTimeout;
+    }
 }
