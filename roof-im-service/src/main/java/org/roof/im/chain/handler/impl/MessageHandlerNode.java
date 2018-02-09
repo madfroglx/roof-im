@@ -1,14 +1,15 @@
-package org.roof.im.handler.impl;
+package org.roof.im.chain.handler.impl;
 
-import org.roof.im.handler.AbstractRequestHandler;
+import com.roof.chain.api.ValueStack;
+import org.roof.im.chain.handler.AbstractRequestHandlerNode;
 import org.roof.im.request.MessageRequest;
 
-public class MessageHandler extends AbstractRequestHandler<MessageRequest> {
+public class MessageHandlerNode extends AbstractRequestHandlerNode<MessageRequest> {
 
     private static final String RECEIVER_NOT_EXISTS = "receiverNotExists";
     private static final String RECEIVER_OFFLINE = "receiverOffline";
 
-    public String receive(MessageRequest request) {
+    public String doNode(MessageRequest request, ValueStack valueStack) {
         String username = request.getUsername();
         if (!userService.exist(username)) {
             return USER_NOT_EXISTS;

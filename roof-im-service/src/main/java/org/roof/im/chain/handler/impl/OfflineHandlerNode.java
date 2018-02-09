@@ -1,6 +1,7 @@
-package org.roof.im.handler.impl;
+package org.roof.im.chain.handler.impl;
 
-import org.roof.im.handler.AbstractRequestHandler;
+import com.roof.chain.api.ValueStack;
+import org.roof.im.chain.handler.AbstractRequestHandlerNode;
 import org.roof.im.request.OfflineRequest;
 import org.roof.im.route.ServerNameBuilder;
 import org.roof.im.user.UserState;
@@ -8,13 +9,16 @@ import org.roof.im.user.UserState;
 import java.util.Iterator;
 import java.util.List;
 
-public class OfflineHandler extends AbstractRequestHandler<OfflineRequest> {
+/**
+ * 下线处理
+ */
+public class OfflineHandlerNode extends AbstractRequestHandlerNode<OfflineRequest> {
     private ServerNameBuilder serverNameBuilder;
     private static final String USER_NOT_ONLINE = "userNotOnline";
     private static final String OFFLINE_SUCCESS = "offlineSuccess";
 
     @Override
-    public String receive(OfflineRequest request) {
+    public String doNode(OfflineRequest request, ValueStack valueStack) {
         String username = request.getUsername();
         String serverName = serverNameBuilder.getName();
         List<UserState> userStates = userStateService.getStatus(username);

@@ -1,7 +1,8 @@
-package org.roof.im.handler.impl;
+package org.roof.im.chain.handler.impl;
 
+import com.roof.chain.api.ValueStack;
 import org.apache.commons.lang3.StringUtils;
-import org.roof.im.handler.AbstractRequestHandler;
+import org.roof.im.chain.handler.AbstractRequestHandlerNode;
 import org.roof.im.request.OnlineRequest;
 import org.roof.im.route.ServerNameBuilder;
 import org.roof.im.user.UserService;
@@ -11,7 +12,7 @@ import org.roof.im.user.UserStateService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OnlineHandler extends AbstractRequestHandler<OnlineRequest> {
+public class OnlineHandlerNode extends AbstractRequestHandlerNode<OnlineRequest> {
     //用户已经在线
     private static final String IS_ALREADY_ONLINE = "isAlreadyOnline";
     //用户上线成功
@@ -25,7 +26,7 @@ public class OnlineHandler extends AbstractRequestHandler<OnlineRequest> {
 
     private ServerNameBuilder serverNameBuilder;
 
-    public String receive(OnlineRequest onlineRequest) {
+    public String doNode(OnlineRequest onlineRequest, ValueStack valueStack) {
         String username = onlineRequest.getUsername();
         List<UserState> userStates = userStateService.getStatus(username);
         List<UserState> newUserStates = new ArrayList<>();

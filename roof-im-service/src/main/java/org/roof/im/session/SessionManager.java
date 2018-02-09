@@ -16,7 +16,7 @@ public interface SessionManager {
      * @param receiver 接收人
      * @return 会话id
      */
-    String open(String sender, String receiver);
+    Session open(String sender, String receiver);
 
     /**
      * 结束一个会话
@@ -30,24 +30,19 @@ public interface SessionManager {
      * 通过会话ID查询会话
      *
      * @param id 会话id
+     * @param effective session 是否有效, <code>null</code>都查
      * @return 会话
      */
-    Session queryById(String id);
+    Session queryById(String id, Boolean effective);
 
     /**
      * 通过会话双方查询会话
      *
      * @param sender   会话发起者
      * @param receiver 会话接受者
+     * @param effective session 是否有效 ， <code>null</code>都查
      * @return 会话
      */
-    Session queryByUser(String sender, String receiver);
+    Session queryByUser(String sender, String receiver, Boolean effective);
 
-    /**
-     * 会话是否有效
-     *
-     * @param session 会话
-     * @return 是否有效
-     */
-    boolean effective(Session session);
 }

@@ -7,9 +7,8 @@
         <property name="nodes">
             <list>
                 <bean class="com.roof.chain.support.NodeFactoryBean">
-                    <property name="methodName" value="receive"/>
                     <property name="target">
-                        <bean class="org.roof.im.handler.impl.OnlineHandler">
+                        <bean class="org.roof.im.chain.handler.impl.OnlineHandlerNode">
                             <property name="userService" ref="userService"/>
                             <property name="userStateService" ref="userStateService"/>
                             <property name="serverNameBuilder" ref="serverNameBuilder"/>

@@ -33,9 +33,9 @@ public class ImConstant {
     /**
      * 会话ID
      */
-    public static final String SESSION_ID = "sessionID";
+    public static final String SESSION_ID = "sessionId";
     /**
      * 连接ID
      */
-    public static final String CONNECT_ID = "connectID";
+    public static final String CONNECT_ID = "connectId";
 }
