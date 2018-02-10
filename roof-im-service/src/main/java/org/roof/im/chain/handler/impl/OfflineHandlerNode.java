@@ -3,7 +3,7 @@ package org.roof.im.chain.handler.impl;
 import com.roof.chain.api.ValueStack;
 import org.roof.im.chain.handler.AbstractRequestHandlerNode;
 import org.roof.im.request.OfflineRequest;
-import org.roof.im.route.ServerNameBuilder;
+import org.roof.im.transport.ServerNameBuilder;
 import org.roof.im.user.UserState;
 
 import java.util.Iterator;

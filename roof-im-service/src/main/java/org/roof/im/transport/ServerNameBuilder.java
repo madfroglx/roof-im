@@ -1,4 +1,4 @@
-package org.roof.im.route;
+package org.roof.im.transport;
 
 /**
  * 获得服务节点名称

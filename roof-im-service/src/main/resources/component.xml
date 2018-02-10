@@ -12,7 +12,7 @@
     <bean id="userStateService" class="org.roof.im.user.impl.SimpleUserStateService">
         <property name="userStatusStore" ref="userStatusStore"/>
     </bean>
-    <bean id="serverNameBuilder" class="org.roof.im.route.redis.HostAddressServerNameBuilder">
+    <bean id="serverNameBuilder" class="org.roof.im.transport.impl.HostAddressServerNameBuilder">
         <property name="serviceNamePrefix" value="im:"/>
     </bean>
 </beans>

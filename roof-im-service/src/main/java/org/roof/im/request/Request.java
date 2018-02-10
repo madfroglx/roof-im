@@ -7,6 +7,7 @@ public class Request {
     private String token; // 授权token
     private String username; //用户名
     private String clientType; //客户端类型
+    private String serverName;
 
     public String getId() {
         return id;
@@ -54,5 +55,13 @@ public class Request {
 
     public void setClientType(String clientType) {
         this.clientType = clientType;
+    }
+
+    public String getServerName() {
+        return serverName;
+    }
+
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
     }
 }

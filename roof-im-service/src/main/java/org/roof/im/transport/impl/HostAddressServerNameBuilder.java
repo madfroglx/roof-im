@@ -1,8 +1,8 @@
-package org.roof.im.route.redis;
+package org.roof.im.transport.impl;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Joiner;
-import org.roof.im.route.ServerNameBuilder;
+import org.roof.im.transport.ServerNameBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
