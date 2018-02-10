@@ -21,7 +21,7 @@ public class OfflineHandlerNode extends AbstractRequestHandlerNode<OfflineReques
     public String doNode(OfflineRequest request, ValueStack valueStack) {
         String username = request.getUsername();
         String serverName = serverNameBuilder.getName();
-        List<UserState> userStates = userStateService.getStatus(username);
+        List<UserState> userStates = userStateService.getStates(username);
         if (userStates == null || userStates.size() == 0) {
             return USER_NOT_ONLINE;
         }

@@ -13,7 +13,7 @@ public class SimpleUserStateService implements UserStateService {
     private UserStatusStore userStatusStore;
 
     @Override
-    public List<UserState> getStatus(String username) {
+    public List<UserState> getStates(String username) {
         try {
             return userStatusStore.get(username);
         } catch (Exception e) {
@@ -24,7 +24,7 @@ public class SimpleUserStateService implements UserStateService {
 
     @Override
     public boolean isOnline(String username) {
-        return !(getStatus(username) == null);
+        return !(getStates(username) == null);
     }
 
     @Override

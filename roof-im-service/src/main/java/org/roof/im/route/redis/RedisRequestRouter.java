@@ -4,6 +4,7 @@ import org.roof.im.request.Request;
 import org.roof.im.route.OfferIndexPolicy;
 import org.roof.im.route.RequestRouter;
 import org.roof.im.route.ServerNameBuilder;
+import org.roof.im.user.UserState;
 import org.springframework.data.redis.support.collections.RedisList;
 import org.springframework.retry.RetryCallback;
 import org.springframework.retry.RetryContext;
@@ -38,7 +39,7 @@ public class RedisRequestRouter implements RequestRouter {
     private Long redisListOfferTimeout;
 
     @Override
-    public boolean route(Request request) throws Throwable {
+    public boolean route(Request request, List<UserState> userStates) throws Throwable {
         String nodeName = serverNameBuilder.getName();
 
         retryTemplate.execute(new RetryCallback<Boolean, Throwable>() {

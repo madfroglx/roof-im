@@ -5,7 +5,7 @@ package org.roof.im.request;
  *
  * @author liuxin
  */
-public enum RequestContentType {
+public enum ContentType {
     /**
      * 文本消息
      */

@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface UserStateService {
 
-    List<UserState> getStatus(String username);
+    List<UserState> getStates(String username);
 
     boolean isOnline(String username);
 

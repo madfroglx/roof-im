@@ -5,7 +5,7 @@ package org.roof.im.request;
  */
 public class MessageRequest extends Request {
     private String receiver;//接收人
-    private RequestContentType type; //消息类型
+    private ContentType type; //消息类型
     private String payload; //消息体
 
     public String getReceiver() {
@@ -16,11 +16,11 @@ public class MessageRequest extends Request {
         this.receiver = receiver;
     }
 
-    public RequestContentType getType() {
+    public ContentType getType() {
         return type;
     }
 
-    public void setType(RequestContentType type) {
+    public void setType(ContentType type) {
         this.type = type;
     }
 

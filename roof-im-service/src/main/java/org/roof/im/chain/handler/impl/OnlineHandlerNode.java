@@ -28,7 +28,7 @@ public class OnlineHandlerNode extends AbstractRequestHandlerNode<OnlineRequest>
 
     public String doNode(OnlineRequest onlineRequest, ValueStack valueStack) {
         String username = onlineRequest.getUsername();
-        List<UserState> userStates = userStateService.getStatus(username);
+        List<UserState> userStates = userStateService.getStates(username);
         List<UserState> newUserStates = new ArrayList<>();
         UserState userState = createUserState(onlineRequest);
         newUserStates.add(userState);
@@ -47,7 +47,7 @@ public class OnlineHandlerNode extends AbstractRequestHandlerNode<OnlineRequest>
         String nodeName = serverNameBuilder.getName();
         UserState userState = new UserState();
         userState.setUsername(onlineRequest.getUsername());
-        userState.setConnectID(onlineRequest.getConnectID());
+        userState.setConnectId(onlineRequest.getConnectId());
         userState.setClientType(onlineRequest.getClientType());
         userState.setServerName(nodeName);
         return userState;

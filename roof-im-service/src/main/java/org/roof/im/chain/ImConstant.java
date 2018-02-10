@@ -38,4 +38,8 @@ public class ImConstant {
      * 连接ID
      */
     public static final String CONNECT_ID = "connectId";
+    /**
+     * 用户状态
+     */
+    public static final String USER_STATES = "userStates";
 }

@@ -2,7 +2,7 @@ package org.roof.im.request;
 
 public class Request {
     private String id;
-    private String connectID; // 连接ID
+    private String connectId; // 连接ID
     private String requestType; //请求类型
     private String token; // 授权token
     private String username; //用户名
@@ -16,12 +16,12 @@ public class Request {
         this.id = id;
     }
 
-    public String getConnectID() {
-        return connectID;
+    public String getConnectId() {
+        return connectId;
     }
 
-    public void setConnectID(String connectID) {
-        this.connectID = connectID;
+    public void setConnectId(String connectId) {
+        this.connectId = connectId;
     }
 
     public String getRequestType() {

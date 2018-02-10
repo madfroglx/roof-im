@@ -8,7 +8,7 @@ public class UserState {
     /**
      * 会话ID
      */
-    private String connectID;
+    private String connectId;
     /**
      * 节点名称
      */
@@ -26,12 +26,12 @@ public class UserState {
         this.username = username;
     }
 
-    public String getConnectID() {
-        return connectID;
+    public String getConnectId() {
+        return connectId;
     }
 
-    public void setConnectID(String connectID) {
-        this.connectID = connectID;
+    public void setConnectId(String connectId) {
+        this.connectId = connectId;
     }
 
     public String getServerName() {
