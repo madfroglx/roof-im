@@ -78,5 +78,11 @@ public class RedisLoadBalanceRequestPublisher<E extends Request> implements Requ
         this.retryTemplate = retryTemplate;
     }
 
+    public void setRedisTemplates(List<RedisTemplate> redisTemplates) {
+        this.redisTemplates = redisTemplates;
+    }
 
+    public void setServerNames(List<String> serverNames) {
+        this.serverNames = serverNames;
+    }
 }

@@ -5,6 +5,9 @@ import com.roof.chain.support.NodeResult;
 import org.apache.commons.lang3.StringUtils;
 import org.roof.im.response.Response;
 
+/**
+ * 将节点的返回转化为服务端返回
+ */
 public class ReturnCodeResponseCreateNode {
     private String state;
     public static final String RESPONSE_CREATE_SUCCESS = "responseCreateSuccess";

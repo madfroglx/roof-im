@@ -26,10 +26,6 @@ public class MessageHandlerNode extends AbstractRequestHandlerNode<MessageReques
     private static final String MESSAGE_HANDLE_SUCCESS = "messageHandleSuccess";
 
     public String doNode(MessageRequest request, ValueStack valueStack) {
-        String username = request.getUsername();
-        if (!userService.exist(username)) {
-            return USER_NOT_EXISTS;
-        }
         String receiver = request.getReceiver();
         if (!userService.exist(receiver)) {
             return RECEIVER_NOT_EXISTS;

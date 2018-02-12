@@ -8,6 +8,7 @@ public class Request {
     private String username; //用户名
     private String clientType; //客户端类型
     private String serverName;
+    private long createTime;
 
     public String getId() {
         return id;
@@ -63,5 +64,13 @@ public class Request {
 
     public void setServerName(String serverName) {
         this.serverName = serverName;
+    }
+
+    public long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
     }
 }

@@ -7,15 +7,18 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
+/**
+ * 将请求通过连接发送给客户端
+ */
 public class ResponseNode {
     private static final Logger LOGGER = LoggerFactory.getLogger(ResponseNode.class);
     private static final String RESPONSE_FAIL = "responseFail";
     private static final String RESPONSE_SUCCESS = "responseSuccess";
     private ResponseEndpoint responseEndpoint;
 
-    public String doNode(String connectID, Response response) {
+    public String doNode(String connectId, Response response) {
         try {
-            responseEndpoint.send(connectID, response);
+            responseEndpoint.send(connectId, response);
         } catch (IOException e) {
             LOGGER.error(e.getMessage(), e);
             return RESPONSE_FAIL;

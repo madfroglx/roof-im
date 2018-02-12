@@ -27,7 +27,7 @@ public class Message {
     /**
      * 发送时间
      */
-    private long sendTime;
+    private long createTime;
     /**
      * 状态 0:未收取, 1:已收取
      */
@@ -73,12 +73,12 @@ public class Message {
         this.payload = payload;
     }
 
-    public long getSendTime() {
-        return sendTime;
+    public long getCreateTime() {
+        return createTime;
     }
 
-    public void setSendTime(long sendTime) {
-        this.sendTime = sendTime;
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
     }
 
     public int getState() {
