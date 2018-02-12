@@ -64,6 +64,9 @@
                                     <entry key="openSession">
                                         <ref bean="openSessionChain"/>
                                     </entry>
+                                    <entry key="closeSession">
+                                        <ref bean="closeSessionChain"/>
+                                    </entry>
                                 </map>
                             </property>
                             <property name="valueStackKey" value="requestType"/>

@@ -39,7 +39,7 @@ public class MapSessionManager implements SessionManager {
             return null;
         }
         if (effective) {
-            if (session.getEnd() != 0) {
+            if (session.getEnd() == 0) {
                 return session;
             } else {
                 return null;
