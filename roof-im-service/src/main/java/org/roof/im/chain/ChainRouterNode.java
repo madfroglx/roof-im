@@ -13,7 +13,7 @@ public class ChainRouterNode {
     private String valueStackKey;
     private Map<String, Chain> mapping;
     private static final String ROUTE_SUCCESS = "routeSuccess";
-    private static final String ROUTE_FAIL = "routeSuccess";
+    private static final String ROUTE_FAIL = "routeFail";
 
     public Object doNode(ValueStack valueStack) throws Exception {
         Assert.notNull(valueStack, "ValueStack cannot null");

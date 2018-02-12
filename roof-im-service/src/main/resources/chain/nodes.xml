@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!-- 成功-->
-    <bean id="successReturnCodeResponseCreateNode" class="com.roof.chain.support.NodeFactoryBean">
+    <bean id="successResponseCreateNode" class="com.roof.chain.support.NodeFactoryBean">
         <property name="name" value="successResponseCreateNode"/>
         <property name="target">
             <bean class="org.roof.im.chain.ReturnCodeResponseCreateNode">
@@ -17,7 +17,7 @@
         </property>
     </bean>
     <!-- 失败-->
-    <bean id="failReturnCodeResponseCreateNode" class="com.roof.chain.support.NodeFactoryBean">
+    <bean id="failResponseCreateNode" class="com.roof.chain.support.NodeFactoryBean">
         <property name="name" value="failResponseCreateNode"/>
         <property name="target">
             <bean class="org.roof.im.chain.ReturnCodeResponseCreateNode">
@@ -31,7 +31,7 @@
         </property>
     </bean>
     <!-- 错误-->
-    <bean id="errorReturnCodeResponseCreateNode" class="com.roof.chain.support.NodeFactoryBean">
+    <bean id="errorResponseCreateNode" class="com.roof.chain.support.NodeFactoryBean">
         <property name="name" value="errorResponseCreateNode"/>
         <property name="target">
             <bean class="org.roof.im.chain.ReturnCodeResponseCreateNode">

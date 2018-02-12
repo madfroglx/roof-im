@@ -2,11 +2,9 @@ package org.roof.im.chain;
 
 import com.alibaba.fastjson.JSONObject;
 import com.roof.chain.api.ValueStack;
-import org.roof.im.converter.CommonRequestConverter;
 import org.roof.im.converter.RequestConverter;
 import org.roof.im.converter.RequestTypeMappingRequestConverter;
 import org.roof.im.request.Request;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
 import java.util.List;

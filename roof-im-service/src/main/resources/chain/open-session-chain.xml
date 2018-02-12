@@ -2,21 +2,24 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="onlineChain" class="com.roof.chain.support.GenericChain">
-        <property name="startNodeName" value="onlineHandler"/>
+    <bean id="openSessionChain" class="com.roof.chain.support.GenericChain">
+        <property name="startNodeName" value="openSessionHandlerNode"/>
         <property name="nodes">
             <list>
                 <bean class="com.roof.chain.support.NodeFactoryBean">
                     <property name="target">
-                        <bean class="org.roof.im.chain.handler.impl.OnlineHandlerNode">
+                        <bean class="org.roof.im.chain.handler.impl.OpenSessionHandlerNode">
                             <property name="userService" ref="userService"/>
                             <property name="userStateService" ref="userStateService"/>
-                            <property name="serverNameBuilder" ref="serverNameBuilder"/>
+                            <property name="sessionManager" ref="sessionManager"/>
                         </bean>
                     </property>
                     <property name="forwards">
                         <map>
-                            <entry key="onlineSuccess" value="successResponseCreateNode"/>
+                            <entry key="senderNotExist" value="failResponseCreateNode"/>
+                            <entry key="receiverNotExist" value="failResponseCreateNode"/>
+                            <entry key="sessionAlreadyExist" value="failResponseCreateNode"/>
+                            <entry key="openSessionSuccess" value="successResponseCreateNode"/>
                         </map>
                     </property>
                 </bean>

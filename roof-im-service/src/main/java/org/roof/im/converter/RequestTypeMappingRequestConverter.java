@@ -16,6 +16,8 @@ public class RequestTypeMappingRequestConverter implements RequestConverter {
     static {
         REQUEST_TYPE_MAPPING.put(RequestType.online.name(), OnlineRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.offline.name(), OfflineRequest.class);
+        REQUEST_TYPE_MAPPING.put(RequestType.openSession.name(), OpenSessionRequest.class);
+        REQUEST_TYPE_MAPPING.put(RequestType.closeSession.name(), CloseSessionRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.message.name(), MessageRequest.class);
     }
 

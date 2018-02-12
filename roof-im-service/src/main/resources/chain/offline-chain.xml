@@ -36,9 +36,9 @@
                         </map>
                     </property>
                 </bean>
-                <ref bean="successReturnCodeResponseCreateNode"/>
-                <ref bean="failReturnCodeResponseCreateNode"/>
-                <ref bean="errorReturnCodeResponseCreateNode"/>
+                <ref bean="successResponseCreateNode"/>
+                <ref bean="failResponseCreateNode"/>
+                <ref bean="errorResponseCreateNode"/>
                 <ref bean="webSocketResponseEndPointNode"/>
             </list>
         </property>

@@ -13,7 +13,7 @@
                     </property>
                     <property name="forwards">
                         <map>
-                            <entry key="requestConvertError" value="error"/>
+                            <entry key="requestConvertError" value="errorResponseCreateNode"/>
                             <entry key="requestConvertSuccess" value="tokenUsernameStoreNode"/>
                         </map>
                     </property>
@@ -61,15 +61,18 @@
                                     <entry key="offline">
                                         <ref bean="offlineChain"/>
                                     </entry>
+                                    <entry key="openSession">
+                                        <ref bean="openSessionChain"/>
+                                    </entry>
                                 </map>
                             </property>
                             <property name="valueStackKey" value="requestType"/>
                         </bean>
                     </property>
                 </bean>
-                <ref bean="successReturnCodeResponseCreateNode"/>
-                <ref bean="failReturnCodeResponseCreateNode"/>
-                <ref bean="errorReturnCodeResponseCreateNode"/>
+                <ref bean="successResponseCreateNode"/>
+                <ref bean="failResponseCreateNode"/>
+                <ref bean="errorResponseCreateNode"/>
                 <ref bean="webSocketResponseEndPointNode"/>
             </list>
         </property>

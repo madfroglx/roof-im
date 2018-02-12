@@ -36,13 +36,12 @@ public interface SessionManager {
     Session queryById(String id, Boolean effective);
 
     /**
-     * 通过会话双方查询会话
+     * 查询用户间有效的会话
      *
      * @param sender   会话发起者
      * @param receiver 会话接受者
-     * @param effective session 是否有效 ， <code>null</code>都查
      * @return 会话
      */
-    Session queryByUser(String sender, String receiver, Boolean effective);
+    Session effective(String sender, String receiver);
 
 }

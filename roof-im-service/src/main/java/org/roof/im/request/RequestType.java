@@ -15,6 +15,14 @@ public enum RequestType {
      */
     offline,
     /**
+     * 打开session
+     */
+    openSession,
+    /**
+     * 关闭session
+     */
+    closeSession,
+    /**
      * 发送消息
      */
     message
