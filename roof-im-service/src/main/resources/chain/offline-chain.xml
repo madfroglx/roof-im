@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!--下线-->
     <bean id="offlineChain" class="com.roof.chain.support.GenericChain">
-        <property name="startNodeName" value="onlineHandler"/>
+        <property name="startNodeName" value="offlineHandlerNode"/>
         <property name="nodes">
             <list>
                 <bean class="com.roof.chain.support.NodeFactoryBean">
@@ -17,8 +17,8 @@
                     </property>
                     <property name="forwards">
                         <map>
-                            <entry key="userNotOnline" value="failReturnCodeResponseCreateNode"/>
-                            <entry key="offlineSuccess" value="failReturnCodeResponseCreateNode"/>
+                            <entry key="userNotOnline" value="failResponseCreateNode"/>
+                            <entry key="offlineSuccess" value="successResponseCreateNode"/>
                         </map>
                     </property>
                 </bean>

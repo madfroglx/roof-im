@@ -9,10 +9,7 @@
                 <!-- 反序列化请求 -->
                 <bean class="com.roof.chain.support.NodeFactoryBean">
                     <property name="target">
-                        <bean class="org.roof.im.chain.RequestConverterNode">
-                            <property name="commonRequestConverter" ref="commonRequestConverter"/>
-                            <property name="requestConverters" ref="requestConverters"/>
-                        </bean>
+                        <bean class="org.roof.im.chain.RequestConverterNode"/>
                     </property>
                     <property name="forwards">
                         <map>
@@ -60,6 +57,9 @@
                                 <map>
                                     <entry key="online">
                                         <ref bean="onlineChain"/>
+                                    </entry>
+                                    <entry key="offline">
+                                        <ref bean="offlineChain"/>
                                     </entry>
                                 </map>
                             </property>

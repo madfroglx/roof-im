@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.roof.chain.api.ValueStack;
 import org.roof.im.converter.CommonRequestConverter;
 import org.roof.im.converter.RequestConverter;
+import org.roof.im.converter.RequestTypeMappingRequestConverter;
 import org.roof.im.request.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
@@ -16,9 +17,9 @@ import java.util.List;
  * @author liuxin
  */
 public class RequestConverterNode {
-    private static final RequestConverter DEFAULT_CONVERTER = new CommonRequestConverter();
+    private static final RequestConverter DEFAULT_CONVERTER = new RequestTypeMappingRequestConverter();
     private RequestConverter commonRequestConverter = DEFAULT_CONVERTER;
-    private List<RequestConverter> requestConverters;
+    private List<RequestConverter> requestConverters = null;
 
     private static final String REQUEST_CONVERT_ERROR = "requestConvertError";
     private static final String REQUEST_CONVERT_SUCCESS = "requestConvertSuccess";
@@ -35,6 +36,7 @@ public class RequestConverterNode {
                 }
             }
         }
+
         if (request == null) {
             request = commonRequestConverter.toMessage(jsonObjectMessage);
         }
@@ -51,7 +53,6 @@ public class RequestConverterNode {
         this.commonRequestConverter = commonRequestConverter;
     }
 
-    @Autowired
     public void setRequestConverters(List<RequestConverter> requestConverters) {
         this.requestConverters = requestConverters;
     }

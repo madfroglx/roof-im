@@ -15,7 +15,7 @@ public class CloseWebSocketConnectNode {
     private static final String CLOSE_SUCCESS = "closeSuccess";
     private static final String CLOSE_ERROR = "closeError";
 
-    private String doNode(String connectId) {
+    public String doNode(String connectId) {
         try {
             connectManager.close(connectId);
         } catch (IOException e) {

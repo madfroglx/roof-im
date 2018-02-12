@@ -9,7 +9,7 @@ import java.io.IOException;
 public class ConsoleResponseEndPoint implements ResponseEndpoint {
 
     @Override
-    public void send(String connectID, Response response) throws IOException {
-        System.out.println("connectID : " + connectID + ", response : " + JSON.toJSONString(response));
+    public void send(String connectId, Response response) throws IOException {
+        System.out.println("connectId : " + connectId + ", response : " + JSON.toJSONString(response));
     }
 }

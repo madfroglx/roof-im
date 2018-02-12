@@ -12,10 +12,10 @@ public interface RequestConverter<T extends Request> {
     /**
      * 是否支持该类型消息
      *
-     * @param messageType 消息类型
+     * @param requestType 消息类型
      * @return 是否支持
      */
-    boolean support(String messageType);
+    boolean support(String requestType);
 
     /**
      * 将JSON格式的消息转换为消息对象

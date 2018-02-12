@@ -7,7 +7,7 @@ import org.roof.im.request.Request;
 public class CommonRequestConverter implements RequestConverter<Request> {
 
     @Override
-    public boolean support(String messageType) {
+    public boolean support(String requestType) {
         return true;
     }
 

@@ -5,7 +5,7 @@ import org.roof.im.request.RequestType;
 public class MessageRequestConverter extends CommonRequestConverter {
 
     @Override
-    public boolean support(String messageType) {
-        return RequestType.message.name().equals(messageType);
+    public boolean support(String requestType) {
+        return RequestType.message.name().equals(requestType);
     }
 }
