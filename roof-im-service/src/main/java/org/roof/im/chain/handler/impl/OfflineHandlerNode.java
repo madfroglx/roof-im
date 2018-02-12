@@ -1,6 +1,7 @@
 package org.roof.im.chain.handler.impl;
 
 import com.roof.chain.api.ValueStack;
+import org.apache.commons.lang3.StringUtils;
 import org.roof.im.chain.handler.AbstractRequestHandlerNode;
 import org.roof.im.request.OfflineRequest;
 import org.roof.im.transport.ServerNameBuilder;
@@ -27,8 +28,13 @@ public class OfflineHandlerNode extends AbstractRequestHandlerNode<OfflineReques
         }
         for (Iterator<UserState> iterator = userStates.iterator(); iterator.hasNext(); ) {
             UserState next = iterator.next();
-            if (next.getServerName().equals(serverName)) {
+            if (StringUtils.equals(next.getServerName(), serverName)) {
                 iterator.remove();
+                if (userStates.size() == 0) {
+                    userStateService.offline(username);
+                } else {
+                    userStateService.online(username, userStates);
+                }
                 return OFFLINE_SUCCESS;
             }
         }
