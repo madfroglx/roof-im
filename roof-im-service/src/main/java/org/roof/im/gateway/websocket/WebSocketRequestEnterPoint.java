@@ -8,7 +8,6 @@ import com.roof.chain.support.GenericValueStack;
 import org.roof.im.chain.ImConstant;
 import org.roof.im.connect.ConnectManager;
 import org.roof.im.gateway.RequestEnterPoint;
-import org.roof.im.connect.ConnectStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,6 @@
 package org.roof.im.converter;
 
 import com.alibaba.fastjson.JSONObject;
-import org.roof.im.message.Message;
 import org.roof.im.request.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

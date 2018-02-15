@@ -8,7 +8,9 @@
     </bean>
     <bean id="tokenUsernameStore" class="org.roof.im.user.impl.MapTokenUsernameStore"/>
     <bean id="userStatusStore" class="org.roof.im.user.impl.MapUserStatusStore"/>
-    <bean id="userService" class="org.roof.im.user.impl.MockUserService"/>
+    <bean id="userService" class="org.roof.im.user.impl.MockUserService">
+        <property name="tokenUsernameStore" ref="tokenUsernameStore"/>
+    </bean>
     <bean id="userStateService" class="org.roof.im.user.impl.SimpleUserStateService">
         <property name="userStatusStore" ref="userStatusStore"/>
     </bean>

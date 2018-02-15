@@ -2,7 +2,6 @@ package org.roof.im.gateway.websocket;
 
 import com.alibaba.fastjson.JSON;
 import org.roof.im.connect.ConnectManager;
-import org.roof.im.connect.ConnectStore;
 import org.roof.im.gateway.ResponseEndpoint;
 import org.roof.im.response.Response;
 import org.slf4j.Logger;

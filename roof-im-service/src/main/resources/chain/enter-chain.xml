@@ -14,21 +14,21 @@
                     <property name="forwards">
                         <map>
                             <entry key="requestConvertError" value="errorResponseCreateNode"/>
-                            <entry key="requestConvertSuccess" value="tokenUsernameStoreNode"/>
+                            <entry key="requestConvertSuccess" value="userLoginNode"/>
                         </map>
                     </property>
                 </bean>
                 <!-- 根据token查询当前登录用户-->
                 <bean class="com.roof.chain.support.NodeFactoryBean">
                     <property name="target">
-                        <bean class="org.roof.im.chain.TokenUsernameStoreNode">
-                            <property name="tokenUsernameStore" ref="tokenUsernameStore"/>
+                        <bean class="org.roof.im.chain.UserLoginNode">
+                            <property name="userService" ref="userService"/>
                         </bean>
                     </property>
                     <property name="forwards">
                         <map>
-                            <entry key="inStore" value="success"/>
-                            <entry key="notInStore" value="authNode"/>
+                            <entry key="userLogin" value="router"/>
+                            <entry key="userNotLogin" value="authNode"/>
                         </map>
                     </property>
                 </bean>
@@ -43,8 +43,8 @@
                     <property name="forwards">
                         <map>
                             <entry key="authSuccess" value="router"/>
-                            <entry key="authError" value="error"/>
-                            <entry key="authFail" value="fail"/>
+                            <entry key="authError" value="errorResponseCreateNode"/>
+                            <entry key="authFail" value="failResponseCreateNode"/>
                         </map>
                     </property>
                 </bean>
@@ -66,6 +66,9 @@
                                     </entry>
                                     <entry key="closeSession">
                                         <ref bean="closeSessionChain"/>
+                                    </entry>
+                                    <entry key="message">
+                                        <ref bean="messageChain"/>
                                     </entry>
                                 </map>
                             </property>
