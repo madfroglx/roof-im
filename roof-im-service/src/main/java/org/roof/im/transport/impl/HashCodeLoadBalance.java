@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.retry.RetryContext;
 
 /**
- * org.roof.im.transport.redis
+ * org.roof.im.transport.queue
  * hashCode + 重试次数 计算出放队列的index
  * size为队列数量
  *
@@ -28,7 +28,7 @@ public class HashCodeLoadBalance implements LoadBalance {
         }
         int hashCode = Math.abs(request.getId().hashCode());
         int index = (hashCode + retryContext.getRetryCount()) % size;
-        LOGGER.debug("produce to queue [" + index + "]");
+        LOGGER.debug("publish to queue [" + index + "]");
         return index;
     }
 }

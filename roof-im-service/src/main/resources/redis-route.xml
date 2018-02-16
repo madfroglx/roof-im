@@ -10,7 +10,7 @@
         <property name="port" value="6379"/>
         <property name="usePool" value="true"/>
         <property name="database" value="1"/>
-        <!--<property name="password" value="${redis.password}"/>-->
+        <!--<property name="password" value="${queue.password}"/>-->
     </bean>
 
     <bean id="jredisConnectionFactory-2"
@@ -19,7 +19,7 @@
         <property name="port" value="6379"/>
         <property name="usePool" value="true"/>
         <property name="database" value="2"/>
-        <!--<property name="password" value="${redis.password}"/>-->
+        <!--<property name="password" value="${queue.password}"/>-->
     </bean>
 
     <bean id="redisTemplate1" class="org.springframework.data.redis.core.RedisTemplate">

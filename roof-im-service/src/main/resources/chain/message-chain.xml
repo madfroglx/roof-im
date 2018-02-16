@@ -17,7 +17,21 @@
                         <map>
                             <entry key="receiverNotExists" value="failResponseCreateNode"/>
                             <entry key="receiverOffline" value="successResponseCreateNode"/>
-                            <entry key="messageHandleSuccess" value="successResponseCreateNode"/>
+                            <entry key="messageHandleSuccess" value="requestMessagePublishNode"/>
+                        </map>
+                    </property>
+                </bean>
+                <bean class="com.roof.chain.support.NodeFactoryBean">
+                    <property name="target">
+                        <bean class="org.roof.im.chain.RequestMessagePublishNode">
+                            <property name="requestPublisher" ref="requestPublisher"/>
+                        </bean>
+                    </property>
+                    <property name="forwards">
+                        <map>
+                            <entry key="publishSuccess" value="successResponseCreateNode"/>
+                            <entry key="publishFail" value="failResponseCreateNode"/>
+                            <entry key="publishError" value="errorResponseCreateNode"/>
                         </map>
                     </property>
                 </bean>

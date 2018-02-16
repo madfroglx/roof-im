@@ -2,5 +2,31 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
+    <bean id="messageRequestChain" class="com.roof.chain.support.GenericChain">
+        <property name="startNodeName" value="messageRequestHandlerNode"/>
+        <property name="nodes">
+            <list>
+                <bean class="com.roof.chain.support.NodeFactoryBean">
+                    <property name="target">
+                        <bean class="org.roof.im.chain.handler.impl.MessageRequestHandlerNode">
+                            <property name="userService" ref="userService"/>
+                            <property name="userStateService" ref="userStateService"/>
+                            <property name="serverNameBuilder" ref="serverNameBuilder"/>
+                            <property name="connectManager" ref="connectManager"/>
+                        </bean>
+                    </property>
+                    <property name="forwards">
+                        <map>
+                            <entry key="cannotFoundConnect" value="failResponseCreateNode"/>
+                            <entry key="messageRequestTransformSuccess" value="successResponseCreateNode"/>
+                        </map>
+                    </property>
+                </bean>
+                <ref bean="successResponseCreateNode"/>
+                <ref bean="failResponseCreateNode"/>
+                <ref bean="errorResponseCreateNode"/>
+                <ref bean="webSocketResponseEndPointNode"/>
+            </list>
+        </property>
+    </bean>
 </beans>

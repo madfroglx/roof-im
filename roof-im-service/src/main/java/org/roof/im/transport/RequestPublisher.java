@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  */
 public interface RequestPublisher<E extends Request> {
 
-    boolean produce(E e, long timeout, TimeUnit unit)
+    boolean publish(E e, long timeout, TimeUnit unit)
             throws InterruptedException;
 
 }

@@ -9,7 +9,9 @@
                 <!-- 反序列化请求 -->
                 <bean class="com.roof.chain.support.NodeFactoryBean">
                     <property name="target">
-                        <bean class="org.roof.im.chain.RequestConverterNode"/>
+                        <bean class="org.roof.im.chain.RequestConverterNode">
+                            <property name="serverNameBuilder" ref="serverNameBuilder"/>
+                        </bean>
                     </property>
                     <property name="forwards">
                         <map>
