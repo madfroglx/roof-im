@@ -3,7 +3,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-    <import resource="spring.xml"/>
+    <import resource="classpath*:spring-im.xml"/>
     <!--<websocket:handlers allowed-origins="*">-->
     <!--<websocket:mapping path="/webscoket.ws" handler="websocketEndPoint"/>-->
     <!--</websocket:handlers>-->
@@ -17,12 +17,7 @@
             <map>
                 <entry key="*.ws">
                     <bean class="org.springframework.web.socket.server.support.WebSocketHttpRequestHandler">
-                        <constructor-arg ref="webSocketEndPoint"/>
-                        <property name="handshakeInterceptors">
-                            <array>
-                                <bean class="org.roof.oc.message.websocket.HandshakeInterceptor"/>
-                            </array>
-                        </property>
+                        <constructor-arg ref="webSocketRequestEnterPoint"/>
                     </bean>
                 </entry>
             </map>

@@ -33,5 +33,15 @@
         <property name="serverNameBuilder" ref="serverNameBuilder"/>
         <property name="executor" ref="taskExecutor"/>
         <property name="chain" ref="messageRequestChain"/>
+        <property name="queues">
+            <list>
+                <ref bean="queue"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="webSocketRequestEnterPoint" class="org.roof.im.gateway.websocket.WebSocketRequestEnterPoint">
+        <property name="enterChain" ref="enterChain"/>
+        <property name="webSocketSessionConnectManager" ref="connectManager"/>
     </bean>
 </beans>

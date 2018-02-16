@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath*:spring.xml"})
+@ContextConfiguration({"classpath*:spring-im.xml"})
 public class OfflineTest {
     private Chain enterChain;
 
@@ -49,6 +49,7 @@ public class OfflineTest {
         offlineRequest.setRequestType("offline");
         offlineRequest.setToken("abc");
         offlineRequest.setCreateTime(System.currentTimeMillis());
+        System.out.println(JSON.toJSONString(offlineRequest));
         return offlineRequest;
     }
 

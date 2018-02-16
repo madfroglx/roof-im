@@ -1,6 +1,7 @@
 package org.roof.im.request;
 
 public class Request {
+    //TODO 上线时间
     private String id;
     private String connectId; // 连接ID
     private String requestType; //请求类型

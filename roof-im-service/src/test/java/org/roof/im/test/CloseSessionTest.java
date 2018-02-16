@@ -18,7 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath*:spring.xml"})
+@ContextConfiguration({"classpath*:spring-im.xml"})
 public class CloseSessionTest {
     private Chain enterChain;
     private SessionManager sessionManager;

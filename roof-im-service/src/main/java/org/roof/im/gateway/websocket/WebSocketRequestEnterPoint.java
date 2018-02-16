@@ -44,7 +44,13 @@ public class WebSocketRequestEnterPoint extends TextWebSocketHandler implements 
         ValueStack valueStack = new GenericValueStack();
         valueStack.set(ImConstant.TEXT_MESSAGE, message);
         valueStack.set(ImConstant.CONNECT_ID, sessionID);
-        JSONObject jsonObjectMessage = JSON.parseObject(message);
+        JSONObject jsonObjectMessage;
+        try {
+            jsonObjectMessage = JSON.parseObject(message);
+        } catch (Exception e) {
+            LOGGER.error("input json error: {}", message);
+            return;
+        }
         valueStack.set(ImConstant.JSON_OBJECT_MESSAGE, jsonObjectMessage);
         try {
             enterChain.doChain(valueStack);

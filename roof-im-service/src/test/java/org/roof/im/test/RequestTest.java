@@ -19,6 +19,7 @@ public class RequestTest {
         onlineRequest.setRequestType("online");
         onlineRequest.setToken(token);
         ValueStack valueStack = new GenericValueStack();
+        System.out.println(JSON.toJSONString(onlineRequest));
         valueStack.set(ImConstant.TEXT_MESSAGE, JSON.toJSONString(onlineRequest));
         valueStack.set(ImConstant.CONNECT_ID, "1");
         JSONObject jsonObjectMessage = JSON.parseObject(JSON.toJSONString(onlineRequest));

@@ -69,12 +69,18 @@ public abstract class AbstractBlockingQueueRequestMessageDriveEnterPoint<E exten
 
         @Override
         public void run() {
-            try {
-                E request = queue.poll(timeOut, TimeUnit.MILLISECONDS);
-                subscribe(request);
-            } catch (InterruptedException e) {
-                LOGGER.error(e.getMessage(), e);
+            while (true) {
+                try {
+                    E request = queue.poll(timeOut, TimeUnit.MILLISECONDS);
+                    if (request == null) {
+                        continue;
+                    }
+                    subscribe(request);
+                } catch (InterruptedException e) {
+                    LOGGER.error(e.getMessage(), e);
+                }
             }
+
         }
     }
 
