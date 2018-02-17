@@ -47,6 +47,7 @@ public class RequestConverterNode {
         request.setUsername(currentUser);
         request.setConnectId(connectId);
         request.setServerName(serverNameBuilder.getName());
+        request.setCreateTime(System.currentTimeMillis());
         valueStack.set(ImConstant.REQUEST, request);
         return REQUEST_CONVERT_SUCCESS;
     }

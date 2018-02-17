@@ -28,11 +28,12 @@ public class MessageTest extends RequestTest {
         MessageRequest messageRequest = new MessageRequest();
         messageRequest.setRequestType("message");
         messageRequest.setToken("abc");
-        messageRequest.setReceiver("bcd");
+        messageRequest.setReceiver("abc");
         messageRequest.setType(ContentType.TXT);
         messageRequest.setClientType("h5");
         messageRequest.setCreateTime(System.currentTimeMillis());
         messageRequest.setPayload("test");
+        System.out.println(JSON.toJSONString(messageRequest));
 
         ValueStack valueStack = new GenericValueStack();
         valueStack.set(ImConstant.TEXT_MESSAGE, JSON.toJSONString(messageRequest));
