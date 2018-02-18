@@ -3,7 +3,7 @@ package org.roof.im.user;
 public interface UserService {
     /**
      * 认证
-     *
+     * 使用token认证用户,并返回用户名. 将认证结果保存本地缓存
      * @param token 用户凭证
      * @return 用户名
      */

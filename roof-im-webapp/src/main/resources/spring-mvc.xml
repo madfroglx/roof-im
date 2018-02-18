@@ -18,6 +18,11 @@
                 <entry key="*.ws">
                     <bean class="org.springframework.web.socket.server.support.WebSocketHttpRequestHandler">
                         <constructor-arg ref="webSocketRequestEnterPoint"/>
+                        <property name="handshakeInterceptors">
+                            <list>
+                                <ref bean="loginHandshakeInterceptor"/>
+                            </list>
+                        </property>
                     </bean>
                 </entry>
             </map>

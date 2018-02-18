@@ -61,6 +61,7 @@ public class WebSocketRequestEnterPoint extends TextWebSocketHandler implements 
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+
         ConcurrentWebSocketSessionDecorator socketSessionDecorator
                 = new ConcurrentWebSocketSessionDecorator(session, getSendTimeLimit(), getSendBufferSizeLimit());
         webSocketSessionConnectManager.put(session.getId(), socketSessionDecorator);

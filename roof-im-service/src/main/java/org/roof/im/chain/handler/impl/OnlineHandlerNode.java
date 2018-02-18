@@ -50,6 +50,7 @@ public class OnlineHandlerNode extends AbstractRequestHandlerNode<OnlineRequest>
         userState.setConnectId(onlineRequest.getConnectId());
         userState.setClientType(onlineRequest.getClientType());
         userState.setServerName(nodeName);
+        userState.setOnlineTime(System.currentTimeMillis());
         return userState;
     }
 

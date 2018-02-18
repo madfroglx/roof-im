@@ -29,9 +29,21 @@
                     </property>
                     <property name="forwards">
                         <map>
-                            <entry key="publishSuccess" value="successResponseCreateNode"/>
+                            <entry key="publishSuccess" value="returnMessageExchangeNode"/>
                             <entry key="publishFail" value="failResponseCreateNode"/>
                             <entry key="publishError" value="errorResponseCreateNode"/>
+                        </map>
+                    </property>
+                </bean>
+                <bean class="com.roof.chain.support.NodeFactoryBean">
+                    <property name="target">
+                        <bean class="org.roof.im.chain.ReturnMessageExchangeNode">
+                            <property name="returnMessage" value="sendSuccess"/>
+                        </bean>
+                    </property>
+                    <property name="forwards">
+                        <map>
+                            <entry key="sendSuccess" value="successResponseCreateNode"/>
                         </map>
                     </property>
                 </bean>

@@ -18,8 +18,8 @@ public class WebSocketResponseEndPoint implements ResponseEndpoint {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketResponseEndPoint.class);
     private ConnectManager<WebSocketSession> webSocketSessionConnectManager;
     @Override
-    public void send(String connectID, Response response) throws IOException {
-        WebSocketSession webSocketSession = webSocketSessionConnectManager.get(connectID);
+    public void send(String connectId, Response response) throws IOException {
+        WebSocketSession webSocketSession = webSocketSessionConnectManager.get(connectId);
         if (webSocketSession == null) {
             return;
         }

@@ -17,6 +17,10 @@ public class UserState {
      * 客户端类型
      */
     private String clientType;
+    /**
+     * 上线时间
+     */
+    private long onlineTime;
 
     public String getUsername() {
         return username;
@@ -48,5 +52,13 @@ public class UserState {
 
     public void setClientType(String clientType) {
         this.clientType = clientType;
+    }
+
+    public long getOnlineTime() {
+        return onlineTime;
+    }
+
+    public void setOnlineTime(long onlineTime) {
+        this.onlineTime = onlineTime;
     }
 }
