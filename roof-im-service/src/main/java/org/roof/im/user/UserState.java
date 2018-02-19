@@ -20,7 +20,7 @@ public class UserState {
     /**
      * 上线时间
      */
-    private long onlineTime;
+    private long updateTime;
 
     /**
      * 状态
@@ -62,12 +62,12 @@ public class UserState {
         this.clientType = clientType;
     }
 
-    public long getOnlineTime() {
-        return onlineTime;
+    public long getUpdateTime() {
+        return updateTime;
     }
 
-    public void setOnlineTime(long onlineTime) {
-        this.onlineTime = onlineTime;
+    public void setUpdateTime(long updateTime) {
+        this.updateTime = updateTime;
     }
 
     public String getState() {

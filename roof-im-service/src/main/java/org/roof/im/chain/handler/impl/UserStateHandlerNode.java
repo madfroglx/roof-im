@@ -20,7 +20,6 @@ public class UserStateHandlerNode extends AbstractRequestHandlerNode<UserStateRe
      * 用户状态变更成功
      */
     private static final String USER_STATE_CHANGE_SUCCESS = "userStateChangeSuccess";
-    //上线失败
 
     private UserStateService userStateService;
 
@@ -52,7 +51,7 @@ public class UserStateHandlerNode extends AbstractRequestHandlerNode<UserStateRe
         userState.setConnectId(userStateRequest.getConnectId());
         userState.setClientType(userStateRequest.getClientType());
         userState.setServerName(nodeName);
-        userState.setOnlineTime(System.currentTimeMillis());
+        userState.setUpdateTime(System.currentTimeMillis());
         userState.setState(userStateRequest.getRequestType());
         return userState;
     }
