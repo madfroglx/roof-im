@@ -3,7 +3,7 @@ package org.roof.im.chain.handler.impl;
 import com.roof.chain.api.ValueStack;
 import org.apache.commons.lang3.StringUtils;
 import org.roof.im.chain.handler.AbstractRequestHandlerNode;
-import org.roof.im.request.OnlineRequest;
+import org.roof.im.request.UserStateRequest;
 import org.roof.im.transport.ServerNameBuilder;
 import org.roof.im.user.UserService;
 import org.roof.im.user.UserState;
@@ -12,13 +12,15 @@ import org.roof.im.user.UserStateService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OnlineHandlerNode extends AbstractRequestHandlerNode<OnlineRequest> {
-    //用户已经在线
-    private static final String IS_ALREADY_ONLINE = "isAlreadyOnline";
-    //用户上线成功
-    private static final String ONLINE_SUCCESS = "onlineSuccess";
+/**
+ * 用户状态变更
+ */
+public class UserStateHandlerNode extends AbstractRequestHandlerNode<UserStateRequest> {
+    /**
+     * 用户状态变更成功
+     */
+    private static final String USER_STATE_CHANGE_SUCCESS = "userStateChangeSuccess";
     //上线失败
-    private static final String ONLINE_FAIL = "onlineFail";
 
     private UserStateService userStateService;
 
@@ -26,11 +28,11 @@ public class OnlineHandlerNode extends AbstractRequestHandlerNode<OnlineRequest>
 
     private ServerNameBuilder serverNameBuilder;
 
-    public String doNode(OnlineRequest onlineRequest, ValueStack valueStack) {
-        String username = onlineRequest.getUsername();
+    public String doNode(UserStateRequest userStateRequest, ValueStack valueStack) {
+        String username = userStateRequest.getUsername();
         List<UserState> userStates = userStateService.getStates(username);
         List<UserState> newUserStates = new ArrayList<>();
-        UserState userState = createUserState(onlineRequest);
+        UserState userState = createUserState(userStateRequest);
         newUserStates.add(userState);
         if (userStates != null && userStates.size() > 0) {
             for (UserState us : userStates) {
@@ -40,17 +42,18 @@ public class OnlineHandlerNode extends AbstractRequestHandlerNode<OnlineRequest>
             }
         }
         userStateService.online(username, newUserStates);
-        return ONLINE_SUCCESS;
+        return USER_STATE_CHANGE_SUCCESS;
     }
 
-    private UserState createUserState(OnlineRequest onlineRequest) {
+    private UserState createUserState(UserStateRequest userStateRequest) {
         String nodeName = serverNameBuilder.getName();
         UserState userState = new UserState();
-        userState.setUsername(onlineRequest.getUsername());
-        userState.setConnectId(onlineRequest.getConnectId());
-        userState.setClientType(onlineRequest.getClientType());
+        userState.setUsername(userStateRequest.getUsername());
+        userState.setConnectId(userStateRequest.getConnectId());
+        userState.setClientType(userStateRequest.getClientType());
         userState.setServerName(nodeName);
         userState.setOnlineTime(System.currentTimeMillis());
+        userState.setState(userStateRequest.getRequestType());
         return userState;
     }
 

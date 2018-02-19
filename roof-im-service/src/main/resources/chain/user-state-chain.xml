@@ -2,14 +2,14 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <!-- 上线 -->
-    <bean id="onlineChain" class="com.roof.chain.support.GenericChain">
+    <!-- 用户状态变更 -->
+    <bean id="userStateChain" class="com.roof.chain.support.GenericChain">
         <property name="startNodeName" value="onlineHandlerNode"/>
         <property name="nodes">
             <list>
                 <bean class="com.roof.chain.support.NodeFactoryBean">
                     <property name="target">
-                        <bean class="org.roof.im.chain.handler.impl.OnlineHandlerNode">
+                        <bean class="org.roof.im.chain.handler.impl.UserStateHandlerNode">
                             <property name="userService" ref="userService"/>
                             <property name="userStateService" ref="userStateService"/>
                             <property name="serverNameBuilder" ref="serverNameBuilder"/>
@@ -17,7 +17,7 @@
                     </property>
                     <property name="forwards">
                         <map>
-                            <entry key="onlineSuccess" value="successResponseCreateNode"/>
+                            <entry key="userStateChangeSuccess" value="successResponseCreateNode"/>
                         </map>
                     </property>
                 </bean>

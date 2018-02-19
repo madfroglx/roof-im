@@ -14,8 +14,9 @@ public class RequestTypeMappingRequestConverter implements RequestConverter {
     private static Map<String, Class<? extends Request>> REQUEST_TYPE_MAPPING = new HashMap<>();
     private RequestIdGenerator requestIdGenerator = new UUIDRequestIdGenerator();
     static {
-        REQUEST_TYPE_MAPPING.put(RequestType.online.name(), OnlineRequest.class);
-        REQUEST_TYPE_MAPPING.put(RequestType.offline.name(), OfflineRequest.class);
+        REQUEST_TYPE_MAPPING.put(RequestType.online.name(), UserStateRequest.class);
+        REQUEST_TYPE_MAPPING.put(RequestType.hide.name(), UserStateRequest.class);
+        REQUEST_TYPE_MAPPING.put(RequestType.offline.name(), UserStateRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.openSession.name(), OpenSessionRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.closeSession.name(), CloseSessionRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.message.name(), MessageRequest.class);

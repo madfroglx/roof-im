@@ -44,10 +44,10 @@ public abstract class AbstractBlockingQueueLoadBalanceRequestPublisher<E extends
     protected abstract void onInit();
 
     @Override
-    public boolean publish(E e, long timeout, TimeUnit unit) throws InterruptedException {
+    public boolean publish(E e, String serverName, long timeout, TimeUnit unit) throws InterruptedException {
         return retryTemplate.execute(retryContext -> {
-            List<BlockingQueue<E>> queues = queuesMap.get(e.getServerName());
-            Assert.notNull(queues, "server name: " + e.getServerName() + " queue cannot null");
+            List<BlockingQueue<E>> queues = queuesMap.get(serverName);
+            Assert.notNull(queues, "server name: " + serverName + " queue cannot null");
             int index = loadBalance.select(e, retryContext, queues.size());
             return queues.get(index).offer(e, timeOut, TimeUnit.MILLISECONDS);
         });

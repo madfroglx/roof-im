@@ -24,6 +24,7 @@ public class TokenAuthHandshakeInterceptor implements HandshakeInterceptor {
             return false;
         }
         String token = null;
+        String client = null;
         for (String q : queries) {
             String[] qs = StringUtils.split(q, "=");
             if (qs != null && qs.length >= 2) {

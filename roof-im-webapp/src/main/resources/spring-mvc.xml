@@ -20,7 +20,7 @@
                         <constructor-arg ref="webSocketRequestEnterPoint"/>
                         <property name="handshakeInterceptors">
                             <list>
-                                <ref bean="loginHandshakeInterceptor"/>
+                                <ref bean="tokenAuthHandshakeInterceptor"/>
                             </list>
                         </property>
                     </bean>

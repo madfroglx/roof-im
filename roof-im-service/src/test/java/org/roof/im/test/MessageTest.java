@@ -7,6 +7,7 @@ import com.roof.chain.support.GenericValueStack;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.roof.im.chain.ImConstant;
+import org.roof.im.request.ClientType;
 import org.roof.im.request.ContentType;
 import org.roof.im.request.MessageRequest;
 import org.roof.im.transport.ServerNameBuilder;
@@ -30,7 +31,7 @@ public class MessageTest extends RequestTest {
         messageRequest.setToken("abc");
         messageRequest.setReceiver("abc");
         messageRequest.setType(ContentType.TXT);
-        messageRequest.setClientType("h5");
+        messageRequest.setClientType(ClientType.h5.name());
         messageRequest.setCreateTime(System.currentTimeMillis());
         messageRequest.setPayload("test");
         System.out.println(JSON.toJSONString(messageRequest));

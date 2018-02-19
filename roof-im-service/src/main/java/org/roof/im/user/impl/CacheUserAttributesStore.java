@@ -4,13 +4,14 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import org.roof.im.user.UserAttributesStore;
 
+import java.util.HashMap;
 import java.util.Map;
 
-public class CacheUserStore implements UserAttributesStore {
+public class CacheUserAttributesStore implements UserAttributesStore {
 
     private Cache<String, Map<String, Object>> cache;
 
-    public CacheUserStore() {
+    public CacheUserAttributesStore() {
         cache = CacheBuilder.newBuilder().build();
     }
 
@@ -71,6 +72,9 @@ public class CacheUserStore implements UserAttributesStore {
     @Override
     public void put(String username, String key, Object value) {
         Map<String, Object> attributes = getAttributes(username);
+        if (attributes == null) {
+            attributes = new HashMap<>();
+        }
         attributes.put(key, value);
         cache.put(username, attributes);
     }

@@ -8,6 +8,7 @@ import com.roof.chain.support.GenericValueStack;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.roof.im.chain.ImConstant;
+import org.roof.im.request.ClientType;
 import org.roof.im.request.OfflineRequest;
 import org.roof.im.transport.ServerNameBuilder;
 import org.roof.im.user.UserState;
@@ -45,7 +46,7 @@ public class OfflineTest {
 
     private OfflineRequest createRequest() {
         OfflineRequest offlineRequest = new OfflineRequest();
-        offlineRequest.setClientType("h5");
+        offlineRequest.setClientType(ClientType.h5.name());
         offlineRequest.setRequestType("offline");
         offlineRequest.setToken("abc");
         offlineRequest.setCreateTime(System.currentTimeMillis());
@@ -58,7 +59,7 @@ public class OfflineTest {
         List<UserState> states = new ArrayList<>();
         UserState userState = new UserState();
         userState.setConnectId("1");
-        userState.setClientType("h5");
+        userState.setClientType(ClientType.h5.name());
         userState.setUsername("abc");
         userState.setServerName(serverNameBuilder.getName());
         states.add(userState);

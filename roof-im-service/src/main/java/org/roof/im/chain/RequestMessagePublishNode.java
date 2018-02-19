@@ -1,11 +1,14 @@
 package org.roof.im.chain;
 
+import com.alibaba.fastjson.JSONObject;
 import com.roof.chain.api.ValueStack;
 import org.roof.im.request.Request;
 import org.roof.im.transport.RequestPublisher;
+import org.roof.im.user.UserState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class RequestMessagePublishNode {
@@ -17,18 +20,19 @@ public class RequestMessagePublishNode {
     private static final long DEFAULT_TIMEOUT = 1000;
     private long timeout = DEFAULT_TIMEOUT;
 
-    public String doNode(Request request, ValueStack valueStack) {
-        try {
-            boolean result = requestPublisher.publish(request, timeout, TimeUnit.MILLISECONDS);
-            if (result) {
-                return PUBLISH_SUCCESS;
-            } else {
-                return PUBLISH_FAIL;
+    public String doNode(Request request, List<UserState> userStates, ValueStack valueStack) {
+        for (UserState userState : userStates) {
+            boolean result = false;
+            try {
+                result = requestPublisher.publish(request, userState.getServerName(), timeout, TimeUnit.MILLISECONDS);
+            } catch (Exception e) {
+                LOGGER.error(e.getMessage(), e);
             }
-        } catch (InterruptedException e) {
-            LOGGER.error(e.getMessage(), e);
-            return PUBLISH_ERROR;
+            if (!result) {
+                LOGGER.error("push message error: {} ,{}", userState.getUsername(), JSONObject.toJSONString(request));
+            }
         }
+        return PUBLISH_SUCCESS;
     }
 
     public void setTimeout(long timeout) {

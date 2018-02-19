@@ -7,6 +7,7 @@ import com.roof.chain.support.GenericValueStack;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.roof.im.chain.ImConstant;
+import org.roof.im.request.ClientType;
 import org.roof.im.request.ContentType;
 import org.roof.im.request.MessageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class MessageRequestTest extends MessageTest {
         messageRequest.setToken("abc");
         messageRequest.setReceiver("bcd");
         messageRequest.setType(ContentType.TXT);
-        messageRequest.setClientType("h5");
+        messageRequest.setClientType(ClientType.h5.name());
         messageRequest.setCreateTime(System.currentTimeMillis());
         messageRequest.setPayload("test");
 

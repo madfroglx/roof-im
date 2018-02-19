@@ -7,7 +7,10 @@
         <property name="webSocketSessionConnectStore" ref="connectStore"/>
     </bean>
     <bean id="tokenUsernameStore" class="org.roof.im.user.impl.CacheTokenUsernameStore"/>
-    <bean id="userStatusStore" class="org.roof.im.user.impl.GenericUserStatusStore"/>
+    <bean id="userAttributesStore" class="org.roof.im.user.impl.CacheUserAttributesStore"/>
+    <bean id="userStatusStore" class="org.roof.im.user.impl.GenericUserStatusStore">
+        <property name="userAttributesStore" ref="userAttributesStore"/>
+    </bean>
     <bean id="userService" class="org.roof.im.user.impl.MockUserService">
         <property name="tokenUsernameStore" ref="tokenUsernameStore"/>
     </bean>
@@ -18,7 +21,7 @@
         <property name="serviceNamePrefix" value="im:"/>
     </bean>
 
-    <bean id="sessionManager" class="org.roof.im.session.map.MapSessionManager" />
+    <bean id="sessionManager" class="org.roof.im.session.map.MapSessionManager"/>
 
     <bean id="queue" class="java.util.concurrent.LinkedBlockingQueue"/>
     <bean id="requestPublisher" class="org.roof.im.transport.queue.LinkedBlockingQueueLoadBalanceRequestPublisher">
@@ -45,5 +48,7 @@
         <property name="webSocketSessionConnectManager" ref="connectManager"/>
     </bean>
 
-    <bean id="loginHandshakeInterceptor" class="org.roof.im.connect.TokenAuthHandshakeInterceptor"/>
+    <bean id="tokenAuthHandshakeInterceptor" class="org.roof.im.connect.TokenAuthHandshakeInterceptor">
+        <property name="userService" ref="userService"/>
+    </bean>
 </beans>

@@ -42,4 +42,17 @@ public class ImConstant {
      * 用户状态
      */
     public static final String USER_STATES = "userStates";
+    /**
+     * 在线
+     */
+    public static final String ONLINE = "online";
+    /**
+     * 隐身
+     */
+    public static final String HIDE = "hide";
+    /**
+     * 下线
+     */
+    public static final String OFFLINE = "offline";
+
 }

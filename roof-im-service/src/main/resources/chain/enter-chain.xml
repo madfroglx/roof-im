@@ -58,7 +58,10 @@
                             <property name="mapping">
                                 <map>
                                     <entry key="online">
-                                        <ref bean="onlineChain"/>
+                                        <ref bean="userStateChain"/>
+                                    </entry>
+                                    <entry key="hide">
+                                        <ref bean="userStateChain"/>
                                     </entry>
                                     <entry key="offline">
                                         <ref bean="offlineChain"/>

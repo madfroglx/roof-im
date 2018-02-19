@@ -22,6 +22,14 @@ public class UserState {
      */
     private long onlineTime;
 
+    /**
+     * 状态
+     * {@link org.roof.im.chain.ImConstant#ONLINE}
+     * {@link org.roof.im.chain.ImConstant#HIDE}
+     * {@link org.roof.im.chain.ImConstant#OFFLINE}
+     */
+    private String state;
+
     public String getUsername() {
         return username;
     }
@@ -60,5 +68,13 @@ public class UserState {
 
     public void setOnlineTime(long onlineTime) {
         this.onlineTime = onlineTime;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class WebSocketSessionCacheConnectStore implements ConnectStore<WebSocketSession>, InitializingBean {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketSessionCacheConnectStore.class);
-    private static final long DEFAULT_DURATION_MINUTES = 1000L;
+    private static final long DEFAULT_DURATION_MINUTES = 1L;
     private Cache<String, WebSocketSession> cache;
     private long durationMinutes = DEFAULT_DURATION_MINUTES;
 
@@ -28,7 +28,7 @@ public class WebSocketSessionCacheConnectStore implements ConnectStore<WebSocket
                 if (cache != null) {
                     return;
                 }
-                cache = CacheBuilder.newBuilder().expireAfterWrite(durationMinutes, TimeUnit.MILLISECONDS)
+                cache = CacheBuilder.newBuilder().expireAfterAccess(durationMinutes, TimeUnit.MINUTES)
                         .removalListener((RemovalListener<String, WebSocketSession>) notification -> {
                             LOGGER.debug("{} removal cause {}", notification.getKey(), notification.getCause().name());
                             try {

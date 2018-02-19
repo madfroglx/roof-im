@@ -15,6 +15,10 @@ public enum RequestType {
      */
     offline,
     /**
+     * 隐身
+     */
+    hide,
+    /**
      * 打开session
      */
     openSession,
