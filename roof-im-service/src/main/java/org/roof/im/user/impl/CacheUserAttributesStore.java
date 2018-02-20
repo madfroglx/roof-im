@@ -1,23 +1,30 @@
 package org.roof.im.user.impl;
 
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
 import org.roof.im.user.UserAttributesStore;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
+import org.springframework.util.Assert;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class CacheUserAttributesStore implements UserAttributesStore {
+public class CacheUserAttributesStore implements UserAttributesStore, InitializingBean {
 
-    private Cache<String, Map<String, Object>> cache;
+    private static final String USER_ATTRIBUTES_STORE = "userAttributesStore";
+    private Cache cache;
+    private CacheManager cacheManager;
 
-    public CacheUserAttributesStore() {
-        cache = CacheBuilder.newBuilder().build();
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        Assert.notNull(cacheManager, "cacheManager cannot be null");
+        cache = cacheManager.getCache(USER_ATTRIBUTES_STORE);
     }
+
 
     @Override
     public Map<String, Object> getAttributes(String username) {
-        return cache.getIfPresent(username);
+        return cache.get(username, Map.class);
     }
 
     @Override
@@ -53,7 +60,7 @@ public class CacheUserAttributesStore implements UserAttributesStore {
         if (attributes == null) {
             return null;
         } else {
-            cache.invalidate(username);
+            cache.evict(username);
             return attributes;
         }
     }
@@ -82,5 +89,10 @@ public class CacheUserAttributesStore implements UserAttributesStore {
     @Override
     public void putAttributes(String username, Map<String, Object> attributes) {
         cache.put(username, attributes);
+    }
+
+
+    public void setCacheManager(CacheManager cacheManager) {
+        this.cacheManager = cacheManager;
     }
 }

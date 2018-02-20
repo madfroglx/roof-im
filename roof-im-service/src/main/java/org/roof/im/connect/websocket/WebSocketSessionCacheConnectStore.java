@@ -1,57 +1,32 @@
 package org.roof.im.connect.websocket;
 
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.RemovalListener;
 import org.roof.im.connect.ConnectStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
+import org.springframework.util.Assert;
 import org.springframework.web.socket.WebSocketSession;
-
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 使用本地缓存的 ConnectStore
  */
 public class WebSocketSessionCacheConnectStore implements ConnectStore<WebSocketSession>, InitializingBean {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketSessionCacheConnectStore.class);
-    private static final long DEFAULT_DURATION_MINUTES = 1L;
-    private Cache<String, WebSocketSession> cache;
-    private long durationMinutes = DEFAULT_DURATION_MINUTES;
+    public static final String CONNECT_STORE = "ConnectStore";
+    private Cache cache;
+    private CacheManager cacheManager;
 
     @Override
     public void afterPropertiesSet() {
-        if (cache == null) {
-            synchronized (this) {
-                if (cache != null) {
-                    return;
-                }
-                cache = CacheBuilder.newBuilder().expireAfterAccess(durationMinutes, TimeUnit.MINUTES)
-                        .removalListener((RemovalListener<String, WebSocketSession>) notification -> {
-                            LOGGER.debug("{} removal cause {}", notification.getKey(), notification.getCause().name());
-                            try {
-                                WebSocketSession webSocketSession = notification.getValue();
-                                if (webSocketSession.isOpen()) {
-                                    webSocketSession.close();
-                                    LOGGER.debug("{} close success", notification.getKey());
-                                }
-                                LOGGER.debug("{} has been closed", notification.getKey());
-
-                            } catch (IOException e) {
-                                LOGGER.error(e.getMessage(), e);
-                            }
-                        }).build();
-            }
-
-        }
-
+        Assert.notNull(cacheManager, "cacheManager cannot be null");
+        cache = cacheManager.getCache(CONNECT_STORE);
     }
 
     @Override
     public WebSocketSession get(String connectId) {
-        return cache.getIfPresent(connectId);
+        return cache.get(connectId, WebSocketSession.class);
     }
 
     @Override
@@ -61,15 +36,11 @@ public class WebSocketSessionCacheConnectStore implements ConnectStore<WebSocket
 
     @Override
     public boolean remove(String connectId) {
-        cache.invalidate(connectId);
+        cache.evict(connectId);
         return true;
     }
 
-    public long getDurationMinutes() {
-        return durationMinutes;
-    }
-
-    public void setDurationMinutes(long durationMinutes) {
-        this.durationMinutes = durationMinutes;
+    public void setCacheManager(CacheManager cacheManager) {
+        this.cacheManager = cacheManager;
     }
 }

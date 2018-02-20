@@ -2,12 +2,18 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="connectStore" class="org.roof.im.connect.websocket.WebSocketSessionCacheConnectStore"/>
-    <bean id="connectManager" class="org.roof.im.connect.websocket.WebSocketMapConnectManager">
+    <bean id="connectStore" class="org.roof.im.connect.websocket.WebSocketSessionCacheConnectStore">
+        <property name="cacheManager" ref="guavaCacheManager"/>
+    </bean>
+    <bean id="connectManager" class="org.roof.im.connect.websocket.WebSocketConnectManager">
         <property name="webSocketSessionConnectStore" ref="connectStore"/>
     </bean>
-    <bean id="tokenUsernameStore" class="org.roof.im.user.impl.CacheTokenUsernameStore"/>
-    <bean id="userAttributesStore" class="org.roof.im.user.impl.CacheUserAttributesStore"/>
+    <bean id="tokenUsernameStore" class="org.roof.im.user.impl.CacheTokenUsernameStore">
+        <property name="cacheManager" ref="guavaCacheManager"/>
+    </bean>
+    <bean id="userAttributesStore" class="org.roof.im.user.impl.CacheUserAttributesStore">
+        <property name="cacheManager" ref="guavaCacheManager"/>
+    </bean>
     <bean id="userStatusStore" class="org.roof.im.user.impl.GenericUserStatusStore">
         <property name="userAttributesStore" ref="userAttributesStore"/>
     </bean>
@@ -51,4 +57,9 @@
     <bean id="tokenAuthHandshakeInterceptor" class="org.roof.im.connect.TokenAuthHandshakeInterceptor">
         <property name="userService" ref="userService"/>
     </bean>
+    <bean id="guavaCacheManager" class="org.springframework.cache.guava.GuavaCacheManager">
+        <property name="allowNullValues" value="false"/>
+        <property name="cacheSpecification" value="expireAfterAccess=1s"/>
+    </bean>
+
 </beans>

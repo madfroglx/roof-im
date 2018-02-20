@@ -6,7 +6,7 @@ import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
 
-public class WebSocketMapConnectManager implements ConnectManager<WebSocketSession> {
+public class WebSocketConnectManager implements ConnectManager<WebSocketSession> {
     private ConnectStore<WebSocketSession> webSocketSessionConnectStore;
 
     @Override

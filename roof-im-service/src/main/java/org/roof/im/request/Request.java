@@ -7,7 +7,8 @@ public class Request {
     private String token; // 授权token
     private String username; //用户名
     private String clientType; //客户端类型
-    private long createTime;
+    private long createTime;  //创建时间
+    private String serverName; //服务器名称
 
     public String getId() {
         return id;
@@ -63,5 +64,13 @@ public class Request {
 
     public void setCreateTime(long createTime) {
         this.createTime = createTime;
+    }
+
+    public String getServerName() {
+        return serverName;
+    }
+
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
     }
 }

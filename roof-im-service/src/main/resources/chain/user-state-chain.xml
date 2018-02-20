@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!-- 用户状态变更 -->
     <bean id="userStateChain" class="com.roof.chain.support.GenericChain">
-        <property name="startNodeName" value="onlineHandlerNode"/>
+        <property name="startNodeName" value="userStateHandlerNode"/>
         <property name="nodes">
             <list>
                 <bean class="com.roof.chain.support.NodeFactoryBean">
