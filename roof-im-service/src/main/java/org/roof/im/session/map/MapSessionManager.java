@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * 用于测试Map实现
+ */
 public class MapSessionManager implements SessionManager {
     private static final Map<String, Session> SESSION_STORE = new HashMap<>();
 

@@ -7,6 +7,7 @@ import org.roof.im.chain.ImConstant;
 import org.roof.im.chain.handler.AbstractRequestHandlerNode;
 import org.roof.im.connect.ConnectManager;
 import org.roof.im.message.Message;
+import org.roof.im.message.MessageUtils;
 import org.roof.im.request.MessageRequest;
 import org.roof.im.request.Request;
 import org.roof.im.transport.ServerNameBuilder;
@@ -62,13 +63,7 @@ public class MessageRequestHandlerNode extends AbstractRequestHandlerNode<Reques
             return new NodeResult(CANNOT_FOUND_CONNECT);
         }
         valueStack.set(ImConstant.CONNECT_ID, connectId);
-        Message message = new Message();
-        message.setPayload(messageRequest.getPayload());
-        message.setReceiver(messageRequest.getReceiver());
-        message.setSender(messageRequest.getUsername());
-        message.setCreateTime(messageRequest.getCreateTime());
-//     TODO   message.setState();
-        message.setType(messageRequest.getType().name());
+        Message message = MessageUtils.request2Message(messageRequest);
         NodeResult result = new NodeResult(MESSAGE_REQUEST_TRANSFORM_SUCCESS);
         result.setData(message);
         return result;
