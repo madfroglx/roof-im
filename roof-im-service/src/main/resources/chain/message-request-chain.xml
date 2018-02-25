@@ -9,10 +9,8 @@
                 <bean class="com.roof.chain.support.NodeFactoryBean">
                     <property name="target">
                         <bean class="org.roof.im.chain.handler.impl.MessageRequestHandlerNode">
-                            <property name="userService" ref="userService"/>
                             <property name="userStateService" ref="userStateService"/>
                             <property name="serverNameBuilder" ref="serverNameBuilder"/>
-                            <property name="connectManager" ref="connectManager"/>
                         </bean>
                     </property>
                     <property name="forwards">
@@ -22,10 +20,48 @@
                         </map>
                     </property>
                 </bean>
-                <ref bean="successResponseCreateNode"/>
                 <ref bean="failResponseCreateNode"/>
                 <ref bean="errorResponseCreateNode"/>
                 <ref bean="webSocketResponseEndPointNode"/>
+
+                <!-- 成功-->
+                <bean class="com.roof.chain.support.NodeFactoryBean">
+                    <property name="name" value="successResponseCreateNode"/>
+                    <property name="target">
+                        <bean class="org.roof.im.chain.ReturnCodeResponseCreateNode">
+                            <property name="state" value="success"/>
+                        </bean>
+                    </property>
+                    <property name="forwards">
+                        <map>
+                            <entry key="responseCreateSuccess" value="successResponseEndPointNode"/>
+                        </map>
+                    </property>
+                </bean>
+
+                <!-- 返回消息-->
+                <bean class="com.roof.chain.support.NodeFactoryBean">
+                    <property name="name" value="successResponseEndPointNode"/>
+                    <property name="target">
+                        <bean class="org.roof.im.chain.ResponseNode">
+                            <property name="responseEndpoint" ref="webSocketResponseEndPoint"/>
+                        </bean>
+                    </property>
+                    <property name="forwards">
+                        <map>
+                            <entry key="responseSuccess" value="setMessageTakedNode"/>
+                        </map>
+                    </property>
+                </bean>
+                <bean class="com.roof.chain.support.NodeFactoryBean">
+                    <property name="name" value="setMessageTakedNode"/>
+                    <property name="target">
+                        <bean class="org.roof.im.chain.SetMessageTakedNode">
+                            <property name="messageDao" ref="jdbcMessageDao"/>
+                        </bean>
+                    </property>
+                </bean>
+
             </list>
         </property>
     </bean>

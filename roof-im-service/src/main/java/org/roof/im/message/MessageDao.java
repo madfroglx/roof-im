@@ -14,6 +14,6 @@ public interface MessageDao {
      * @param messageId 消息id
      * @param state     当前状态
      */
-    void updateState(Long messageId, int state);
+    int updateState(Long messageId, int state);
 
 }

@@ -1,7 +1,7 @@
 package org.roof.im.transport.redis;
 
 import org.roof.im.request.Request;
-import org.roof.im.transport.queue.AbstractBlockingQueueLoadBalanceRequestPublisher;
+import org.roof.im.transport.queue.AbstractBlockingQueueLoadBalanceMessagePublisher;
 import org.springframework.data.redis.core.BoundListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.support.collections.DefaultRedisList;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 
-public class RedisBlockingQueueLoadBalanceRequestPublisher<E extends Request> extends AbstractBlockingQueueLoadBalanceRequestPublisher {
+public class RedisBlockingQueueLoadBalanceMessagePublisher<E extends Request> extends AbstractBlockingQueueLoadBalanceMessagePublisher {
     protected List<String> serverNames;
     protected List<RedisTemplate> redisTemplates;
 

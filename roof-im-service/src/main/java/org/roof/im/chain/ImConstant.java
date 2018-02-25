@@ -15,6 +15,10 @@ public class ImConstant {
      */
     public static final String RESPONSE = "response";
     /**
+     * 消息
+     */
+    public static final String MESSAGE = "message";
+    /**
      *  当前登录用户
      */
     public static final String CURRENT_USER = "currentUser";

@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * 将消息发送给客户端
  */
-public class MessageRequestHandlerNode extends AbstractRequestHandlerNode<Request> {
+public class MessageRequestHandlerNode {
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageRequestHandlerNode.class);
     /**
      * 客户端连接未找到
@@ -36,22 +36,20 @@ public class MessageRequestHandlerNode extends AbstractRequestHandlerNode<Reques
      * 不支持的请求类型
      */
     private static final String NONSUPPORT_REQUEST_TYPE = "nonsupportRequestType";
-    private ConnectManager<WebSocketSession> connectManager;
     private UserStateService userStateService;
     private ServerNameBuilder serverNameBuilder;
 
 
-    @Override
-    public NodeResult<Message> doNode(Request request, ValueStack valueStack) {
-        MessageRequest messageRequest;
-        if (request instanceof MessageRequest) {
-            messageRequest = (MessageRequest) request;
-        } else {
-            LOGGER.error("request error type : {}, mast be {}",
-                    request.getClass().getSimpleName(), MessageRequest.class.getSimpleName());
-            return new NodeResult<>(NONSUPPORT_REQUEST_TYPE);
-        }
-        String receiver = messageRequest.getReceiver();
+    public NodeResult<Message> doNode(Message message, ValueStack valueStack) {
+//        MessageRequest messageRequest;
+//        if (request instanceof MessageRequest) {
+//            messageRequest = (MessageRequest) request;
+//        } else {
+//            LOGGER.error("request error type : {}, mast be {}",
+//                    request.getClass().getSimpleName(), MessageRequest.class.getSimpleName());
+//            return new NodeResult<>(NONSUPPORT_REQUEST_TYPE);
+//        }
+        String receiver = message.getReceiver();
         List<UserState> userStates = userStateService.getStates(receiver);
         String connectId = null;
         for (UserState userState : userStates) {
@@ -63,17 +61,11 @@ public class MessageRequestHandlerNode extends AbstractRequestHandlerNode<Reques
             return new NodeResult(CANNOT_FOUND_CONNECT);
         }
         valueStack.set(ImConstant.CONNECT_ID, connectId);
-        Message message = MessageUtils.request2Message(messageRequest);
         NodeResult result = new NodeResult(MESSAGE_REQUEST_TRANSFORM_SUCCESS);
         result.setData(message);
         return result;
     }
 
-    public void setConnectManager(ConnectManager<WebSocketSession> connectManager) {
-        this.connectManager = connectManager;
-    }
-
-    @Override
     public void setUserStateService(UserStateService userStateService) {
         this.userStateService = userStateService;
     }

@@ -3,9 +3,22 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="messageChain" class="com.roof.chain.support.GenericChain">
-        <property name="startNodeName" value="messageHandlerNode"/>
+        <property name="startNodeName" value="saveMessageNode"/>
         <property name="nodes">
             <list>
+                <bean class="com.roof.chain.support.NodeFactoryBean">
+                    <property name="target">
+                        <bean class="org.roof.im.chain.SaveMessageNode">
+                            <property name="messageDao" ref="jdbcMessageDao"/>
+                        </bean>
+                    </property>
+                    <property name="forwards">
+                        <map>
+                            <entry key="messageIsNull" value="failResponseCreateNode"/>
+                            <entry key="messageSaveSuccess" value="messageHandlerNode"/>
+                        </map>
+                    </property>
+                </bean>
                 <bean class="com.roof.chain.support.NodeFactoryBean">
                     <property name="target">
                         <bean class="org.roof.im.chain.handler.impl.MessageHandlerNode">
@@ -24,7 +37,7 @@
                 <bean class="com.roof.chain.support.NodeFactoryBean">
                     <property name="target">
                         <bean class="org.roof.im.chain.RequestMessagePublishNode">
-                            <property name="requestPublisher" ref="requestPublisher"/>
+                            <property name="messagePublisher" ref="messagePublisher"/>
                         </bean>
                     </property>
                     <property name="forwards">

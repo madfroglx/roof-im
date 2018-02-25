@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
-public class LinkedBlockingQueueLoadBalanceRequestPublisher<E extends Request> extends AbstractBlockingQueueLoadBalanceRequestPublisher {
+public class LinkedBlockingQueueLoadBalanceMessagePublisher<E> extends AbstractBlockingQueueLoadBalanceMessagePublisher {
     private ServerNameBuilder serverNameBuilder;
     private BlockingQueue<E> queue;
 

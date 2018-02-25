@@ -30,7 +30,7 @@
     <bean id="sessionManager" class="org.roof.im.session.map.MapSessionManager"/>
 
     <bean id="queue" class="java.util.concurrent.LinkedBlockingQueue"/>
-    <bean id="requestPublisher" class="org.roof.im.transport.queue.LinkedBlockingQueueLoadBalanceRequestPublisher">
+    <bean id="messagePublisher" class="org.roof.im.transport.queue.LinkedBlockingQueueLoadBalanceMessagePublisher">
         <property name="serverNameBuilder" ref="serverNameBuilder"/>
         <property name="queue" ref="queue"/>
     </bean>
@@ -59,7 +59,7 @@
     </bean>
     <bean id="guavaCacheManager" class="org.springframework.cache.guava.GuavaCacheManager">
         <property name="allowNullValues" value="false"/>
-        <property name="cacheSpecification" value="expireAfterAccess=1s"/>
+        <!--<property name="cacheSpecification" value="expireAfterAccess=1s"/>-->
     </bean>
 
 </beans>

@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  * @author liht
  * @date 18/2/7
  */
-public abstract class AbstractBlockingQueueRequestMessageDriveEnterPoint<E extends Request> implements InitializingBean, org.roof.im.transport.RequestSubscriber {
+public abstract class AbstractBlockingQueueRequestMessageDriveEnterPoint<E> implements InitializingBean, org.roof.im.transport.RequestSubscriber<E> {
     protected static final int DEFAULT_POLL_THREAD_SIZE = 2;
     protected static final long DEFAULT_TIMEOUT = 1000;
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractBlockingQueueRequestMessageDriveEnterPoint.class);
@@ -50,9 +50,9 @@ public abstract class AbstractBlockingQueueRequestMessageDriveEnterPoint<E exten
     protected abstract void onInit();
 
     @Override
-    public void subscribe(Request request) {
+    public void subscribe(E message) {
         ValueStack valueStack = new GenericValueStack();
-        valueStack.set(ImConstant.REQUEST, request);
+        valueStack.set(ImConstant.MESSAGE, message);
         try {
             chain.doChain(valueStack);
         } catch (Exception e) {

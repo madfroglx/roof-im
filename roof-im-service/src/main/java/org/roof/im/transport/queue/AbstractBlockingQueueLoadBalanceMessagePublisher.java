@@ -2,7 +2,7 @@ package org.roof.im.transport.queue;
 
 import org.roof.im.request.Request;
 import org.roof.im.transport.LoadBalance;
-import org.roof.im.transport.RequestPublisher;
+import org.roof.im.transport.MessagePublisher;
 import org.roof.im.transport.impl.HashCodeLoadBalance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,8 +20,8 @@ import java.util.concurrent.TimeUnit;
  *
  * @param <E>
  */
-public abstract class AbstractBlockingQueueLoadBalanceRequestPublisher<E extends Request> implements RequestPublisher<E>, InitializingBean {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractBlockingQueueLoadBalanceRequestPublisher.class);
+public abstract class AbstractBlockingQueueLoadBalanceMessagePublisher<E> implements MessagePublisher<E>, InitializingBean {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractBlockingQueueLoadBalanceMessagePublisher.class);
     /**
      * key : 机器名
      * value : 对应队列列表

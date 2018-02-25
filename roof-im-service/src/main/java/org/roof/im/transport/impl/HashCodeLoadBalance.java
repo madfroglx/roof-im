@@ -1,6 +1,5 @@
 package org.roof.im.transport.impl;
 
-import org.roof.im.request.Request;
 import org.roof.im.transport.LoadBalance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,14 +18,11 @@ public class HashCodeLoadBalance implements LoadBalance {
     private static final Logger LOGGER = LoggerFactory.getLogger(HashCodeLoadBalance.class);
 
     @Override
-    public int select(Request request, RetryContext retryContext, int size) {
-        if (request == null) {
+    public int select(Object value, RetryContext retryContext, int size) {
+        if (value == null) {
             return -1;
         }
-        if (request.getId() == null) {
-            return -1;
-        }
-        int hashCode = Math.abs(request.getId().hashCode());
+        int hashCode = Math.abs(value.hashCode());
         int index = (hashCode + retryContext.getRetryCount()) % size;
         LOGGER.debug("publish to queue [" + index + "]");
         return index;
