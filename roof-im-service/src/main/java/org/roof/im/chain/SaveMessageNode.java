@@ -3,7 +3,6 @@ package org.roof.im.chain;
 import com.roof.chain.api.ValueStack;
 import org.roof.im.message.Message;
 import org.roof.im.message.MessageDao;
-import org.roof.im.message.MessageUtils;
 import org.roof.im.request.MessageRequest;
 
 /**
@@ -24,7 +23,12 @@ public class SaveMessageNode {
         if (request == null) {
             return MESSAGE_IS_NULL;
         }
-        Message message = MessageUtils.request2Message(request);
+        Message message = new Message();
+        message.setPayload(request.getPayload());
+        message.setReceiver(request.getReceiver());
+        message.setSender(request.getUsername());
+        message.setCreateTime(request.getCreateTime());
+        message.setType(request.getType().name());
         messageDao.save(message);
         valueStack.set(ImConstant.MESSAGE, message);
         return MESSAGE_SAVE_SUCCESS;

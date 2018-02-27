@@ -1,6 +1,5 @@
 package org.roof.im.message.jdbc;
 
-import org.roof.im.chain.SaveMessageNode;
 import org.roof.im.message.Message;
 import org.roof.im.message.MessageDao;
 import org.springframework.beans.factory.annotation.Autowired;
