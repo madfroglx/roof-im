@@ -29,6 +29,7 @@ public class SaveMessageNode {
         message.setSender(request.getUsername());
         message.setCreateTime(request.getCreateTime());
         message.setType(request.getType().name());
+        message.setSeq(request.getSeq());
         messageDao.save(message);
         valueStack.set(ImConstant.MESSAGE, message);
         return MESSAGE_SAVE_SUCCESS;

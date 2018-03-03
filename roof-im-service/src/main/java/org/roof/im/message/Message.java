@@ -35,6 +35,10 @@ public class Message {
      * 状态 0:未收取, 1:已收取
      */
     private int state;
+    /**
+     * 客户端消息序列
+     */
+    private String seq;
 
     public Long getId() {
         return id;
@@ -90,5 +94,13 @@ public class Message {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public String getSeq() {
+        return seq;
+    }
+
+    public void setSeq(String seq) {
+        this.seq = seq;
     }
 }
