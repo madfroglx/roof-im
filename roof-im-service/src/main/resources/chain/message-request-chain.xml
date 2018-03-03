@@ -57,7 +57,7 @@
                     <property name="name" value="setMessageTakedNode"/>
                     <property name="target">
                         <bean class="org.roof.im.chain.SetMessageTakedNode">
-                            <property name="messageDao" ref="jdbcMessageDao"/>
+                            <property name="messageDao" ref="messageDao"/>
                         </bean>
                     </property>
                 </bean>

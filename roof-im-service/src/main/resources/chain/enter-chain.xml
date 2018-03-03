@@ -75,6 +75,9 @@
                                     <entry key="message">
                                         <ref bean="messageChain"/>
                                     </entry>
+                                    <entry key="pullMessage">
+                                        <ref bean="pullMessageChain"/>
+                                    </entry>
                                 </map>
                             </property>
                             <property name="valueStackKey" value="requestType"/>

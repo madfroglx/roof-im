@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 拉取消息-->
+    <bean id="pullMessageChain" class="com.roof.chain.support.GenericChain">
+        <property name="startNodeName" value="pullMessageHandlerNode"/>
+        <property name="nodes">
+            <list>
+                <bean class="com.roof.chain.support.NodeFactoryBean">
+                    <property name="target">
+                        <bean class="org.roof.im.chain.handler.impl.PullMessageHandlerNode">
+                            <property name="messageDao" ref="messageDao"/>
+                        </bean>
+                    </property>
+                    <property name="forwards">
+                        <map>
+                            <entry key="queryMessageSuccess" value="successResponseCreateNode"/>
+                            <entry key="queryMessageFail" value="failResponseCreateNode"/>
+                        </map>
+                    </property>
+                </bean>
+                <ref bean="successResponseCreateNode"/>
+                <ref bean="failResponseCreateNode"/>
+                <ref bean="errorResponseCreateNode"/>
+                <ref bean="webSocketResponseEndPointNode"/>
+            </list>
+        </property>
+    </bean>
+</beans>

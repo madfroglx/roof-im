@@ -29,5 +29,13 @@ public enum RequestType {
     /**
      * 发送消息
      */
-    message
+    message,
+    /**
+     * 拉取消息
+     */
+    pullMessage,
+    /**
+     * 未收取的消息
+     */
+    notReceivedMessage
 }

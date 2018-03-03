@@ -62,4 +62,9 @@
         <!--<property name="cacheSpecification" value="expireAfterAccess=1s"/>-->
     </bean>
 
+    <!--<bean id="messageDao" class="org.roof.im.message.jdbc.JdbcMessageDao">-->
+        <!--<property name="jdbcTemplate" ref="jdbcTemplate"/>-->
+        <!--<property name="messageMapper" ref="messageMapper"/>-->
+    <!--</bean>-->
+
 </beans>

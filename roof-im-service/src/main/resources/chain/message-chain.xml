@@ -9,7 +9,7 @@
                 <bean class="com.roof.chain.support.NodeFactoryBean">
                     <property name="target">
                         <bean class="org.roof.im.chain.SaveMessageNode">
-                            <property name="messageDao" ref="jdbcMessageDao"/>
+                            <property name="messageDao" ref="messageDao"/>
                         </bean>
                     </property>
                     <property name="forwards">
