@@ -13,6 +13,10 @@ public class Response<T> {
      */
     private String exceptionCode;
     /**
+     * 请求类型
+     */
+    private String requestType;
+    /**
      * 服务器返回消息
      */
     private String message;
@@ -58,5 +62,13 @@ public class Response<T> {
 
     public void setResult(T result) {
         this.result = result;
+    }
+
+    public String getRequestType() {
+        return requestType;
+    }
+
+    public void setRequestType(String requestType) {
+        this.requestType = requestType;
     }
 }
