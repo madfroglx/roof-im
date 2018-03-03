@@ -21,15 +21,17 @@ public interface MessageDao {
      * @param messageId 消息id
      * @param state     当前状态
      */
-    int updateState(Long messageId, int state);
+    int updateState(@Param("messageId") Long messageId, @Param("state") int state);
 
     /**
      * 查询未收取消息,并标记为已读
      *
-     * @param limit 查询数量
+     * @param sender 消息发送者
+     * @param limit  查询数量
      * @return 记录列表
      */
-    List<Message> queryNotReceived(String receiver, int limit);
+    List<Message> queryNotReceived(@Param("receiver") String receiver,
+                                   @Param("sender") String sender, @Param("limit") int limit);
 
     /**
      * 查询消息
@@ -38,12 +40,14 @@ public interface MessageDao {
      * @param sender    消息发送者
      * @param startTime 消息发送开始时间
      * @param endTime   消息发送结束时间
+     * @param state     消息状态
      * @param offset    记录偏移
      * @param limit     查询数量
      * @return 记录列表
      */
     List<Message> query(@Param("receiver") String receiver, @Param("sender") String sender,
-                        @Param("startTime") long startTime, @Param("endTime") long endTime, @Param("offset") int offset,
-                        @Param("limit") int limit);
+                        @Param("startTime") long startTime, @Param("endTime") long endTime,
+                        @Param("state") Integer state,
+                        @Param("offset") int offset, @Param("limit") int limit);
 
 }

@@ -19,6 +19,32 @@
 
     <sql id="message_table_name">im_message</sql>
 
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="org.roof.im.message.Message">
+        <selectKey keyProperty="id" resultType="Long" order="AFTER">
+            select
+            last_insert_id()
+        </selectKey>
+        insert into im_message (sender,receiver,type,payload,create_time,state)
+        values(#{sender}, #{receiver}, #{type}, #{payload}, #{createTime}, #{state})
+    </insert>
+
+    <update id="updateState">
+        update im_message set state = #{state} where id = #{messageId}
+    </update>
+
+    <select id="queryNotReceived" resultMap="MessageMapper">
+        SELECT
+        <include refid="message_column_list"/>
+        from
+        <include refid="message_table_name"/>
+        WHERE
+        receiver = #{receiver}
+        <if test="sender != null and sender != ''">
+            sender = #{sender}
+        </if>
+        order by create_time desc limit 0, #{limit}
+    </select>
+
     <select id="query" resultMap="MessageMapper">
         select
         <include refid="message_column_list"/>
@@ -33,6 +59,9 @@
         <![CDATA[
         and create_time < #{endTime}
         ]]>
+        <if test="state != null">
+            state = #{state}
+        </if>
         order by create_time desc limit #{offset}, #{limit}
     </select>
 

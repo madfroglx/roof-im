@@ -32,7 +32,8 @@ public class PullMessageHandlerNode {
         try {
             messages = messageDao.query(pullMessageRequest.getUsername(), pullMessageRequest.getSender(),
                     pullMessageRequest.getStartTime(),
-                    pullMessageRequest.getEndTime(), pullMessageRequest.getOffset(), DEFAULT_LIMIT);
+                    pullMessageRequest.getEndTime(), pullMessageRequest.getState(),
+                    pullMessageRequest.getOffset(), DEFAULT_LIMIT);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
             return new NodeResult<>(QUERY_MESSAGE_FAIL);
