@@ -6,12 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="roof-im-dao-api" />
         <module name="roof-im-service" />
         <module name="roof-im-webapp" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="roof-im" target="1.8" />
+      <module name="roof-im-dao" target="1.8" />
+      <module name="roof-im-dao-api" target="1.8" />
       <module name="roof-im-service" target="1.8" />
       <module name="roof-im-webapp" target="1.8" />
     </bytecodeTargetLevel>

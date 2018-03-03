@@ -57,6 +57,7 @@ public class MessageRequestHandlerNode {
         valueStack.set(ImConstant.CONNECT_ID, connectId);
         NodeResult result = new NodeResult(MESSAGE_REQUEST_TRANSFORM_SUCCESS);
         result.setData(message);
+        valueStack.set(ImConstant.REQUEST_TYPE, ImConstant.MESSAGE);
         return result;
     }
 

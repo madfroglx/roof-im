@@ -1,0 +1,68 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.roof.im.message.MessageDao">
+    <resultMap type="Message" id="MessageMapper">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="sender" property="sender" jdbcType="VARCHAR"/>
+        <result column="receiver" property="receiver" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="payload" property="payload" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="state" property="state" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="message_column_list">
+        id, sender, receiver, type, payload, create_time, state
+	</sql>
+
+    <sql id="message_table_name">im_message</sql>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="org.roof.im.message.Message">
+        <selectKey keyProperty="id" resultType="Long" order="AFTER">
+            select
+            last_insert_id()
+        </selectKey>
+        insert into im_message (sender,receiver,type,payload,create_time,state)
+        values(#{sender}, #{receiver}, #{type}, #{payload}, #{createTime}, #{state})
+    </insert>
+
+    <update id="updateState">
+        update im_message set state = #{state} where id = #{messageId}
+    </update>
+
+    <select id="queryNotReceived" resultMap="MessageMapper">
+        SELECT
+        <include refid="message_column_list"/>
+        from
+        <include refid="message_table_name"/>
+        WHERE
+        receiver = #{receiver}
+        <if test="sender != null and sender != ''">
+            sender = #{sender}
+        </if>
+        order by create_time desc limit 0, #{limit}
+    </select>
+
+    <select id="query" resultMap="MessageMapper">
+        select
+        <include refid="message_column_list"/>
+        from
+        <include refid="message_table_name"/>
+        where
+        receiver = #{receiver}
+        <if test="sender != null and sender != ''">
+            sender = #{sender}
+        </if>
+        and create_time > #{startTime}
+        <![CDATA[
+        and create_time < #{endTime}
+        ]]>
+        <if test="state != null">
+            state = #{state}
+        </if>
+        order by create_time desc limit #{offset}, #{limit}
+    </select>
+
+</mapper>

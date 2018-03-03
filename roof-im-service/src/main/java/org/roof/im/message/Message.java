@@ -1,8 +1,11 @@
 package org.roof.im.message;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 消息
  */
+@Alias("Message")
 public class Message {
     /**
      * id

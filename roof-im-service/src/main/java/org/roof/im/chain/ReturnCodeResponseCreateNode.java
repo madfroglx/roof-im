@@ -18,6 +18,7 @@ public class ReturnCodeResponseCreateNode {
         response.setState(StringUtils.isBlank(state) ? nodeResult.getState() : state);
         response.setMessage(nodeResult.getNext());
         response.setResult(nodeResult.getData());
+        response.setRequestType(valueStack.getAsString(ImConstant.REQUEST_TYPE));
         valueStack.set(ImConstant.RESPONSE, response);
         return RESPONSE_CREATE_SUCCESS;
     }

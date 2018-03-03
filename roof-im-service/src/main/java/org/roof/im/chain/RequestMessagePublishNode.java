@@ -3,7 +3,6 @@ package org.roof.im.chain;
 import com.alibaba.fastjson.JSONObject;
 import com.roof.chain.api.ValueStack;
 import org.roof.im.message.Message;
-import org.roof.im.request.Request;
 import org.roof.im.transport.MessagePublisher;
 import org.roof.im.user.UserState;
 import org.slf4j.Logger;
