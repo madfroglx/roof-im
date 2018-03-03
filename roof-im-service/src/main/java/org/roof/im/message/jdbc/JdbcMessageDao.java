@@ -11,7 +11,7 @@ import java.util.List;
 
 @Component
 public class JdbcMessageDao implements MessageDao {
-    private static final String MESSAGE_SAVE_SQL = "insert into im_message˚(sender,receiver,type,payload,create_time,state) " +
+    private static final String MESSAGE_SAVE_SQL = "insert into im_message (sender,receiver,type,payload,create_time,state) " +
             "values(?, ?, ?, ?, ?, ?)";
     private static final String LAST_INSERT_ID = "select LAST_INSERT_ID()";
     private static final String MESSAGE_STATE_UPDATE_SQL = "update im_message set state = ? where id = ?";
