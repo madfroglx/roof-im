@@ -50,7 +50,7 @@
             sender = #{sender}
         </if>
         and state = 0
-        order by create_time desc limit 0, #{limit}
+        order by create_time limit 0, #{limit}
     </select>
 
     <select id="query" resultMap="MessageMapper">
