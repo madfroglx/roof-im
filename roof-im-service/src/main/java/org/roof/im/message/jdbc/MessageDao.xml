@@ -63,10 +63,14 @@
         <if test="sender != null and sender != ''">
             sender = #{sender}
         </if>
-        and create_time > #{startTime}
-        <![CDATA[
+        <if test="startTime != null and startTime != 0">
+            and create_time > #{startTime}
+        </if>
+        <if test="endTime != null and endTime != 0">
+            <![CDATA[
         and create_time < #{endTime}
         ]]>
+        </if>
         <if test="state != null">
             state = #{state}
         </if>

@@ -27,6 +27,10 @@ public enum RequestType {
      */
     closeSession,
     /**
+     * 查询session
+     */
+    querySession,
+    /**
      * 发送消息
      */
     message,

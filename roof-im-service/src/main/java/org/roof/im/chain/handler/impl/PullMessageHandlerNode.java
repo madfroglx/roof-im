@@ -31,8 +31,9 @@ public class PullMessageHandlerNode {
         List<Message> messages;
         try {
             messages = messageDao.query(pullMessageRequest.getUsername(), pullMessageRequest.getSender(),
-                    pullMessageRequest.getStartTime(),
-                    pullMessageRequest.getEndTime(), pullMessageRequest.getState(),
+                    pullMessageRequest.getStartTime() == null ? 0 : pullMessageRequest.getStartTime(),
+                    pullMessageRequest.getEndTime() == null ? 0 : pullMessageRequest.getEndTime(),
+                    pullMessageRequest.getState(),
                     pullMessageRequest.getOffset(), DEFAULT_LIMIT);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);

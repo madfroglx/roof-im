@@ -23,6 +23,7 @@ public class RequestTypeMappingRequestConverter implements RequestConverter {
         REQUEST_TYPE_MAPPING.put(RequestType.message.name(), MessageRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.pullMessage.name(), PullMessageRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.pullNotReceivedMessage.name(), PullNotReceivedMessageRequest.class);
+        REQUEST_TYPE_MAPPING.put(RequestType.querySession.name(), QuerySessionRequest.class);
     }
 
 
