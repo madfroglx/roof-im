@@ -9,6 +9,7 @@ public class Request {
     private String clientType; //客户端类型
     private long createTime;  //创建时间
     private String serverName; //服务器名称
+    private String seq; //序列
 
     public String getId() {
         return id;
@@ -72,5 +73,13 @@ public class Request {
 
     public void setServerName(String serverName) {
         this.serverName = serverName;
+    }
+
+    public String getSeq() {
+        return seq;
+    }
+
+    public void setSeq(String seq) {
+        this.seq = seq;
     }
 }

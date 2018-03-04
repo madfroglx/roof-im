@@ -24,6 +24,10 @@ public class Response<T> {
      * 服务器返回数据
      */
     private T result;
+    /**
+     * 序列
+     */
+    private String seq;
 
     public Response() {
     }
@@ -70,5 +74,13 @@ public class Response<T> {
 
     public void setRequestType(String requestType) {
         this.requestType = requestType;
+    }
+
+    public String getSeq() {
+        return seq;
+    }
+
+    public void setSeq(String seq) {
+        this.seq = seq;
     }
 }

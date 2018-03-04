@@ -3,6 +3,7 @@ package org.roof.im.chain;
 import com.roof.chain.api.ValueStack;
 import com.roof.chain.support.NodeResult;
 import org.apache.commons.lang3.StringUtils;
+import org.roof.im.request.Request;
 import org.roof.im.response.Response;
 
 /**
@@ -13,12 +14,14 @@ public class ReturnCodeResponseCreateNode {
     public static final String RESPONSE_CREATE_SUCCESS = "responseCreateSuccess";
 
     public String doNode(ValueStack valueStack) {
+        Request request = (Request) valueStack.get(ImConstant.REQUEST);
         NodeResult nodeResult = valueStack.getPreResult();
         Response<Object> response = new Response<>();
         response.setState(StringUtils.isBlank(state) ? nodeResult.getState() : state);
         response.setMessage(nodeResult.getNext());
         response.setResult(nodeResult.getData());
         response.setRequestType(valueStack.getAsString(ImConstant.REQUEST_TYPE));
+        response.setSeq(request.getSeq());
         valueStack.set(ImConstant.RESPONSE, response);
         return RESPONSE_CREATE_SUCCESS;
     }
