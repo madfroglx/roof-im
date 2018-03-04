@@ -18,7 +18,7 @@
                     <property name="forwards">
                         <map>
                             <entry key="userNotOnline" value="failResponseCreateNode"/>
-                            <entry key="offlineSuccess" value="successResponseCreateNode"/>
+                            <entry key="offlineSuccess" value="closeWebSocketConnectNode"/>
                         </map>
                     </property>
                 </bean>
