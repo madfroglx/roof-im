@@ -45,9 +45,9 @@ public class OpenSessionHandlerNode extends AbstractRequestHandlerNode<OpenSessi
             nodeResult.setData(sessionExist);
             return nodeResult;
         }
-//        Session session = sessionManager.open(sender, receiver);
+        Session session = sessionManager.open(sender, receiver, request.getStartTime(), request.getEndTime());
         NodeResult<Session> nodeResult = new NodeResult<>(OPEN_SESSION_SUCCESS);
-//        nodeResult.setData(session);
+        nodeResult.setData(session);
         return nodeResult;
     }
 

@@ -24,16 +24,13 @@ public class JdbcSessionManager implements SessionManager {
     @Override
     public boolean close(long id) {
         int r = sessionDao.updateState(id, 2);
-        if (r == 0) {
-            return false;
-        }
-        return true;
+        return r != 0;
     }
 
 
     @Override
     public Session queryEffective(String sender, String receiver) {
-        return null;
+        return sessionDao.queryEffective(sender, receiver);
     }
 
     @Override

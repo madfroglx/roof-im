@@ -3,6 +3,8 @@ package org.roof.im.session.jdbc;
 import org.mybatis.spring.annotation.MapperScan;
 import org.roof.im.session.Session;
 
+import java.util.List;
+
 @MapperScan
 public interface SessionDao {
     /**
@@ -29,6 +31,15 @@ public interface SessionDao {
      * @return 影响行数
      */
     int updateState(long id, int state);
+
+    /**
+     * 查询双方有效会话
+     *
+     * @param sender   发送方
+     * @param receiver 接收方
+     * @return session对象
+     */
+    Session queryEffective(String sender, String receiver);
 
 
 }
