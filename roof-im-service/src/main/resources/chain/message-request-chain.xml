@@ -49,14 +49,13 @@
                     </property>
                     <property name="forwards">
                         <map>
-                            <entry key="responseSuccess" value="setMessageTakedNode"/>
+                            <entry key="responseSuccess" value="setMessageReceivedNode"/>
                         </map>
                     </property>
                 </bean>
                 <bean class="com.roof.chain.support.NodeFactoryBean">
-                    <property name="name" value="setMessageTakedNode"/>
                     <property name="target">
-                        <bean class="org.roof.im.chain.SetMessageTakedNode">
+                        <bean class="org.roof.im.chain.SetMessageReceivedNode">
                             <property name="messageDao" ref="messageDao"/>
                         </bean>
                     </property>

@@ -78,6 +78,9 @@
                                     <entry key="pullMessage">
                                         <ref bean="pullMessageChain"/>
                                     </entry>
+                                    <entry key="pullNotReceivedMessage">
+                                        <ref bean="pullNotReceivedMessageChain"/>
+                                    </entry>
                                 </map>
                             </property>
                             <property name="valueStackKey" value="requestType"/>

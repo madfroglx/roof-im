@@ -4,10 +4,12 @@ import org.roof.im.message.Message;
 import org.roof.im.message.MessageDao;
 import org.roof.im.response.Response;
 
+import java.util.List;
+
 /**
  * 设置消息为已被收取
  */
-public class SetMessageTakedNode {
+public class SetMessageReceivedNode {
     /**
      * 消息设置为已收取成功
      */

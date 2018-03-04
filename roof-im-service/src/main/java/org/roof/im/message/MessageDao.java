@@ -25,6 +25,15 @@ public interface MessageDao {
     int updateState(@Param("messageId") Long messageId, @Param("state") int state);
 
     /**
+     * 批量更新消息状态
+     *
+     * @param messageIds 消息id数组
+     * @param state      当前状态
+     * @return 影响行数
+     */
+    int updateStateBatch(@Param("messageIds") long[] messageIds, @Param("state") int state);
+
+    /**
      * 查询未收取消息,并标记为已读
      *
      * @param sender 消息发送者

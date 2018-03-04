@@ -13,6 +13,7 @@ public class RequestTypeMappingRequestConverter implements RequestConverter {
     private static final Logger LOGGER = LoggerFactory.getLogger(RequestTypeMappingRequestConverter.class);
     private static Map<String, Class<? extends Request>> REQUEST_TYPE_MAPPING = new HashMap<>();
     private RequestIdGenerator requestIdGenerator = new UUIDRequestIdGenerator();
+
     static {
         REQUEST_TYPE_MAPPING.put(RequestType.online.name(), UserStateRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.hide.name(), UserStateRequest.class);
@@ -21,6 +22,7 @@ public class RequestTypeMappingRequestConverter implements RequestConverter {
         REQUEST_TYPE_MAPPING.put(RequestType.closeSession.name(), CloseSessionRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.message.name(), MessageRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.pullMessage.name(), PullMessageRequest.class);
+        REQUEST_TYPE_MAPPING.put(RequestType.pullNotReceivedMessage.name(), PullNotReceivedMessageRequest.class);
     }
 
 
