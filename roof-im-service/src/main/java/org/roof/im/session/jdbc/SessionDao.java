@@ -41,5 +41,13 @@ public interface SessionDao {
      */
     Session queryEffective(String sender, String receiver);
 
+    /**
+     * 查询一个用户的有效会话
+     *
+     * @param username
+     * @return
+     */
+    List<Session> queryAllEffective(String username);
+
 
 }
