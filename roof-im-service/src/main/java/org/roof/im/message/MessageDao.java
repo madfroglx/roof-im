@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 @MapperScan
+//TODO 改为MessageManager 与数据库解耦
 public interface MessageDao {
     /**
      * 保存消息

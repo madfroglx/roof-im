@@ -22,13 +22,12 @@ public class CloseSessionHandlerNode extends AbstractRequestHandlerNode<CloseSes
 
     @Override
     public Object doNode(CloseSessionRequest request, ValueStack valueStack) {
-        String sessionId = request.getSessionId();
-        Session session = sessionManager.queryById(sessionId, true);
-        if (session == null) {
-            return SESSION_NOT_EXIST;
+        long sessionId = request.getSessionId();
+        if (sessionManager.close(sessionId)) {
+            return SESSION_CLOSE_SUCCESS;
+
         }
-        sessionManager.close(sessionId);
-        return SESSION_CLOSE_SUCCESS;
+        return SESSION_NOT_EXIST;
     }
 
     public void setSessionManager(SessionManager sessionManager) {

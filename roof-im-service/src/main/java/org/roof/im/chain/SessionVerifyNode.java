@@ -21,7 +21,7 @@ public class SessionVerifyNode {
     public String doNode(MessageRequest request) {
         String username = request.getUsername();
         String receiver = request.getReceiver();
-        Session effective = sessionManager.effective(username, receiver);
+        Session effective = sessionManager.queryEffective(username, receiver);
         if (effective == null) {
             return SESSION_NOT_EXIST;
         }

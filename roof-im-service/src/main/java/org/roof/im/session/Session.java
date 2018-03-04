@@ -7,7 +7,7 @@ public class Session {
     /**
      * 会话ID
      */
-    private String id;
+    private long id;
     /**
      * 发起者
      */
@@ -19,17 +19,25 @@ public class Session {
     /**
      * 开始时间
      */
-    private long start;
+    private long startTime;
     /**
      * 结束时间
      */
-    private long end;
+    private long endTime;
+    /**
+     * 实际结束时间
+     */
+    private long realEndTime;
+    /**
+     * 状态(0:创建,2:结束)
+     */
+    private int state;
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -49,19 +57,35 @@ public class Session {
         this.receiver = receiver;
     }
 
-    public long getStart() {
-        return start;
+    public long getStartTime() {
+        return startTime;
     }
 
-    public void setStart(long start) {
-        this.start = start;
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
     }
 
-    public long getEnd() {
-        return end;
+    public long getEndTime() {
+        return endTime;
     }
 
-    public void setEnd(long end) {
-        this.end = end;
+    public void setEndTime(long endTime) {
+        this.endTime = endTime;
+    }
+
+    public long getRealEndTime() {
+        return realEndTime;
+    }
+
+    public void setRealEndTime(long realEndTime) {
+        this.realEndTime = realEndTime;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }

@@ -13,15 +13,18 @@ public class ReturnCodeResponseCreateNode {
     private String state;
     public static final String RESPONSE_CREATE_SUCCESS = "responseCreateSuccess";
 
-    public String doNode(ValueStack valueStack) {
-        Request request = (Request) valueStack.get(ImConstant.REQUEST);
+    public String doNode(Request request, ValueStack valueStack) {
         NodeResult nodeResult = valueStack.getPreResult();
         Response<Object> response = new Response<>();
         response.setState(StringUtils.isBlank(state) ? nodeResult.getState() : state);
         response.setMessage(nodeResult.getNext());
         response.setResult(nodeResult.getData());
         response.setRequestType(valueStack.getAsString(ImConstant.REQUEST_TYPE));
-        response.setSeq(request.getSeq());
+
+        if (request != null) {
+            response.setSeq(request.getSeq());
+        }
+
         valueStack.set(ImConstant.RESPONSE, response);
         return RESPONSE_CREATE_SUCCESS;
     }

@@ -27,7 +27,7 @@
         <property name="serviceNamePrefix" value="im:"/>
     </bean>
 
-    <bean id="sessionManager" class="org.roof.im.session.map.MapSessionManager"/>
+    <bean id="sessionManager" class="org.roof.im.session.jdbc.JdbcSessionManager"/>
 
     <bean id="queue" class="java.util.concurrent.LinkedBlockingQueue"/>
     <bean id="messagePublisher" class="org.roof.im.transport.queue.LinkedBlockingQueueLoadBalanceMessagePublisher">

@@ -5,13 +5,13 @@ package org.roof.im.request;
  */
 public class CloseSessionRequest extends Request {
 
-    private String sessionId;
+    private long sessionId;
 
-    public String getSessionId() {
+    public long getSessionId() {
         return sessionId;
     }
 
-    public void setSessionId(String sessionId) {
+    public void setSessionId(long sessionId) {
         this.sessionId = sessionId;
     }
 }

@@ -39,15 +39,15 @@ public class OpenSessionHandlerNode extends AbstractRequestHandlerNode<OpenSessi
             return new NodeResult<>(RECEIVER_NOT_EXIST);
         }
         //双方已存在session
-        Session sessionExist = sessionManager.effective(sender, receiver);
+        Session sessionExist = sessionManager.queryEffective(sender, receiver);
         if (sessionExist != null) {
             NodeResult<Session> nodeResult = new NodeResult<>(SESSION_ALREADY_EXIST);
             nodeResult.setData(sessionExist);
             return nodeResult;
         }
-        Session session = sessionManager.open(sender, receiver);
+//        Session session = sessionManager.open(sender, receiver);
         NodeResult<Session> nodeResult = new NodeResult<>(OPEN_SESSION_SUCCESS);
-        nodeResult.setData(session);
+//        nodeResult.setData(session);
         return nodeResult;
     }
 

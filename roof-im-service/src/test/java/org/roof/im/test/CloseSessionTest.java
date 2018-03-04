@@ -26,7 +26,7 @@ public class CloseSessionTest {
     @Test
     public void testSessionNotExists() throws Exception {
         CloseSessionRequest request = new CloseSessionRequest();
-        request.setSessionId("123");
+        request.setSessionId(123);
         request.setRequestType(RequestType.closeSession.name());
         request.setToken("abc");
 
@@ -44,7 +44,7 @@ public class CloseSessionTest {
 
     @Test
     public void testSuccess() throws Exception {
-        Session session = sessionManager.open("abc", "efg");
+        Session session = sessionManager.open("abc", "efg", 0, 99);
 
         CloseSessionRequest request = new CloseSessionRequest();
         request.setSessionId(session.getId());
