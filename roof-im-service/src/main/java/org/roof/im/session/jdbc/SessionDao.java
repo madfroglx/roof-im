@@ -1,5 +1,6 @@
 package org.roof.im.session.jdbc;
 
+import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
 import org.roof.im.session.Session;
 
@@ -30,7 +31,7 @@ public interface SessionDao {
      * @param state 状态
      * @return 影响行数
      */
-    int updateState(long id, int state);
+    Integer updateState(@Param("id") long id, @Param("state") int state);
 
     /**
      * 查询双方有效会话
@@ -39,7 +40,7 @@ public interface SessionDao {
      * @param receiver 接收方
      * @return session对象
      */
-    Session queryEffective(String sender, String receiver);
+    Session queryEffective(@Param("sender") String sender, @Param("receiver") String receiver);
 
     /**
      * 查询一个用户的有效会话

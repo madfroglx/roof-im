@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * @author liuxin
  */
+@Controller
 @RequestMapping("/session")
 public class SessionController {
     private static final Logger LOGGER = LoggerFactory.getLogger(SessionController.class);
@@ -48,10 +50,11 @@ public class SessionController {
         valueStack.set(ImConstant.JSON_OBJECT_MESSAGE, jsonObjectMessage);
         try {
             enterChain.doChain(valueStack);
+            return valueStack.get(ImConstant.RESPONSE);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
+            return new Response<>(Response.ERROR, e.getMessage());
         }
-        return new Response<>(Response.SUCCESS);
     }
 
     /**

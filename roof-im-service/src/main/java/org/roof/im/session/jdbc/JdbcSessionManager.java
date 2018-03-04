@@ -23,8 +23,12 @@ public class JdbcSessionManager implements SessionManager {
 
     @Override
     public boolean close(long id) {
-        int r = sessionDao.updateState(id, 2);
-        return r != 0;
+        try {
+            sessionDao.updateState(id, 2);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 

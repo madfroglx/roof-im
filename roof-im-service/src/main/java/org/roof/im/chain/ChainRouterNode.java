@@ -21,8 +21,7 @@ public class ChainRouterNode {
         Assert.hasText(chainName, "ValueStack cannot found key " + valueStackKey);
         Chain chain = mapping.get(chainName);
         Assert.notNull(chain, "Chain mapping cannot key " + chainName);
-        chain.doChain(valueStack);
-        return ROUTE_SUCCESS;
+        return chain.doChain(valueStack);
     }
 
     public String getValueStackKey() {

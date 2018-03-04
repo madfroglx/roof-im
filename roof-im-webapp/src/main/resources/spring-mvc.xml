@@ -11,9 +11,9 @@
     <!--</websocket:handlers>-->
     <!--<bean id="myInterceptor" class="org.roof.oc.message.websocket.HandshakeInterceptor"/>-->
     <!-- 启用注解 -->
-    <context:annotation-config />
+    <context:annotation-config/>
     <!-- 扫描组件 -->
-    <context:component-scan base-package="org.roof.*,com.roof.*" />
+    <context:component-scan base-package="org.roof.*,com.roof.*"/>
 
 
     <mvc:annotation-driven/>
@@ -39,6 +39,42 @@
     </bean>
 
 
+    <!-- 配置RequestMappingHandlerAdapter -->
+    <bean
+            class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="order" value="0"/>
+        <property name="webBindingInitializer">
+            <bean
+                    class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
+                <property name="conversionService">
+                    <bean
+                            class="org.springframework.format.support.FormattingConversionServiceFactoryBean"/>
+                </property>
+            </bean>
+        </property>
+        <property name="messageConverters">
+            <list>
+                <bean
+                        class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+                <bean
+                        class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name="writeAcceptCharset" value="false"/>
+                </bean>
+                <bean class="org.springframework.http.converter.FormHttpMessageConverter"/>
+                <bean
+                        class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
+                <bean
+                        class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>application/json;charset=UTF-8</value>
+                            <value>application/json</value>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
 
     <!-- <bean
              class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
