@@ -37,5 +37,5 @@ public enum RequestType {
     /**
      * 未收取的消息
      */
-    notReceivedMessage
+    pullNotReceivedMessage
 }

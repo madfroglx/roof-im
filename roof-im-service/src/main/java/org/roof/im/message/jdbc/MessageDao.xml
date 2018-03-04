@@ -32,6 +32,13 @@
         update im_message set state = #{state} where id = #{messageId}
     </update>
 
+    <update id="updateStateBatch">
+        update im_message set state = #{state} where id in
+        <foreach collection="messageIds" item="item" index="index"
+                 open="(" separator="," close=")">#{item}
+        </foreach>
+    </update>
+
     <select id="queryNotReceived" resultMap="MessageMapper">
         SELECT
         <include refid="message_column_list"/>
@@ -42,7 +49,8 @@
         <if test="sender != null and sender != ''">
             sender = #{sender}
         </if>
-        order by create_time desc limit 0, #{limit}
+        and state = 0
+        order by create_time limit 0, #{limit}
     </select>
 
     <select id="query" resultMap="MessageMapper">
