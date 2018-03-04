@@ -1,8 +1,11 @@
 package org.roof.im.session;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 会话
  */
+@Alias("Session")
 public class Session {
     /**
      * 会话ID

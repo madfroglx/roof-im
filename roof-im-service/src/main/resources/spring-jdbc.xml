@@ -56,13 +56,14 @@
         <property name="mapperLocations">
             <array>
                 <value>classpath:org/roof/im/message/jdbc/*.xml</value>
+                <value>classpath:org/roof/im/session/jdbc/*.xml</value>
             </array>
         </property>
     </bean>
 
     <!-- DAO接口所在包名，Spring会自动查找其下的类 ,包下的类需要使用@MapperScan注解,否则容器注入会失败 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="org.roof.im.message"/>
+        <property name="basePackage" value="org.roof.im"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 

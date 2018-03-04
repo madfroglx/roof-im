@@ -1,0 +1,67 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.roof.im.session.jdbc.SessionDao">
+    <resultMap type="Session" id="SessionMapper">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="sender" property="sender" jdbcType="VARCHAR"/>
+        <result column="receiver" property="receiver" jdbcType="VARCHAR"/>
+        <result column="start_time" property="startTime" jdbcType="BIGINT"/>
+        <result column="end_time" property="endTime" jdbcType="BIGINT"/>
+        <result column="real_end_time" property="realEndTime" jdbcType="BIGINT"/>
+        <result column="state" property="state" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="session_column_list">
+        id, sender, receiver, start_time, end_time, real_end_time, state
+	</sql>
+
+    <sql id="session_table_name">im_session</sql>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="org.roof.im.session.Session">
+        <selectKey keyProperty="id" resultType="Long" order="AFTER">
+            SELECT
+            last_insert_id()
+        </selectKey>
+        INSERT INTO
+        <include refid="session_table_name"/>
+        (sender,receiver,start_time,end_time,real_end_time,state)
+        VALUES(#{sender}, #{receiver}, #{startTime}, #{endTime}, #{realEndTime}, #{state})
+    </insert>
+
+    <select id="load" resultMap="SessionMapper">
+        SELECT
+        <include refid="session_column_list"/>
+        FROM
+        <include refid="session_table_name"/>
+        WHERE id = #{id}
+    </select>
+
+    <select id="updateState">
+        UPDATE
+        <include refid="session_table_name"/>
+        SET state = #{state}
+        WHERE id = #{id}
+    </select>
+
+    <select id="queryEffective" resultMap="SessionMapper">
+        SELECT
+        <include refid="session_column_list"/>
+        FROM
+        <include refid="session_table_name"/>
+        WHERE sender = #{sender}
+        AND receiver = #{receiver}
+        AND state = 0
+        ORDER BY start_time
+    </select>
+    <select id="queryAllEffective" resultMap="SessionMapper">
+        SELECT
+        <include refid="session_column_list"/>
+        FROM
+        <include refid="session_table_name"/>
+        WHERE (sender = #{username} OR receiver = #{username})
+        AND state = 0
+        ORDER BY start_time
+    </select>
+</mapper>
