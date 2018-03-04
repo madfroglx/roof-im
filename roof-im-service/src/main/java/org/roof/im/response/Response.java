@@ -32,6 +32,15 @@ public class Response<T> {
     public Response() {
     }
 
+    public Response(String state) {
+        this.state = state;
+    }
+
+    public Response(String state, String message) {
+        this.state = state;
+        this.message = message;
+    }
+
     public Response(T result) {
         this.result = result;
     }
