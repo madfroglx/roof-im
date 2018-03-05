@@ -16,7 +16,7 @@
                     <property name="forwards">
                         <map>
                             <entry key="querySessionError" value="errorResponseCreateNode"/>
-                            <entry key="querySessionSuccess" value=""/>
+                            <entry key="querySessionSuccess" value="createSessionVoNode"/>
                         </map>
                     </property>
                 </bean>
