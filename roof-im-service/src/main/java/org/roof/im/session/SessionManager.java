@@ -40,11 +40,11 @@ public interface SessionManager {
     Session queryEffective(String sender, String receiver);
 
     /**
-     * 查询用户所有有效会话
+     * 查询用户未完成会话
      *
      * @param username 用户名
      * @return 有效会话列表
      */
-    List<Session> queryAllEffective(String username);
+    List<Session> queryIncomplete(String username);
 
 }

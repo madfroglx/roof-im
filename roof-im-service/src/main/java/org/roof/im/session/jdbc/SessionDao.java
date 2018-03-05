@@ -43,12 +43,12 @@ public interface SessionDao {
     Session queryEffective(@Param("sender") String sender, @Param("receiver") String receiver);
 
     /**
-     * 查询一个用户的有效会话
+     * 查询用户未完成会话
      *
-     * @param username
+     * @param username 用户名
      * @return
      */
-    List<Session> queryAllEffective(String username);
+    List<Session> queryIncomplete(String username);
 
 
 }

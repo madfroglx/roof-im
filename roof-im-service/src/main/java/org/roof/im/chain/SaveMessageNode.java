@@ -19,6 +19,7 @@ public class SaveMessageNode {
     private static final String MESSAGE_IS_NULL = "messageIsNull";
     private MessageDao messageDao;
 
+    //TODO 保存sessionId
     public String doNode(MessageRequest request, ValueStack valueStack) {
         if (request == null) {
             return MESSAGE_IS_NULL;

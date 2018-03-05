@@ -53,16 +53,20 @@
         WHERE sender = #{sender}
         AND receiver = #{receiver}
         AND state = 0
+        <![CDATA[
+        AND start_time < (select unix_timestamp() * 1000)
+        ]]>
         AND end_time > (select unix_timestamp() * 1000)
         ORDER BY start_time
     </select>
-    <select id="queryAllEffective" resultMap="SessionMapper">
+    <select id="queryIncomplete" resultMap="SessionMapper">
         SELECT
         <include refid="session_column_list"/>
         FROM
         <include refid="session_table_name"/>
         WHERE (sender = #{username} OR receiver = #{username})
         AND state = 0
+        AND end_time > (select unix_timestamp() * 1000)
         ORDER BY start_time
     </select>
 </mapper>

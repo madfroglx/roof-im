@@ -58,5 +58,9 @@ public class ImConstant {
      * 下线
      */
     public static final String OFFLINE = "offline";
+    /**
+     * sessions
+     */
+    public static final String SESSIONS = "sessions";
 
 }

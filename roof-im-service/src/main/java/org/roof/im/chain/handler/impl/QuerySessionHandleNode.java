@@ -1,6 +1,7 @@
 package org.roof.im.chain.handler.impl;
 
-import com.roof.chain.support.NodeResult;
+import com.roof.chain.api.ValueStack;
+import org.roof.im.chain.ImConstant;
 import org.roof.im.request.QuerySessionRequest;
 import org.roof.im.session.Session;
 import org.roof.im.session.SessionManager;
@@ -15,8 +16,8 @@ import java.util.List;
  * @author liuxin
  * @date 2018/3/4
  */
-public class QuerySessionNode {
-    private static final Logger LOGGER = LoggerFactory.getLogger(QuerySessionNode.class);
+public class QuerySessionHandleNode {
+    private static final Logger LOGGER = LoggerFactory.getLogger(QuerySessionHandleNode.class);
     /**
      * 查询session失败
      */
@@ -28,17 +29,16 @@ public class QuerySessionNode {
 
     private SessionManager sessionManager;
 
-    public NodeResult<List<Session>> doNode(QuerySessionRequest request) {
+    public String doNode(QuerySessionRequest request, ValueStack valueStack) {
         List<Session> sessions;
         try {
-            sessions = sessionManager.queryAllEffective(request.getUsername());
+            sessions = sessionManager.queryIncomplete(request.getUsername());
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
-            return new NodeResult<>(QUERY_SESSION_ERROR);
+            return QUERY_SESSION_ERROR;
         }
-        NodeResult<List<Session>> result = new NodeResult<>(QUERY_SESSION_SUCCESS);
-        result.setData(sessions);
-        return result;
+        valueStack.set(ImConstant.SESSIONS, sessions);
+        return QUERY_SESSION_SUCCESS;
     }
 
     public void setSessionManager(SessionManager sessionManager) {

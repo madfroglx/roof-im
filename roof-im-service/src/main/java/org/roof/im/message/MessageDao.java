@@ -55,6 +55,7 @@ public interface MessageDao {
      * @param limit     查询数量
      * @return 记录列表
      */
+    //TODO 解决sql OR问题
     List<Message> query(@Param("receiver") String receiver, @Param("sender") String sender,
                         @Param("startTime") long startTime, @Param("endTime") long endTime,
                         @Param("state") Integer state,

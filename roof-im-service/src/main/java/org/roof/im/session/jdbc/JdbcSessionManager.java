@@ -14,7 +14,7 @@ public class JdbcSessionManager implements SessionManager {
         Session session = new Session();
         session.setSender(sender);
         session.setReceiver(receiver);
-        session.setStartTime(startTime == 0 ? System.currentTimeMillis() : startTime);
+        session.setStartTime(startTime);
         session.setEndTime(endTime);
         session.setState(0);
         sessionDao.save(session);
@@ -38,8 +38,8 @@ public class JdbcSessionManager implements SessionManager {
     }
 
     @Override
-    public List<Session> queryAllEffective(String username) {
-        return null;
+    public List<Session> queryIncomplete(String username) {
+        return sessionDao.queryIncomplete(username);
     }
 
     public void setSessionDao(SessionDao sessionDao) {
