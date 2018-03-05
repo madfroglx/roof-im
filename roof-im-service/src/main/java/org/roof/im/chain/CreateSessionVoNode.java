@@ -15,15 +15,22 @@ import java.util.List;
  * 创建返回客户端的sessionVo
  *
  * @author liuxin
- * @date 2018/3/4
+ * @since 2018/3/4
  */
 public class CreateSessionVoNode {
-
+    /**
+     * 没有未完成的会话
+     */
+    private static final String NO_INCOMPLETE_SESSION = "noIncompleteSession";
+    /**
+     * 查询未完成的会话成功
+     */
+    private static final String QUERY_INCOMPLETE_SESSION_SUCCESS = "queryIncompleteSessionSuccess";
     private UserStateService userStateService;
 
     public NodeResult<List<SessionVo>> doNode(Request request, List<Session> sessions) {
         if (sessions == null || sessions.size() == 0) {
-            return new NodeResult<>("noIncompleteSession");
+            return new NodeResult<>(NO_INCOMPLETE_SESSION);
         }
         List<SessionVo> sessionVos = new ArrayList<>();
         String username = request.getUsername();
@@ -54,7 +61,7 @@ public class CreateSessionVoNode {
             sessionVos.add(sessionVo);
         }
 
-        NodeResult<List<SessionVo>> result = new NodeResult<>("queryIncompleteSessionSuccess");
+        NodeResult<List<SessionVo>> result = new NodeResult<>(QUERY_INCOMPLETE_SESSION_SUCCESS);
         result.setData(sessionVos);
         return result;
     }

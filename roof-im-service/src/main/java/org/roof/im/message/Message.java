@@ -36,6 +36,11 @@ public class Message {
      */
     private int state;
     /**
+     * 客户端类型
+     * @see {@link org.roof.im.request.ClientType}
+     */
+    private String clientType;
+    /**
      * 聊天双方用户名组合
      * {@link org.roof.im.user.UserService#joinUsername(String, String)}
      */
@@ -97,6 +102,13 @@ public class Message {
         this.state = state;
     }
 
+    public String getClientType() {
+        return clientType;
+    }
+
+    public void setClientType(String clientType) {
+        this.clientType = clientType;
+    }
     public String getMessageKey() {
         return messageKey;
     }

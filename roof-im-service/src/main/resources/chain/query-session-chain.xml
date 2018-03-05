@@ -2,37 +2,34 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <!--下线-->
-    <bean id="offlineChain" class="com.roof.chain.support.GenericChain">
-        <property name="startNodeName" value="offlineHandlerNode"/>
+    <!-- 查询未完成会话 -->
+    <bean id="querySessionChain" class="com.roof.chain.support.GenericChain">
+        <property name="startNodeName" value="querySessionHandleNode"/>
         <property name="nodes">
             <list>
                 <bean class="com.roof.chain.support.NodeFactoryBean">
                     <property name="target">
-                        <bean class="org.roof.im.chain.handler.impl.OfflineHandlerNode">
-                            <property name="userService" ref="userService"/>
-                            <property name="userStateService" ref="userStateService"/>
-                            <property name="serverNameBuilder" ref="serverNameBuilder"/>
+                        <bean class="org.roof.im.chain.handler.impl.QuerySessionHandleNode">
+                            <property name="sessionManager" ref="sessionManager"/>
                         </bean>
                     </property>
                     <property name="forwards">
                         <map>
-                            <entry key="userNotOnline" value="failResponseCreateNode"/>
-                            <entry key="offlineSuccess" value="closeWebSocketConnectNode"/>
+                            <entry key="querySessionError" value="errorResponseCreateNode"/>
+                            <entry key="querySessionSuccess" value="createSessionVoNode"/>
                         </map>
                     </property>
                 </bean>
-                <!-- 关闭连接-->
                 <bean class="com.roof.chain.support.NodeFactoryBean">
                     <property name="target">
-                        <bean class="org.roof.im.chain.CloseWebSocketConnectNode">
-                            <property name="connectManager" ref="connectManager"/>
+                        <bean class="org.roof.im.chain.CreateSessionVoNode">
+                            <property name="userStateService" ref="userStateService"/>
                         </bean>
                     </property>
                     <property name="forwards">
                         <map>
-                            <entry key="closeSuccess" value="successReturnCodeResponseCreateNode"/>
-                            <entry key="closeError" value="errorReturnCodeResponseCreateNode"/>
+                            <entry key="noIncompleteSession" value="successResponseCreateNode"/>
+                            <entry key="queryIncompleteSessionSuccess" value="successResponseCreateNode"/>
                         </map>
                     </property>
                 </bean>

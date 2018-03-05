@@ -19,7 +19,7 @@ public class ResponseNode {
     public String doNode(String connectId, Response response) {
         try {
             responseEndpoint.send(connectId, response);
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
             return RESPONSE_FAIL;
         }

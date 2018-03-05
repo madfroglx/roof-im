@@ -7,6 +7,7 @@ import org.roof.im.transport.MessagePublisher;
 import org.roof.im.user.UserState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -24,7 +25,10 @@ public class RequestMessagePublishNode {
         for (UserState userState : userStates) {
             boolean result = false;
             try {
-                result = messagePublisher.publish(message, userState.getServerName(), timeout, TimeUnit.MILLISECONDS);
+                Message c = new Message();
+                BeanUtils.copyProperties(message, c);
+                c.setClientType(userState.getClientType());
+                result = messagePublisher.publish(c, userState.getServerName(), timeout, TimeUnit.MILLISECONDS);
             } catch (Exception e) {
                 LOGGER.error(e.getMessage(), e);
             }
