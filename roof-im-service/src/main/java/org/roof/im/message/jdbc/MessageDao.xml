@@ -11,10 +11,11 @@
         <result column="payload" property="payload" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <result column="state" property="state" jdbcType="TINYINT"/>
+        <result column="message_key" property="messageKey" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="message_column_list">
-        id, sender, receiver, type, payload, create_time, state
+        id, sender, receiver, type, payload, create_time, state, message_key
 	</sql>
 
     <sql id="message_table_name">im_message</sql>
@@ -24,8 +25,8 @@
             select
             last_insert_id()
         </selectKey>
-        insert into im_message (sender,receiver,type,payload,create_time,state)
-        values(#{sender}, #{receiver}, #{type}, #{payload}, #{createTime}, #{state})
+        insert into im_message (sender,receiver,type,payload,create_time,state, message_key)
+        values(#{sender}, #{receiver}, #{type}, #{payload}, #{createTime}, #{state}, #{messageKey})
     </insert>
 
     <update id="updateState">
@@ -59,9 +60,7 @@
         from
         <include refid="message_table_name"/>
         where
-        (receiver = #{receiver} and sender = #{sender})
-        OR
-        (receiver = #{sender} and sender = #{receiver})
+        message_key = #{messageKey}
         <if test="startTime != null and startTime != 0">
             and create_time > #{startTime}
         </if>

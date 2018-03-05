@@ -44,9 +44,20 @@
                     </property>
                     <property name="forwards">
                         <map>
-                            <entry key="authSuccess" value="router"/>
+                            <entry key="authSuccess" value="requestFormatNode"/>
                             <entry key="authError" value="errorResponseCreateNode"/>
                             <entry key="authFail" value="failResponseCreateNode"/>
+                        </map>
+                    </property>
+                </bean>
+                <!-- 将请求数据格式化 -->
+                <bean class="com.roof.chain.support.NodeFactoryBean">
+                    <property name="target">
+                        <bean class="org.roof.im.chain.RequestFormatNode"/>
+                    </property>
+                    <property name="forwards">
+                        <map>
+                            <entry key="success" value="router"/>
                         </map>
                     </property>
                 </bean>

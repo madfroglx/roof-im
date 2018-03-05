@@ -1,9 +1,11 @@
 package org.roof.im.chain;
 
 import com.roof.chain.api.ValueStack;
+import org.apache.commons.lang3.StringUtils;
 import org.roof.im.message.Message;
 import org.roof.im.message.MessageDao;
 import org.roof.im.request.MessageRequest;
+import org.roof.im.user.UserService;
 
 /**
  *  保存用户发送的信息
@@ -24,12 +26,15 @@ public class SaveMessageNode {
         if (request == null) {
             return MESSAGE_IS_NULL;
         }
+        String receiver = StringUtils.lowerCase(request.getReceiver());
+        String username = StringUtils.lowerCase(request.getUsername());
         Message message = new Message();
         message.setPayload(request.getPayload());
-        message.setReceiver(request.getReceiver());
-        message.setSender(request.getUsername());
+        message.setReceiver(receiver);
+        message.setSender(username);
         message.setCreateTime(request.getCreateTime());
         message.setType(request.getType().name());
+        message.setMessageKey(UserService.joinUsername(receiver, username));
         messageDao.save(message);
         valueStack.set(ImConstant.MESSAGE, message);
         return MESSAGE_SAVE_SUCCESS;

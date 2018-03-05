@@ -35,6 +35,11 @@ public class Message {
      * 状态 0:未收取, 1:已收取
      */
     private int state;
+    /**
+     * 聊天双方用户名组合
+     * {@link org.roof.im.user.UserService#joinUsername(String, String)}
+     */
+    private String messageKey;
 
     public Long getId() {
         return id;
@@ -92,4 +97,11 @@ public class Message {
         this.state = state;
     }
 
+    public String getMessageKey() {
+        return messageKey;
+    }
+
+    public void setMessageKey(String messageKey) {
+        this.messageKey = messageKey;
+    }
 }

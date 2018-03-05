@@ -46,17 +46,15 @@ public interface MessageDao {
     /**
      * 查询消息
      *
-     * @param receiver  用户名
-     * @param sender    消息发送者
-     * @param startTime 消息发送开始时间
-     * @param endTime   消息发送结束时间
-     * @param state     消息状态
-     * @param offset    记录偏移
-     * @param limit     查询数量
+     * @param messageKey 聊天双方用户名组合
+     * @param startTime  消息发送开始时间
+     * @param endTime    消息发送结束时间
+     * @param state      消息状态
+     * @param offset     记录偏移
+     * @param limit      查询数量
      * @return 记录列表
      */
-    //TODO 解决sql OR问题
-    List<Message> query(@Param("receiver") String receiver, @Param("sender") String sender,
+    List<Message> query(@Param("messageKey") String messageKey,
                         @Param("startTime") long startTime, @Param("endTime") long endTime,
                         @Param("state") Integer state,
                         @Param("offset") int offset, @Param("limit") int limit);

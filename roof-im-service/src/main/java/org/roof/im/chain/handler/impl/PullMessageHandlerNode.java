@@ -5,6 +5,7 @@ import com.roof.chain.support.NodeResult;
 import org.roof.im.message.Message;
 import org.roof.im.message.MessageDao;
 import org.roof.im.request.PullMessageRequest;
+import org.roof.im.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +31,7 @@ public class PullMessageHandlerNode {
     public NodeResult<List<Message>> doNode(PullMessageRequest pullMessageRequest, ValueStack valueStack) {
         List<Message> messages;
         try {
-            messages = messageDao.query(pullMessageRequest.getUsername(), pullMessageRequest.getSender(),
+            messages = messageDao.query(UserService.joinUsername(pullMessageRequest.getUsername(), pullMessageRequest.getSender()),
                     pullMessageRequest.getStartTime() == null ? 0 : pullMessageRequest.getStartTime(),
                     pullMessageRequest.getEndTime() == null ? 0 : pullMessageRequest.getEndTime(),
                     pullMessageRequest.getState(),
