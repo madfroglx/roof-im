@@ -59,9 +59,9 @@
         from
         <include refid="message_table_name"/>
         where
-        (receiver = #{receiver} and sender = #{sender})
+        ((receiver = #{receiver} and sender = #{sender})
         OR
-        (receiver = #{sender} and sender = #{receiver})
+        (receiver = #{sender} and sender = #{receiver}))
         <if test="startTime != null and startTime != 0">
             and create_time > #{startTime}
         </if>
