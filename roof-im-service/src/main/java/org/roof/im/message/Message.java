@@ -35,6 +35,11 @@ public class Message {
      * 状态 0:未收取, 1:已收取
      */
     private int state;
+    /**
+     * 客户端类型
+     * @see {@link org.roof.im.request.ClientType}
+     */
+    private String clientType;
 
     public Long getId() {
         return id;
@@ -92,4 +97,11 @@ public class Message {
         this.state = state;
     }
 
+    public String getClientType() {
+        return clientType;
+    }
+
+    public void setClientType(String clientType) {
+        this.clientType = clientType;
+    }
 }

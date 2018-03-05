@@ -10,5 +10,5 @@ import java.io.IOException;
  * @author liuxin
  */
 public interface ResponseEndpoint {
-    void send(String connectID, Response response) throws IOException;
+    void send(String connectID, Response response) throws IOException, ConnectNotExistException;
 }

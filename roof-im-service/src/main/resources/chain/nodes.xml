@@ -53,6 +53,18 @@
                 <property name="responseEndpoint" ref="webSocketResponseEndPoint"/>
             </bean>
         </property>
+        <property name="forwards">
+            <map>
+                <entry key="responseFail" value="connectionAvailableHandlerNode"/>
+            </map>
+        </property>
+    </bean>
+    <bean id="connectionAvailableHandlerNode" class="com.roof.chain.support.NodeFactoryBean">
+        <property name="target">
+            <bean class="org.roof.im.chain.handler.impl.ConnectionAvailableHandlerNode">
+                <property name="userStateService" ref="userStateService"/>
+            </bean>
+        </property>
     </bean>
 
     <!--    <bean id="webSocketResponseEndPointNode" class="com.roof.chain.support.NodeFactoryBean">

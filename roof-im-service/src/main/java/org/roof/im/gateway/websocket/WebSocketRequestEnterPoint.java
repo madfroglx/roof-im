@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.roof.chain.api.Chain;
 import com.roof.chain.api.ValueStack;
 import com.roof.chain.support.GenericValueStack;
+import org.apache.commons.logging.Log;
 import org.roof.im.chain.ImConstant;
 import org.roof.im.connect.ConnectManager;
 import org.roof.im.gateway.RequestEnterPoint;
@@ -17,6 +18,7 @@ import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.ConcurrentWebSocketSessionDecorator;
+import org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 /**
@@ -74,6 +76,7 @@ public class WebSocketRequestEnterPoint extends TextWebSocketHandler implements 
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
         LOGGER.error(exception.getMessage(), exception);
+        WebSocketUtils.tryCloseWithError(session, exception, LOGGER);
     }
 
     public ConnectManager<WebSocketSession> getWebSocketSessionConnectManager() {
@@ -108,4 +111,5 @@ public class WebSocketRequestEnterPoint extends TextWebSocketHandler implements 
     public void setEnterChain(@Qualifier("enterChain") Chain enterChain) {
         this.enterChain = enterChain;
     }
+
 }

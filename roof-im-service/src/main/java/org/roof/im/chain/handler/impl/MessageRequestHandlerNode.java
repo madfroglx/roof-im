@@ -47,7 +47,8 @@ public class MessageRequestHandlerNode {
         List<UserState> userStates = userStateService.getStates(receiver);
         String connectId = null;
         for (UserState userState : userStates) {
-            if (StringUtils.equals(userState.getServerName(), serverNameBuilder.getName())) {
+            if (StringUtils.equals(userState.getServerName(), serverNameBuilder.getName())
+                    && StringUtils.equals(userState.getClientType(), message.getClientType())) {
                 connectId = userState.getConnectId();
             }
         }

@@ -40,6 +40,7 @@
                 <ref bean="failResponseCreateNode"/>
                 <ref bean="errorResponseCreateNode"/>
                 <ref bean="webSocketResponseEndPointNode"/>
+                <ref bean="connectionAvailableHandlerNode"/>
             </list>
         </property>
     </bean>

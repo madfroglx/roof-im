@@ -23,6 +23,7 @@
                 <ref bean="failResponseCreateNode"/>
                 <ref bean="errorResponseCreateNode"/>
                 <ref bean="webSocketResponseEndPointNode"/>
+                <ref bean="connectionAvailableHandlerNode"/>
 
                 <!-- 成功-->
                 <bean class="com.roof.chain.support.NodeFactoryBean">
@@ -50,6 +51,7 @@
                     <property name="forwards">
                         <map>
                             <entry key="responseSuccess" value="setMessageReceivedNode"/>
+                            <entry key="responseFail" value="connectionAvailableHandlerNode"/>
                         </map>
                     </property>
                 </bean>
