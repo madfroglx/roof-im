@@ -70,6 +70,7 @@ public class WebSocketRequestEnterPoint extends TextWebSocketHandler implements 
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        //TODO 关闭连接同时删除在线状态
         webSocketSessionConnectManager.remove(session.getId());
     }
 
