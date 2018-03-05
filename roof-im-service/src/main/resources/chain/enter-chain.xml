@@ -81,6 +81,9 @@
                                     <entry key="pullNotReceivedMessage">
                                         <ref bean="pullNotReceivedMessageChain"/>
                                     </entry>
+                                    <entry key="querySession">
+                                        <ref bean="querySessionChain"/>
+                                    </entry>
                                 </map>
                             </property>
                             <property name="valueStackKey" value="requestType"/>
