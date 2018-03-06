@@ -26,8 +26,8 @@ public class SaveMessageNode {
         if (request == null) {
             return MESSAGE_IS_NULL;
         }
-        String receiver = StringUtils.lowerCase(request.getReceiver());
-        String username = StringUtils.lowerCase(request.getUsername());
+        String receiver = request.getReceiver();
+        String username = request.getUsername();
         Message message = new Message();
         message.setPayload(request.getPayload());
         message.setReceiver(receiver);
