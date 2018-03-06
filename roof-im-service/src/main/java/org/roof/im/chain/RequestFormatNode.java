@@ -11,11 +11,6 @@ import org.roof.im.request.Request;
  */
 public class RequestFormatNode {
     public String doNode(Request request) {
-        request.setUsername(StringUtils.lowerCase(request.getUsername()));
-        if (request instanceof MessageRequest) {
-            MessageRequest messageRequest = (MessageRequest) request;
-            messageRequest.setReceiver(StringUtils.lowerCase(request.getUsername()));
-        }
         return NodeResult.SUCCESS;
     }
 }

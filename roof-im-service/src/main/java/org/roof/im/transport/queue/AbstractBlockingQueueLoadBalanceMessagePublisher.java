@@ -47,11 +47,22 @@ public abstract class AbstractBlockingQueueLoadBalanceMessagePublisher<E> implem
     public boolean publish(E e, String serverName, long timeout, TimeUnit unit) throws InterruptedException {
         return retryTemplate.execute(retryContext -> {
             List<BlockingQueue<E>> queues = queuesMap.get(serverName);
+            if (queues == null || queues.size() == 0) {
+                synchronized (this) {
+                    queues = queuesMap.get(serverName);
+                    if (queues == null || queues.size() == 0) {
+                        queues = createQueues(serverName);
+                        queuesMap.put(serverName, queues);
+                    }
+                }
+            }
             Assert.notNull(queues, "server name: " + serverName + " queue cannot null");
             int index = loadBalance.select(e, retryContext, queues.size());
             return queues.get(index).offer(e, timeOut, TimeUnit.MILLISECONDS);
         });
     }
+
+    protected abstract List<BlockingQueue<E>> createQueues(String serverName);
 
     public void setLoadBalance(LoadBalance loadBalance) {
         this.loadBalance = loadBalance;
