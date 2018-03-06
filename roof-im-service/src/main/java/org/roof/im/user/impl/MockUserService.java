@@ -11,7 +11,6 @@ public class MockUserService implements UserService {
     @Override
     public String auth(String token) throws UserAuthException {
         String username = token;
-        username = username.toLowerCase();
         tokenUsernameStore.put(token, username);
         return username;
     }
