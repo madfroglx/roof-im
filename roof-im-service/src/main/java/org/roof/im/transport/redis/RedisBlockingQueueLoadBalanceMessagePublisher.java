@@ -18,17 +18,28 @@ public class RedisBlockingQueueLoadBalanceMessagePublisher<E extends Request> ex
 
     @Override
     protected void onInit() {
-        Map<String, List<BlockingQueue<E>>> map = new HashMap<>();
-        for (String serverName : serverNames) {
-            List<BlockingQueue<E>> list = new ArrayList<>();
-            for (RedisTemplate redisTemplate : redisTemplates) {
-                BoundListOperations boundListOperations = redisTemplate.boundListOps(serverName);
-                BlockingQueue blockingQueue = new DefaultRedisList(boundListOperations);
-                list.add(blockingQueue);
-            }
-            queuesMap.put(serverName, list);
+//        Map<String, List<BlockingQueue<E>>> map = new HashMap<>();
+//        for (String serverName : serverNames) {
+//            List<BlockingQueue<E>> list = new ArrayList<>();
+//            for (RedisTemplate redisTemplate : redisTemplates) {
+//                BoundListOperations boundListOperations = redisTemplate.boundListOps(serverName);
+//                BlockingQueue blockingQueue = new DefaultRedisList(boundListOperations);
+//                list.add(blockingQueue);
+//            }
+//            queuesMap.put(serverName, list);
+//        }
+        this.queuesMap = new HashMap<>();
+    }
+
+    @Override
+    protected List<BlockingQueue> createQueues(String serverName) {
+        List<BlockingQueue> list = new ArrayList<>();
+        for (RedisTemplate redisTemplate : redisTemplates) {
+            BoundListOperations boundListOperations = redisTemplate.boundListOps(serverName);
+            BlockingQueue blockingQueue = new DefaultRedisList(boundListOperations);
+            list.add(blockingQueue);
         }
-        this.queuesMap = map;
+        return list;
     }
 
     public void setRedisTemplates(List<RedisTemplate> redisTemplates) {
