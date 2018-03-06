@@ -21,6 +21,11 @@ public class LinkedBlockingQueueLoadBalanceMessagePublisher<E> extends AbstractB
         queuesMap.put(serverName, queues);
     }
 
+    @Override
+    protected List<BlockingQueue> createQueues(String serverName) {
+        throw new UnsupportedOperationException();
+    }
+
     public void setServerNameBuilder(ServerNameBuilder serverNameBuilder) {
         this.serverNameBuilder = serverNameBuilder;
     }
