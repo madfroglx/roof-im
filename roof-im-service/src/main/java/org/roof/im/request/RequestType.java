@@ -41,5 +41,9 @@ public enum RequestType {
     /**
      * 未收取的消息
      */
-    pullNotReceivedMessage
+    pullNotReceivedMessage,
+    /**
+     * 获取上传文件临时密钥
+     */
+    getTmpSecret
 }

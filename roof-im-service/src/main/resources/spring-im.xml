@@ -11,6 +11,7 @@
         <property name="locations">
             <list>
                 <value>classpath:app-ds.properties</value>
+                <value>classpath:tencent-ocs.properties</value>
             </list>
         </property>
     </bean>

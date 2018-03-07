@@ -95,6 +95,9 @@
                                     <entry key="querySession">
                                         <ref bean="querySessionChain"/>
                                     </entry>
+                                    <entry key="getTmpSecret">
+                                        <ref bean="getTmpSecretChain"/>
+                                    </entry>
                                 </map>
                             </property>
                             <property name="valueStackKey" value="requestType"/>
