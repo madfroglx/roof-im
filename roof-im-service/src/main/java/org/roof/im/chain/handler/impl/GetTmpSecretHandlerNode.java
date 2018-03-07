@@ -28,6 +28,7 @@ public class GetTmpSecretHandlerNode {
     private static final String GET_TMP_SECRET_SUCCESS = "getTmpSecretSuccess";
     private String secretId;
     private String secretKey;
+    private int durationSeconds;
 
     public NodeResult doNode(GetTmpSecretRequest request, ValueStack valueStack) {
         TreeMap<String, Object> config = new TreeMap<String, Object>();
@@ -49,6 +50,7 @@ public class GetTmpSecretHandlerNode {
         params.put("name", "im");
         String policy = "{\"statement\": [{\"action\": [\"name/cos:GetObject\",\"name/cos:PutObject\"],\"effect\": \"allow\",\"resource\":[\"qcs::cos:ap-shanghai:uid/1255710173:prefix//1255710173/im/*\"]}],\"version\": \"2.0\"}";
         params.put("policy", policy);
+        params.put("durationSeconds", durationSeconds);
 
         /* 在这里指定所要用的签名算法，不指定默认为 HmacSHA1*/
         //params.put("SignatureMethod", "HmacSHA256");
@@ -78,5 +80,9 @@ public class GetTmpSecretHandlerNode {
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public void setDurationSeconds(int durationSeconds) {
+        this.durationSeconds = durationSeconds;
     }
 }
