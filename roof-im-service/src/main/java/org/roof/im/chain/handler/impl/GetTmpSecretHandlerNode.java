@@ -5,10 +5,12 @@ import com.qcloud.Module.Sts;
 import com.qcloud.QcloudApiModuleCenter;
 import com.roof.chain.api.ValueStack;
 import com.roof.chain.support.NodeResult;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.roof.im.request.GetTmpSecretRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Date;
 import java.util.TreeMap;
 
 /**
@@ -29,9 +31,13 @@ public class GetTmpSecretHandlerNode {
     private String secretId;
     private String secretKey;
     private int durationSeconds;
+    private String region;
+    private String bucket;
+    private String pathPrefix;
+    private String appId;
 
     public NodeResult doNode(GetTmpSecretRequest request, ValueStack valueStack) {
-        TreeMap<String, Object> config = new TreeMap<String, Object>();
+        TreeMap<String, Object> config = new TreeMap<>();
         config.put("SecretId", secretId);
         config.put("SecretKey", secretKey);
 
@@ -44,11 +50,14 @@ public class GetTmpSecretHandlerNode {
         QcloudApiModuleCenter module = new QcloudApiModuleCenter(new Sts(),
                 config);
 
-        TreeMap<String, Object> params = new TreeMap<String, Object>();
+        TreeMap<String, Object> params = new TreeMap<>();
         /* 将需要输入的参数都放入 params 里面，必选参数是必填的。 */
         /* DescribeInstances 接口的部分可选参数如下 */
         params.put("name", "im");
-        String policy = "{\"statement\": [{\"action\": [\"name/cos:GetObject\",\"name/cos:PutObject\"],\"effect\": \"allow\",\"resource\":[\"qcs::cos:ap-shanghai:uid/1255710173:prefix//1255710173/im/*\"]}],\"version\": \"2.0\"}";
+        String policy = "{\"statement\": [{\"action\": [\"name/cos:GetObject\",\"name/cos:PutObject\"]," +
+                "\"effect\": \"allow\"," +
+                "\"resource\":[\"qcs::cos:" + region + ":uid/" + appId + ":prefix//" + appId + "/im/*\"]}]" +
+                ",\"version\": \"2.0\"}";
         params.put("policy", policy);
         params.put("durationSeconds", durationSeconds);
 
@@ -66,7 +75,11 @@ public class GetTmpSecretHandlerNode {
                 LOGGER.error(result);
                 return new NodeResult(GET_TMP_SECRET_ERROR);
             }
-            nodeResult.setData(jsonObject.getJSONObject("data"));
+            JSONObject data = jsonObject.getJSONObject("data");
+            data.put("region", region);
+            data.put("bucket", bucket);
+            data.put("path", pathPrefix + "/" + DateFormatUtils.format(new Date(), "yyyyMM") + "/");
+            nodeResult.setData(data);
             return nodeResult;
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
@@ -84,5 +97,17 @@ public class GetTmpSecretHandlerNode {
 
     public void setDurationSeconds(int durationSeconds) {
         this.durationSeconds = durationSeconds;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public void setBucket(String bucket) {
+        this.bucket = bucket;
+    }
+
+    public void setPathPrefix(String pathPrefix) {
+        this.pathPrefix = pathPrefix;
     }
 }
