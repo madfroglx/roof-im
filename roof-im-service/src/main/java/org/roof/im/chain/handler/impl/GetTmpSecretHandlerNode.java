@@ -77,7 +77,7 @@ public class GetTmpSecretHandlerNode {
             }
             JSONObject data = jsonObject.getJSONObject("data");
             data.put("region", region);
-            data.put("bucket", bucket);
+            data.put("bucket", bucket + "-" + appId);
             data.put("path", pathPrefix + "/" + DateFormatUtils.format(new Date(), "yyyyMM") + "/");
             nodeResult.setData(data);
             return nodeResult;
@@ -109,5 +109,9 @@ public class GetTmpSecretHandlerNode {
 
     public void setPathPrefix(String pathPrefix) {
         this.pathPrefix = pathPrefix;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
     }
 }
