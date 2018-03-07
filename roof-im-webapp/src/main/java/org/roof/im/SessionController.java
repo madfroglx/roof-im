@@ -21,9 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/session")
-public class SessionController {
+public class SessionController extends AbstractChainController {
     private static final Logger LOGGER = LoggerFactory.getLogger(SessionController.class);
-    private Chain enterChain;
 
     /**
      * 打开session
@@ -34,27 +33,7 @@ public class SessionController {
     @RequestMapping(value = "/open")
     public @ResponseBody
     Object open(@RequestBody String request) {
-        return doChain(request);
-    }
-
-    private Object doChain(@RequestBody String request) {
-        ValueStack valueStack = new GenericValueStack();
-        valueStack.set(ImConstant.TEXT_MESSAGE, request);
-        JSONObject jsonObjectMessage;
-        try {
-            jsonObjectMessage = JSON.parseObject(request);
-        } catch (Exception e) {
-            LOGGER.error("input json error: {}", request);
-            return new Response<>(Response.ERROR, "json format error");
-        }
-        valueStack.set(ImConstant.JSON_OBJECT_MESSAGE, jsonObjectMessage);
-        try {
-            enterChain.doChain(valueStack);
-            return valueStack.get(ImConstant.RESPONSE);
-        } catch (Exception e) {
-            LOGGER.error(e.getMessage(), e);
-            return new Response<>(Response.ERROR, e.getMessage());
-        }
+        return doChain(request, LOGGER);
     }
 
     /**
@@ -66,11 +45,12 @@ public class SessionController {
     @RequestMapping(value = "/close")
     public @ResponseBody
     Object close(@RequestBody String request) {
-        return doChain(request);
+        return doChain(request, LOGGER);
     }
 
     @Autowired
     public void setEnterChain(@Qualifier("enterChain") Chain enterChain) {
         this.enterChain = enterChain;
     }
+
 }
