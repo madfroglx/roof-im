@@ -53,7 +53,7 @@ public class GetTmpSecretHandlerNode {
         TreeMap<String, Object> params = new TreeMap<>();
         /* 将需要输入的参数都放入 params 里面，必选参数是必填的。 */
         /* DescribeInstances 接口的部分可选参数如下 */
-        params.put("name", "im");
+        params.put("name", request.getUsername());
         String policy = "{\"statement\": [{\"action\": [\"name/cos:GetObject\",\"name/cos:PutObject\"]," +
                 "\"effect\": \"allow\"," +
                 "\"resource\":[\"qcs::cos:" + region + ":uid/" + appId + ":prefix//" + appId + "/im/*\"]}]" +

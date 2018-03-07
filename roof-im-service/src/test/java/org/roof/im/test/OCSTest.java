@@ -39,7 +39,7 @@ public class OCSTest {
         TreeMap<String, Object> params = new TreeMap<String, Object>();
         /* 将需要输入的参数都放入 params 里面，必选参数是必填的。 */
         /* DescribeInstances 接口的部分可选参数如下 */
-        params.put("name", "im");
+        params.put("name", "test");
 //        String policy = "{\"statement\": [{\"action\": [\"name/cos:GetObject\",\"name/cos:PutObject\"],\"effect\": \"allow\",\"resource\":[\"qcs::cos:ap-beijing:uid/1255710173:prefix//1255710173/im/*\"]}],\"version\": \"2.0\"}";
         String policy = "{\"statement\": [{\"action\": [\"name/cos:GetObject\",\"name/cos:PutObject\"],\"effect\": \"allow\",\"resource\":[\"qcs::cos:ap-shanghai:uid/1255710173:prefix//1255710173/im/*\"]}],\"version\": \"2.0\"}";
         params.put("policy", policy);
@@ -63,9 +63,9 @@ public class OCSTest {
     public void testUpload() {
         // 用户基本信息
         String appid = "1255710173";
-        String secret_id = "AKIDPigfry2m396vR91EnfICV5n0FwvQ3MVA";
-        String secret_key = "p8kadeSWhGaR1Rew85ULV746h7wyDGYs";
-        String sessionToken = "a8d0b4e25740e530f287c905237966f4837a62de30001";
+        String secret_id = "AKIDuugILA565t6KydHsy48OB96eudU71329";
+        String secret_key = "qwe3cJhkX5yDFrgY4mDm0PPr5t6nr8T8";
+        String sessionToken = "3f9c85c7e4b4406d44297dcd4f88d170c4ed142730001";
 
         // 设置秘钥
         COSCredentials cred = new BasicCOSCredentials(appid, secret_id, secret_key);
