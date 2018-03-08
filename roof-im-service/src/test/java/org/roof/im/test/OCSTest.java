@@ -6,6 +6,8 @@ import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.BasicCOSCredentials;
 import com.qcloud.cos.auth.COSCredentials;
+import com.qcloud.cos.auth.COSSigner;
+import com.qcloud.cos.http.HttpMethodName;
 import com.qcloud.cos.model.ObjectMetadata;
 import com.qcloud.cos.model.PutObjectRequest;
 import com.qcloud.cos.model.PutObjectResult;
@@ -13,6 +15,7 @@ import com.qcloud.cos.region.Region;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.Date;
 import java.util.TreeMap;
 
 /**
@@ -63,9 +66,9 @@ public class OCSTest {
     public void testUpload() {
         // 用户基本信息
         String appid = "1255710173";
-        String secret_id = "AKIDuugILA565t6KydHsy48OB96eudU71329";
-        String secret_key = "qwe3cJhkX5yDFrgY4mDm0PPr5t6nr8T8";
-        String sessionToken = "3f9c85c7e4b4406d44297dcd4f88d170c4ed142730001";
+        String secret_id = "AKIDSpCPQFhNfmmcJ0Q0FKE7pNjuuiKlN73o";
+        String secret_key = "kKjOsEPOCoFUlwviLm27IJ9nFWcaNyOc";
+        String sessionToken = "562af6ffcbe981dd21bd7434176dcbb2f883839030001";
 
         // 设置秘钥
         COSCredentials cred = new BasicCOSCredentials(appid, secret_id, secret_key);
@@ -80,7 +83,7 @@ public class OCSTest {
         String bucketName = "im";
         // 上传 object, 建议 20M 以下的文件使用该接口
         File localFile = new File("E:\\excel\\test.txt");
-        String key = "/test";
+        String key = "im/201803/test4";
         PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, localFile);
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setSecurityToken(sessionToken);
@@ -90,5 +93,22 @@ public class OCSTest {
 
         // 关闭客户端 (关闭后台线程)
         cosClient.shutdown();
+
+        COSSigner cosSigner = new COSSigner();
+        System.out.println(cosSigner.buildAuthorizationStr(HttpMethodName.POST, "im/201803/test5", cred, new Date(1520420531000L)));
+    }
+
+    @Test
+    public void createAuthorization() {
+        String appid = "1255710173";
+        String secret_id = "AKIDSpCPQFhNfmmcJ0Q0FKE7pNjuuiKlN73o";
+        String secret_key = "kKjOsEPOCoFUlwviLm27IJ9nFWcaNyOc";
+//        String sessionToken = "562af6ffcbe981dd21bd7434176dcbb2f883839030001";
+
+        // 设置秘钥
+        COSCredentials cred = new BasicCOSCredentials(appid, secret_id, secret_key);
+        COSSigner cosSigner = new COSSigner();
+        System.out.println(cosSigner.buildAuthorizationStr(HttpMethodName.POST, "im/201803/test5", cred, new Date(1520420531000L)));
+
     }
 }
