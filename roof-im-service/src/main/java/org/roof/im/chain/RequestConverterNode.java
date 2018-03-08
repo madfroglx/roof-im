@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.roof.chain.api.ValueStack;
 import org.roof.im.converter.RequestConverter;
 import org.roof.im.converter.RequestTypeMappingRequestConverter;
+import org.roof.im.request.HeartRequest;
 import org.roof.im.request.Request;
 import org.roof.im.transport.ServerNameBuilder;
 import org.springframework.util.Assert;
@@ -23,6 +24,10 @@ public class RequestConverterNode {
 
     private static final String REQUEST_CONVERT_ERROR = "requestConvertError";
     private static final String REQUEST_CONVERT_SUCCESS = "requestConvertSuccess";
+    /**
+     * 心跳请求
+     */
+    private static final String HEART_REQUEST = "heartRequest";
 
     public String doNode(JSONObject jsonObjectMessage, String currentUser, String connectId, ValueStack valueStack) {
         Assert.notNull(jsonObjectMessage, "property jsonObjectMessage cannot null");
@@ -43,12 +48,16 @@ public class RequestConverterNode {
         if (request == null) {
             return REQUEST_CONVERT_ERROR;
         }
+
         valueStack.set(ImConstant.REQUEST_TYPE, request.getRequestType());
+        request.setCreateTime(System.currentTimeMillis());
+        if (request instanceof HeartRequest) {
+            valueStack.set(ImConstant.REQUEST, request);
+            return HEART_REQUEST;
+        }
         request.setUsername(currentUser);
         request.setConnectId(connectId);
         request.setServerName(serverNameBuilder.getName());
-        request.setCreateTime(System.currentTimeMillis());
-        valueStack.set(ImConstant.REQUEST, request);
         return REQUEST_CONVERT_SUCCESS;
     }
 

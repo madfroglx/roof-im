@@ -25,6 +25,7 @@ public class RequestTypeMappingRequestConverter implements RequestConverter {
         REQUEST_TYPE_MAPPING.put(RequestType.pullNotReceivedMessage.name(), PullNotReceivedMessageRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.querySession.name(), QuerySessionRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.getTmpSecret.name(), GetTmpSecretRequest.class);
+        REQUEST_TYPE_MAPPING.put(RequestType.heart.name(), HeartRequest.class);
     }
 
 
@@ -48,9 +49,9 @@ public class RequestTypeMappingRequestConverter implements RequestConverter {
             return null;
         }
         Request request = jsonObjectMessage.toJavaObject(cls);
-        if (StringUtils.isBlank(request.getId())) {
+       /* if (StringUtils.isBlank(request.getId())) {
             request.setId(requestIdGenerator.generateId(request));
-        }
+        }*/
         return request;
     }
 

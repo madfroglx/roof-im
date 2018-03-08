@@ -45,5 +45,9 @@ public enum RequestType {
     /**
      * 获取上传文件临时密钥
      */
-    getTmpSecret
+    getTmpSecret,
+    /**
+     * 心跳
+     */
+    heart
 }

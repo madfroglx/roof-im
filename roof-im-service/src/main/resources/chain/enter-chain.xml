@@ -17,6 +17,18 @@
                         <map>
                             <entry key="requestConvertError" value="errorResponseCreateNode"/>
                             <entry key="requestConvertSuccess" value="userLoginNode"/>
+                            <entry key="heartRequest" value="heartRequestHandlerNode"/>
+                        </map>
+                    </property>
+                </bean>
+                <!-- 处理心跳 -->
+                <bean class="com.roof.chain.support.NodeFactoryBean">
+                    <property name="target">
+                        <bean class="org.roof.im.chain.handler.impl.HeartRequestHandlerNode"/>
+                    </property>
+                    <property name="forwards">
+                        <map>
+                            <entry key="success" value="successResponseCreateNode"/>
                         </map>
                     </property>
                 </bean>
