@@ -15,6 +15,8 @@ import com.qcloud.cos.region.Region;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.TreeMap;
 
@@ -66,9 +68,9 @@ public class OCSTest {
     public void testUpload() {
         // 用户基本信息
         String appid = "1255710173";
-        String secret_id = "AKIDSpCPQFhNfmmcJ0Q0FKE7pNjuuiKlN73o";
-        String secret_key = "kKjOsEPOCoFUlwviLm27IJ9nFWcaNyOc";
-        String sessionToken = "562af6ffcbe981dd21bd7434176dcbb2f883839030001";
+        String secret_id = "AKID3A9jOoqatjrh6k7UjyKfA5N6q4olSaB6";
+        String secret_key = "Qdr0efEb3NicSkED2UsKaQ8ANaPorDWr";
+        String sessionToken = "81ca8cc5fb84bd42ac36c40515917b308ad333d830001";
 
         // 设置秘钥
         COSCredentials cred = new BasicCOSCredentials(appid, secret_id, secret_key);
@@ -83,7 +85,7 @@ public class OCSTest {
         String bucketName = "im";
         // 上传 object, 建议 20M 以下的文件使用该接口
         File localFile = new File("E:\\excel\\test.txt");
-        String key = "im/201803/test4";
+        String key = "im/zlt/test4";
         PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, localFile);
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setSecurityToken(sessionToken);
@@ -93,13 +95,10 @@ public class OCSTest {
 
         // 关闭客户端 (关闭后台线程)
         cosClient.shutdown();
-
-        COSSigner cosSigner = new COSSigner();
-        System.out.println(cosSigner.buildAuthorizationStr(HttpMethodName.POST, "im/201803/test5", cred, new Date(1520420531000L)));
     }
 
     @Test
-    public void createAuthorization() {
+    public void createAuthorization() throws UnsupportedEncodingException {
         String appid = "1255710173";
         String secret_id = "AKIDSpCPQFhNfmmcJ0Q0FKE7pNjuuiKlN73o";
         String secret_key = "kKjOsEPOCoFUlwviLm27IJ9nFWcaNyOc";
@@ -108,7 +107,7 @@ public class OCSTest {
         // 设置秘钥
         COSCredentials cred = new BasicCOSCredentials(appid, secret_id, secret_key);
         COSSigner cosSigner = new COSSigner();
-        System.out.println(cosSigner.buildAuthorizationStr(HttpMethodName.POST, "im/201803/test5", cred, new Date(1520420531000L)));
+        System.out.println(cosSigner.buildAuthorizationStr(HttpMethodName.POST, URLEncoder.encode("/zlt/test121", "UTF-8"), cred, new Date(1520478668000L)));
 
     }
 }

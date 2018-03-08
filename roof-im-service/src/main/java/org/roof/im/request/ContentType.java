@@ -11,11 +11,11 @@ public enum ContentType {
      */
     TXT,
     /**
-     * MP3消息
+     * 语音消息
      */
-    MP3,
+    AUD,
     /**
      * 图片
      */
-    JPG
+    IMG
 }
