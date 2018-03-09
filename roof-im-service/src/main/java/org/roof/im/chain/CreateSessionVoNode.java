@@ -29,6 +29,7 @@ public class CreateSessionVoNode {
     private UserStateService userStateService;
 
     public NodeResult<List<SessionVo>> doNode(Request request, List<Session> sessions) {
+        //TODO session缓存
         if (sessions == null || sessions.size() == 0) {
             return new NodeResult<>(NO_INCOMPLETE_SESSION);
         }

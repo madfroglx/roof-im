@@ -4,7 +4,6 @@ import com.roof.chain.api.ValueStack;
 import com.roof.chain.support.NodeResult;
 import org.roof.im.message.Message;
 import org.roof.im.message.MessageDao;
-import org.roof.im.request.PullNotReceivedMessage;
 import org.roof.im.request.PullNotReceivedMessageRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +14,7 @@ import java.util.List;
  * 拉取未读消息
  */
 public class PullNotReceivedMessageNode {
-    private static final Logger LOGGER = LoggerFactory.getLogger(PullNotReceivedMessage.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PullNotReceivedMessageNode.class);
     /**
      * 未拉取消息查询失败
      */
