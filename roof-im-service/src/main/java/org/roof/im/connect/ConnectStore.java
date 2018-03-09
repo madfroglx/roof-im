@@ -2,6 +2,10 @@ package org.roof.im.connect;
 
 /**
  * 连接服务器客户存储
+ * <p>
+ * 服务器本地缓存<br/>
+ * 缓存时间与连接时间相同, 连接时放入缓存, 连接长时间不使用时移除
+ * </p>
  *
  * @param <T> 客户端对象
  * @author liuxin

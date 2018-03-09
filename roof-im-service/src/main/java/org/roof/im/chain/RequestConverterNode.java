@@ -51,14 +51,14 @@ public class RequestConverterNode {
 
         valueStack.set(ImConstant.REQUEST_TYPE, request.getRequestType());
         request.setCreateTime(System.currentTimeMillis());
-        if (request instanceof HeartRequest) {
+      /*  if (request instanceof HeartRequest) {
             valueStack.set(ImConstant.REQUEST, request);
             return HEART_REQUEST;
-        }
+        }*/
         request.setUsername(currentUser);
         request.setConnectId(connectId);
-        valueStack.set(ImConstant.REQUEST, request);
         request.setServerName(serverNameBuilder.getName());
+        valueStack.set(ImConstant.REQUEST, request);
         return REQUEST_CONVERT_SUCCESS;
     }
 

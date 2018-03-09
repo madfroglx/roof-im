@@ -4,6 +4,10 @@ import java.util.Map;
 
 /**
  * 用户属性存储
+ * <p>
+ * 集群公共存储<br />
+ * 有一定生效时间默认10分钟, 根据用户心跳或者存储维持缓存
+ * </p>
  */
 public interface UserAttributesStore {
     Map<String, Object> getAttributes(String username);

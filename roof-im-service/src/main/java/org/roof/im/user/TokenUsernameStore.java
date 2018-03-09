@@ -1,7 +1,11 @@
 package org.roof.im.user;
 
 /**
- * 用户
+ * token用户名缓存
+ * <p>
+ * 集群缓存<br />
+ * 一段时间内有效, 失效后需要用户重新通过认证服务器认证
+ * </p>
  */
 public interface TokenUsernameStore {
     /**
