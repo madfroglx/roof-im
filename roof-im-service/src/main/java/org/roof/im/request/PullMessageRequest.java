@@ -1,9 +1,12 @@
 package org.roof.im.request;
 
+import javax.validation.constraints.NotEmpty;
+
 /**
  * 拉取消息请求
  */
 public class PullMessageRequest extends Request {
+    @NotEmpty
     private String sender; //消息发送者
     private Long startTime; //查询开始时间
     private Long endTime;//查询结束时间

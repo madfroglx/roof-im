@@ -1,5 +1,7 @@
 package org.roof.im.request;
 
+import javax.validation.constraints.NotEmpty;
+
 /**
  * 发起会话请求
  */
@@ -7,10 +9,12 @@ public class OpenSessionRequest extends Request {
     /**
      * 发起者
      */
+    @NotEmpty
     private String sender;
     /**
      * 接收者
      */
+    @NotEmpty
     private String receiver;
     /**
      * 开始时间

@@ -16,7 +16,7 @@
                     <property name="forwards">
                         <map>
                             <entry key="requestConvertError" value="errorResponseCreateNode"/>
-                            <entry key="requestConvertSuccess" value="userLoginNode"/>
+                            <entry key="requestConvertSuccess" value="requestValidNode"/>
                             <entry key="heartRequest" value="heartRequestHandlerNode"/>
                         </map>
                     </property>
@@ -32,6 +32,22 @@
                         </map>
                     </property>
                 </bean>
+
+                <!-- 验证参数 -->
+                <bean class="com.roof.chain.support.NodeFactoryBean">
+                    <property name="target">
+                        <bean class="org.roof.im.chain.RequestValidNode">
+                            <property name="validator" ref="validator"/>
+                        </bean>
+                    </property>
+                    <property name="forwards">
+                        <map>
+                            <entry key="validateSuccess" value="userLoginNode"/>
+                            <entry key="validateFail" value="errorResponseCreateNode"/>
+                        </map>
+                    </property>
+                </bean>
+
                 <!-- 根据token查询当前登录用户-->
                 <bean class="com.roof.chain.support.NodeFactoryBean">
                     <property name="target">

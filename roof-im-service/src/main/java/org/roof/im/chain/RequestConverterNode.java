@@ -57,6 +57,7 @@ public class RequestConverterNode {
         }
         request.setUsername(currentUser);
         request.setConnectId(connectId);
+        valueStack.set(ImConstant.REQUEST, request);
         request.setServerName(serverNameBuilder.getName());
         return REQUEST_CONVERT_SUCCESS;
     }

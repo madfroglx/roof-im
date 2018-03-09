@@ -7,6 +7,7 @@
     <import resource="component.xml"/>
     <import resource="spring-jdbc.xml"/>
     <import resource="chain/*"/>
+    <import resource="spring-validator.xml"/>
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
@@ -15,4 +16,5 @@
             </list>
         </property>
     </bean>
+
 </beans>

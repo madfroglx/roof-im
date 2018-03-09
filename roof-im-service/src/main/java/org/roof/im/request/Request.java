@@ -1,11 +1,17 @@
 package org.roof.im.request;
 
+import javax.validation.constraints.NotEmpty;
+
 public class Request {
     private String id;
+    @NotEmpty
     private String connectId; // 连接ID
+    @NotEmpty
     private String requestType; //请求类型
+    @NotEmpty
     private String token; // 授权token
     private String username; //用户名
+    @NotEmpty
     private String clientType; //客户端类型
     private long createTime;  //创建时间
     private String serverName; //服务器名称
