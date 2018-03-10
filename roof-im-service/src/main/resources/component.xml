@@ -63,6 +63,10 @@
         <property name="allowNullValues" value="false"/>
         <property name="cacheSpecification" value="expireAfterAccess=20m"/>
     </bean>
+
+    <bean id="httpClientUtils" class="org.roof.httpclinet.HttpClientUtils">
+    </bean>
+
     <!--<bean id="messageDao" class="org.roof.im.message.jdbc.JdbcMessageDao">-->
     <!--<property name="jdbcTemplate" ref="jdbcTemplate"/>-->
     <!--<property name="messageMapper" ref="messageMapper"/>-->
