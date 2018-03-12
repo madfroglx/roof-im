@@ -46,6 +46,8 @@ public class Message {
      */
     private String messageKey;
 
+    private Long sessionId;
+
     public Long getId() {
         return id;
     }
@@ -115,5 +117,13 @@ public class Message {
 
     public void setMessageKey(String messageKey) {
         this.messageKey = messageKey;
+    }
+
+    public void setSessionId(Long sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public Long getSessionId() {
+        return sessionId;
     }
 }

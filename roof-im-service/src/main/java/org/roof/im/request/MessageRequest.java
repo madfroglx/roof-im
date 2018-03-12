@@ -1,6 +1,7 @@
 package org.roof.im.request;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * 用户发送消息
@@ -8,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 public class MessageRequest extends Request {
     @NotEmpty
     private String receiver;//接收人
-    @NotEmpty
+    @NotNull
     private ContentType type; //消息类型
     @NotEmpty
     private String payload; //消息体

@@ -57,7 +57,7 @@
         AND start_time < (select unix_timestamp() * 1000)
         ]]>
         AND end_time > (select unix_timestamp() * 1000)
-        ORDER BY start_time
+        ORDER BY start_time limit 0, 1
     </select>
     <select id="queryIncomplete" resultMap="SessionMapper">
         SELECT

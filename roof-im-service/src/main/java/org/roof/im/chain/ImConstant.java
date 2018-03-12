@@ -39,6 +39,10 @@ public class ImConstant {
      */
     public static final String SESSION_ID = "sessionId";
     /**
+     * 有效session
+     */
+    public static final String EFFECTIVE_SESSION = "effectiveSession";
+    /**
      * 连接ID
      */
     public static final String CONNECT_ID = "connectId";

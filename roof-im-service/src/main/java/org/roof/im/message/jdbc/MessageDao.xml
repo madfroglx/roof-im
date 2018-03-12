@@ -12,10 +12,11 @@
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <result column="state" property="state" jdbcType="TINYINT"/>
         <result column="message_key" property="messageKey" jdbcType="VARCHAR"/>
+        <result column="session_id" property="sessionId" jdbcType="BIGINT"/>
     </resultMap>
 
     <sql id="message_column_list">
-        id, sender, receiver, type, payload, create_time, state, message_key
+        id, sender, receiver, type, payload, create_time, state, message_key, session_id
 	</sql>
 
     <sql id="message_table_name">im_message</sql>
@@ -25,8 +26,8 @@
             select
             last_insert_id()
         </selectKey>
-        insert into im_message (sender,receiver,type,payload,create_time,state, message_key)
-        values(#{sender}, #{receiver}, #{type}, #{payload}, #{createTime}, #{state}, #{messageKey})
+        insert into im_message (sender,receiver,type,payload,create_time,state, message_key, session_id)
+        values(#{sender}, #{receiver}, #{type}, #{payload}, #{createTime}, #{state}, #{messageKey}, #{sessionId})
     </insert>
 
     <update id="updateState">

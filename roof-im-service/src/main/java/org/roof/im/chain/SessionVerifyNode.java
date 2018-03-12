@@ -1,5 +1,6 @@
 package org.roof.im.chain;
 
+import com.roof.chain.api.ValueStack;
 import org.roof.im.request.MessageRequest;
 import org.roof.im.session.Session;
 import org.roof.im.session.SessionManager;
@@ -18,13 +19,14 @@ public class SessionVerifyNode {
     private static final String SESSION_EXIST = "sessionExist";
     private SessionManager sessionManager;
 
-    public String doNode(MessageRequest request) {
+    public String doNode(MessageRequest request, ValueStack valueStack) {
         String username = request.getUsername();
         String receiver = request.getReceiver();
         Session effective = sessionManager.queryEffective(username, receiver);
         if (effective == null) {
             return SESSION_NOT_EXIST;
         }
+        valueStack.set(ImConstant.EFFECTIVE_SESSION, effective);
         return SESSION_EXIST;
     }
 

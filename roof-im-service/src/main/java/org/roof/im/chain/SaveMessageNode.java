@@ -1,10 +1,10 @@
 package org.roof.im.chain;
 
 import com.roof.chain.api.ValueStack;
-import org.apache.commons.lang3.StringUtils;
 import org.roof.im.message.Message;
 import org.roof.im.message.MessageDao;
 import org.roof.im.request.MessageRequest;
+import org.roof.im.session.Session;
 import org.roof.im.user.UserService;
 
 /**
@@ -22,7 +22,7 @@ public class SaveMessageNode {
     private MessageDao messageDao;
 
     //TODO 保存sessionId
-    public String doNode(MessageRequest request, ValueStack valueStack) {
+    public String doNode(MessageRequest request, Session effectiveSession, ValueStack valueStack) {
         if (request == null) {
             return MESSAGE_IS_NULL;
         }
@@ -35,6 +35,7 @@ public class SaveMessageNode {
         message.setCreateTime(request.getCreateTime());
         message.setType(request.getType().name());
         message.setMessageKey(UserService.joinUsername(receiver, username));
+        message.setSessionId(effectiveSession == null ? null : effectiveSession.getId());
         messageDao.save(message);
         valueStack.set(ImConstant.MESSAGE, message);
         return MESSAGE_SAVE_SUCCESS;
