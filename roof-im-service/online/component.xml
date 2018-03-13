@@ -22,7 +22,7 @@
         <property name="httpClientUtils" ref="httpClientUtils"/>
         <property name="serverAddress" value="${user.server.address}"/>
         <property name="authApi" value="${user.server.auth}"/>
-        <property name="authApi" value="${user.server.auth}"/>
+        <property name="userInfoApi" value="${user.server.userinfo}"/>
     </bean>
     <bean id="userStateService" class="org.roof.im.user.impl.SimpleUserStateService">
         <property name="userStatusStore" ref="userStatusStore"/>
