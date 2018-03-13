@@ -67,6 +67,10 @@
     <bean id="httpClientUtils" class="org.roof.httpclinet.HttpClientUtils">
     </bean>
 
+    <bean id="onlineUserStore" class="org.roof.im.user.impl.CacheOnlineUserStore">
+        <property name="cacheManager" ref="guavaCacheManager"/>
+    </bean>
+
     <!--<bean id="messageDao" class="org.roof.im.message.jdbc.JdbcMessageDao">-->
     <!--<property name="jdbcTemplate" ref="jdbcTemplate"/>-->
     <!--<property name="messageMapper" ref="messageMapper"/>-->
