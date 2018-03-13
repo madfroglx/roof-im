@@ -20,8 +20,9 @@
     <bean id="userService" class="org.roof.im.user.impl.RestfulUserService">
         <property name="tokenUsernameStore" ref="tokenUsernameStore"/>
         <property name="httpClientUtils" ref="httpClientUtils"/>
-        <property name="authApi" value="${user.server.address}"/>
-        <property name="serverAddress" value="${user.server.auth}"/>
+        <property name="serverAddress" value="${user.server.address}"/>
+        <property name="authApi" value="${user.server.auth}"/>
+        <property name="authApi" value="${user.server.auth}"/>
     </bean>
     <bean id="userStateService" class="org.roof.im.user.impl.SimpleUserStateService">
         <property name="userStatusStore" ref="userStatusStore"/>

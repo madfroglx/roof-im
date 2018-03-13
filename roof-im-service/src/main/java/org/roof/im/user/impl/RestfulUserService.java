@@ -2,6 +2,7 @@ package org.roof.im.user.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang3.StringUtils;
 import org.roof.httpclinet.HttpClientUtils;
 import org.roof.im.user.*;
 import org.slf4j.Logger;
@@ -20,11 +21,15 @@ public class RestfulUserService implements UserService, InitializingBean {
     private HttpClientUtils httpClientUtils;
     private String serverAddress; //服务器地址
     private String authApi; //authApi地址
-    private String authApiAddress;
+    private String userInfoApi; //用户信息api地址
+
+    private String authApiAddress;//用户验证接口
+    private String userInfoApiAddress; //用户信息接口
 
     @Override
     public void afterPropertiesSet() throws Exception {
         authApiAddress = serverAddress + authApi;
+        userInfoApiAddress = serverAddress + userInfoApi;
     }
 
 
@@ -51,7 +56,28 @@ public class RestfulUserService implements UserService, InitializingBean {
 
     @Override
     public boolean exist(String username) {
-        return true;
+        String url = authApiAddress + "/" + username;
+        try {
+            ResponseEntity<String> responseEntity = httpClientUtils.doGet(url);
+            if (!responseEntity.getStatusCode().is2xxSuccessful()) {
+                LOGGER.error("userInfo server error, server http return code is " + responseEntity.getStatusCode());
+                return false;
+            }
+            String json = responseEntity.getBody();
+            JSONObject jsonObject = JSON.parseObject(json);
+            JSONObject userInfoJsonObject = jsonObject.getJSONObject("data");
+            if (userInfoJsonObject == null) {
+                return false;
+            }
+            String returnUsername = userInfoJsonObject.getString("username");
+            if (StringUtils.isEmpty(returnUsername)) {
+                return false;
+            }
+            return true;
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+            return false;
+        }
     }
 
     public void setTokenUsernameStore(TokenUsernameStore tokenUsernameStore) {
@@ -68,5 +94,9 @@ public class RestfulUserService implements UserService, InitializingBean {
 
     public void setAuthApi(String authApi) {
         this.authApi = authApi;
+    }
+
+    public void setUserInfoApi(String userInfoApi) {
+        this.userInfoApi = userInfoApi;
     }
 }
