@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="connectStore" class="org.roof.im.connect.websocket.WebSocketSessionCacheConnectStore">
+        <property name="cacheManager" ref="guavaCacheManager"/>
+    </bean>
+    <bean id="connectManager" class="org.roof.im.connect.websocket.WebSocketConnectManager">
+        <property name="webSocketSessionConnectStore" ref="connectStore"/>
+    </bean>
+    <bean id="tokenUsernameStore" class="org.roof.im.user.impl.CacheTokenUsernameStore">
+        <property name="cacheManager" ref="guavaCacheManager"/>
+    </bean>
+    <bean id="userAttributesStore" class="org.roof.im.user.impl.CacheUserAttributesStore">
+        <property name="cacheManager" ref="guavaCacheManager"/>
+    </bean>
+    <bean id="userStatusStore" class="org.roof.im.user.impl.GenericUserStatusStore">
+        <property name="userAttributesStore" ref="userAttributesStore"/>
+    </bean>
+    <bean id="userService" class="org.roof.im.user.impl.RestfulUserService">
+        <property name="tokenUsernameStore" ref="tokenUsernameStore"/>
+        <property name="httpClientUtils" ref="httpClientUtils"/>
+        <property name="authApi" value="${user.server.address}"/>
+        <property name="serverAddress" value="${user.server.auth}"/>
+    </bean>
+    <bean id="userStateService" class="org.roof.im.user.impl.SimpleUserStateService">
+        <property name="userStatusStore" ref="userStatusStore"/>
+    </bean>
+    <bean id="serverNameBuilder" class="org.roof.im.transport.impl.HostAddressServerNameBuilder">
+        <property name="serviceNamePrefix" value="im:"/>
+    </bean>
+
+    <bean id="sessionManager" class="org.roof.im.session.jdbc.JdbcSessionManager">
+        <property name="sessionDao" ref="sessionDao"/>
+    </bean>
+
+    <bean id="queue" class="java.util.concurrent.LinkedBlockingQueue"/>
+    <bean id="messagePublisher" class="org.roof.im.transport.queue.LinkedBlockingQueueLoadBalanceMessagePublisher">
+        <property name="serverNameBuilder" ref="serverNameBuilder"/>
+        <property name="queue" ref="queue"/>
+    </bean>
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+
+    </bean>
+
+    <bean class="org.roof.im.transport.queue.LinkedBlockingQueueRequestMessageDriveEnterPoint">
+        <property name="serverNameBuilder" ref="serverNameBuilder"/>
+        <property name="executor" ref="taskExecutor"/>
+        <property name="chain" ref="messageRequestChain"/>
+        <property name="queues">
+            <list>
+                <ref bean="queue"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="webSocketRequestEnterPoint" class="org.roof.im.gateway.websocket.WebSocketRequestEnterPoint">
+        <property name="enterChain" ref="enterChain"/>
+        <property name="webSocketSessionConnectManager" ref="connectManager"/>
+    </bean>
+
+    <bean id="tokenAuthHandshakeInterceptor" class="org.roof.im.connect.TokenAuthHandshakeInterceptor">
+        <property name="userService" ref="userService"/>
+    </bean>
+    <bean id="guavaCacheManager" class="org.springframework.cache.guava.GuavaCacheManager">
+        <property name="allowNullValues" value="false"/>
+        <property name="cacheSpecification" value="expireAfterAccess=20m"/>
+    </bean>
+
+    <bean id="httpClientUtils" class="org.roof.httpclinet.HttpClientUtils">
+    </bean>
+
+    <bean id="onlineUserStore" class="org.roof.im.user.impl.CacheOnlineUserStore">
+        <property name="cacheManager" ref="guavaCacheManager"/>
+    </bean>
+
+    <!--<bean id="messageDao" class="org.roof.im.message.jdbc.JdbcMessageDao">-->
+    <!--<property name="jdbcTemplate" ref="jdbcTemplate"/>-->
+    <!--<property name="messageMapper" ref="messageMapper"/>-->
+    <!--</bean>-->
+
+</beans>

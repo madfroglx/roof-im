@@ -13,6 +13,7 @@
             <list>
                 <value>classpath:app-ds.properties</value>
                 <value>classpath:tencent-ocs.properties</value>
+                <value>classpath:user.properties</value>
             </list>
         </property>
     </bean>
