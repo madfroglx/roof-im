@@ -107,7 +107,7 @@ public class OCSTest {
         // 设置秘钥
         COSCredentials cred = new BasicCOSCredentials(appid, secret_id, secret_key);
         COSSigner cosSigner = new COSSigner();
-        System.out.println(cosSigner.buildAuthorizationStr(HttpMethodName.POST, URLEncoder.encode("/zlt/test121", "UTF-8"), cred, new Date(1520478668000L)));
+        System.out.println(cosSigner.buildAuthorizationStr(HttpMethodName.POST, "/", cred, new Date(1520516362000L)));
 
     }
 }
