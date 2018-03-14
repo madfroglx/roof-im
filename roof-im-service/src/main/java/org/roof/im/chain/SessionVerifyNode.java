@@ -22,7 +22,11 @@ public class SessionVerifyNode {
     public String doNode(MessageRequest request, ValueStack valueStack) {
         String username = request.getUsername();
         String receiver = request.getReceiver();
+        //TODO 增加session双方字段
         Session effective = sessionManager.queryEffective(username, receiver);
+        if (effective == null) {
+            effective = sessionManager.queryEffective(receiver, username);
+        }
         if (effective == null) {
             return SESSION_NOT_EXIST;
         }
