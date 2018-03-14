@@ -56,7 +56,7 @@ public class RestfulUserService implements UserService, InitializingBean {
 
     @Override
     public boolean exist(String username) {
-        String url = authApiAddress + "/" + username;
+        String url = userInfoApiAddress + "/" + username;
         try {
             ResponseEntity<String> responseEntity = httpClientUtils.doGet(url);
             if (!responseEntity.getStatusCode().is2xxSuccessful()) {
