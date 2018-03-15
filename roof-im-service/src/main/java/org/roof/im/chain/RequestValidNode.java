@@ -29,6 +29,7 @@ public class RequestValidNode {
     private Validator validator;
 
     public NodeResult<String[]> doNode(Request request) {
+        //TODO 添加验证分组
         if (request instanceof OpenSessionRequest
                 || request instanceof CloseSessionRequest
                 || request instanceof StartSessionRequest) {
