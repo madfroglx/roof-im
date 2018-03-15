@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 打开session-->
+    <bean id="startSessionChain" class="com.roof.chain.support.GenericChain">
+        <property name="startNodeName" value="openSessionHandlerNode"/>
+        <property name="nodes">
+            <list>
+                <bean class="com.roof.chain.support.NodeFactoryBean">
+                    <property name="target">
+                        <bean class="org.roof.im.chain.handler.impl.StartSessionHandlerNode">
+                            <property name="sessionManager" ref="sessionManager"/>
+                            <property name="sessionDao" ref="sessionDao"/>
+                        </bean>
+                    </property>
+                    <property name="forwards">
+                        <map>
+                            <entry key="sessionNotExists" value="failResponseCreateNode"/>
+                            <entry key="sessionIsClosed" value="failResponseCreateNode"/>
+                            <entry key="startTimeGtEndTime" value="failResponseCreateNode"/>
+                            <entry key="sessionStartSuccess" value="successResponseCreateNode"/>
+                        </map>
+                    </property>
+                </bean>
+                <ref bean="successResponseCreateNode"/>
+                <ref bean="failResponseCreateNode"/>
+                <ref bean="errorResponseCreateNode"/>
+            </list>
+        </property>
+    </bean>
+</beans>

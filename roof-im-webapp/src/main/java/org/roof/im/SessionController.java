@@ -48,6 +48,18 @@ public class SessionController extends AbstractChainController {
         return doChain(request, LOGGER);
     }
 
+    /**
+     * 打开session
+     *
+     * @param request 打开session请求
+     * @return
+     */
+    @RequestMapping(value = "/start")
+    public @ResponseBody
+    Object start(@RequestBody String request) {
+        return doChain(request, LOGGER);
+    }
+
     @Autowired
     public void setEnterChain(@Qualifier("enterChain") Chain enterChain) {
         this.enterChain = enterChain;
