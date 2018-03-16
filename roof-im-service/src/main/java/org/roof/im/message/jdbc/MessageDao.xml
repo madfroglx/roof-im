@@ -49,7 +49,7 @@
         WHERE
         receiver = #{receiver}
         <if test="sender != null and sender != ''">
-            sender = #{sender}
+            and sender = #{sender}
         </if>
         and state = 0
         order by create_time limit 0, #{limit}
