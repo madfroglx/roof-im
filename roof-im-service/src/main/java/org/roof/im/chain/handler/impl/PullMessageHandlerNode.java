@@ -25,7 +25,7 @@ public class PullMessageHandlerNode {
      * 查询消息失败
      */
     private static final String QUERY_MESSAGE_FAIL = "queryMessageFail";
-    private static final int DEFAULT_LIMIT = 20;
+    private static final int DEFAULT_LIMIT = 10;
     private MessageDao messageDao;
 
     public NodeResult<List<Message>> doNode(PullMessageRequest pullMessageRequest, ValueStack valueStack) {
