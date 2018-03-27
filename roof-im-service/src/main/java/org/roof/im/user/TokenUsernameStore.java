@@ -4,7 +4,7 @@ package org.roof.im.user;
  * token用户名缓存
  * <p>
  * 集群缓存<br />
- * 一段时间内有效, 失效后需要用户重新通过认证服务器认证
+ * 一段时间不不访问该缓存自动失效, 失效后需要用户重新通过认证服务器认证
  * </p>
  */
 public interface TokenUsernameStore {
@@ -24,5 +24,5 @@ public interface TokenUsernameStore {
     /**
      * 删除
      */
-    String remove(String username);
+    String remove(String token);
 }

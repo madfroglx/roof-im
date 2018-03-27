@@ -7,6 +7,8 @@ import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.util.Assert;
 
+import java.util.concurrent.Callable;
+
 public class CacheTokenUsernameStore implements TokenUsernameStore, InitializingBean {
     public static final String TOKEN_USERNAME_STORE = "TokenUsernameStore";
     private Cache cache;
@@ -20,7 +22,7 @@ public class CacheTokenUsernameStore implements TokenUsernameStore, Initializing
 
     @Override
     public String get(String token) {
-        return cache.get(token, String.class);
+        return cache.get(token, () -> null);
     }
 
     @Override
