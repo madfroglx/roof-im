@@ -26,6 +26,6 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>roof-im-webapp</finalName>
+        <finalName>roof-im</finalName>
     </build>
 </project>
