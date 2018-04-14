@@ -1,7 +1,10 @@
 package org.roof.im.chain;
 
 import com.roof.chain.support.NodeResult;
+import org.roof.im.request.CloseSessionRequest;
+import org.roof.im.request.OpenSessionRequest;
 import org.roof.im.request.Request;
+import org.roof.im.request.StartSessionRequest;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
@@ -26,6 +29,12 @@ public class RequestValidNode {
     private Validator validator;
 
     public NodeResult<String[]> doNode(Request request) {
+        //TODO 添加验证分组
+        if (request instanceof OpenSessionRequest
+                || request instanceof CloseSessionRequest
+                || request instanceof StartSessionRequest) {
+            return new NodeResult<>(VALIDATE_SUCCESS);
+        }
         Set<ConstraintViolation<Request>> constraintViolations = validator.validate(request);
         String[] messages = new String[constraintViolations.size()];
         int i = 0;

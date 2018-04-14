@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>roof-im-webapp</artifactId>
     <packaging>war</packaging>
-    <name>roof-im-webapp Maven Webapp</name>
+    <name>roof-im-webapp</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
@@ -26,6 +26,6 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>roof-im-webapp</finalName>
+        <finalName>roof-im</finalName>
     </build>
 </project>

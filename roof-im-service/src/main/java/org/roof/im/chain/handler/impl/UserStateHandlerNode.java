@@ -27,11 +27,11 @@ public class UserStateHandlerNode extends AbstractRequestHandlerNode<UserStateRe
 
     private ServerNameBuilder serverNameBuilder;
 
-    public String doNode(UserStateRequest userStateRequest, ValueStack valueStack) {
-        String username = userStateRequest.getUsername();
+    public String doNode(UserStateRequest request, ValueStack valueStack) {
+        String username = request.getUsername();
         List<UserState> userStates = userStateService.getStates(username);
         List<UserState> newUserStates = new ArrayList<>();
-        UserState userState = createUserState(userStateRequest);
+        UserState userState = createUserState(request);
         newUserStates.add(userState);
         if (userStates != null && userStates.size() > 0) {
             for (UserState us : userStates) {

@@ -26,9 +26,9 @@ public class PullNotReceivedMessageNode {
 
     private MessageDao messageDao;
 
-    public NodeResult<List<Message>> doNode(PullNotReceivedMessageRequest pullNotReceivedMessageRequest, ValueStack valueStack) {
+    public NodeResult<List<Message>> doNode(PullNotReceivedMessageRequest request, ValueStack valueStack) {
         try {
-            List<Message> messages = messageDao.queryNotReceived(pullNotReceivedMessageRequest.getUsername(), pullNotReceivedMessageRequest.getSender(), 20);
+            List<Message> messages = messageDao.queryNotReceived(request.getUsername(), request.getSender(), 20);
             NodeResult<List<Message>> result = new NodeResult<>(NOT_RECEIVED_MESSAGE_QUERY_SUCCESS);
             result.setData(messages);
             return result;

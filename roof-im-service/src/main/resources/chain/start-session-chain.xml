@@ -2,32 +2,30 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <!-- 心跳-->
-    <bean id="heartChain" class="com.roof.chain.support.GenericChain">
-        <property name="startNodeName" value="heartRequestHandlerNode"/>
+    <!-- 打开session-->
+    <bean id="startSessionChain" class="com.roof.chain.support.GenericChain">
+        <property name="startNodeName" value="openSessionHandlerNode"/>
         <property name="nodes">
             <list>
                 <bean class="com.roof.chain.support.NodeFactoryBean">
                     <property name="target">
-                        <bean class="org.roof.im.chain.handler.impl.HeartRequestHandlerNode">
-                            <property name="userStateService" ref="userStateService"/>
-                            <property name="remindTime">
-                                <bean class="org.roof.im.support.FixedRemindTime"/>
-                            </property>
+                        <bean class="org.roof.im.chain.handler.impl.StartSessionHandlerNode">
                             <property name="sessionManager" ref="sessionManager"/>
+                            <property name="sessionDao" ref="sessionDao"/>
                         </bean>
                     </property>
                     <property name="forwards">
                         <map>
-                            <entry key="success" value="successResponseCreateNode"/>
+                            <entry key="sessionNotExists" value="failResponseCreateNode"/>
+                            <entry key="sessionIsClosed" value="failResponseCreateNode"/>
+                            <entry key="startTimeGtEndTime" value="failResponseCreateNode"/>
+                            <entry key="sessionStartSuccess" value="successResponseCreateNode"/>
                         </map>
                     </property>
                 </bean>
                 <ref bean="successResponseCreateNode"/>
                 <ref bean="failResponseCreateNode"/>
                 <ref bean="errorResponseCreateNode"/>
-                <ref bean="webSocketResponseEndPointNode"/>
-                <ref bean="connectionAvailableHandlerNode"/>
             </list>
         </property>
     </bean>

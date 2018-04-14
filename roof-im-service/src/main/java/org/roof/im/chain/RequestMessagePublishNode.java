@@ -2,6 +2,7 @@ package org.roof.im.chain;
 
 import com.alibaba.fastjson.JSONObject;
 import com.roof.chain.api.ValueStack;
+import com.roof.chain.support.NodeResult;
 import org.roof.im.message.Message;
 import org.roof.im.transport.MessagePublisher;
 import org.roof.im.user.UserState;
@@ -21,7 +22,7 @@ public class RequestMessagePublishNode {
     private static final long DEFAULT_TIMEOUT = 1000;
     private long timeout = DEFAULT_TIMEOUT;
 
-    public String doNode(Message message, List<UserState> userStates, ValueStack valueStack) {
+    public NodeResult doNode(Message message, List<UserState> userStates, ValueStack valueStack) {
         for (UserState userState : userStates) {
             boolean result = false;
             try {
@@ -36,7 +37,9 @@ public class RequestMessagePublishNode {
                 LOGGER.error("push message error: {} ,{}", userState.getUsername(), JSONObject.toJSONString(message));
             }
         }
-        return PUBLISH_SUCCESS;
+        NodeResult result = new NodeResult(PUBLISH_SUCCESS);
+        result.setData(message);
+        return result;
     }
 
     public void setTimeout(long timeout) {

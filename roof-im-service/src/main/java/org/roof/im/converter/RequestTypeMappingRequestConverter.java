@@ -20,6 +20,7 @@ public class RequestTypeMappingRequestConverter implements RequestConverter {
         REQUEST_TYPE_MAPPING.put(RequestType.offline.name(), OfflineRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.openSession.name(), OpenSessionRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.closeSession.name(), CloseSessionRequest.class);
+        REQUEST_TYPE_MAPPING.put(RequestType.startSession.name(), StartSessionRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.message.name(), MessageRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.pullMessage.name(), PullMessageRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.pullNotReceivedMessage.name(), PullNotReceivedMessageRequest.class);
