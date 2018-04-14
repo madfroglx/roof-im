@@ -35,6 +35,10 @@ public class Session {
      * 状态(0:创建,2:结束)
      */
     private int state;
+    /**
+     * 结束提醒时间
+     */
+    private int remindTime;
 
     public long getId() {
         return id;
@@ -90,5 +94,13 @@ public class Session {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public int getRemindTime() {
+        return remindTime;
+    }
+
+    public void setRemindTime(int remindTime) {
+        this.remindTime = remindTime;
     }
 }

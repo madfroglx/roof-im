@@ -11,6 +11,7 @@ public class JdbcSessionManager implements SessionManager {
 
     @Override
     public Session open(String sender, String receiver, long startTime, long endTime) {
+        //TODO session缓存
         Session session = new Session();
         session.setSender(sender);
         session.setReceiver(receiver);

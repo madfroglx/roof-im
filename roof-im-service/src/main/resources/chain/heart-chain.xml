@@ -11,6 +11,10 @@
                     <property name="target">
                         <bean class="org.roof.im.chain.handler.impl.HeartRequestHandlerNode">
                             <property name="userStateService" ref="userStateService"/>
+                            <property name="remindTime">
+                                <bean class="org.roof.im.support.FixedRemindTime"/>
+                            </property>
+                            <property name="sessionManager" ref="sessionManager"/>
                         </bean>
                     </property>
                     <property name="forwards">
