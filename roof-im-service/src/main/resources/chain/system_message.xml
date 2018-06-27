@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:chain="http://www.roof.org/schema/roof-chain"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.roof.org/schema/roof-chain http://www.roof.org/schema/roof-chain.xsd">
+    <!-- 系统消息 -->
+
+    <chain:chain id="systemMessageChain" startNodeName="requestConverterNode">
+        <chain:nodes>
+            <chain:node>
+                <chain:target>
+                    <bean class="org.roof.im.chain.RequestConverterNode">
+                        <property name="serverNameBuilder" ref="serverNameBuilder"/>
+                    </bean>
+                </chain:target>
+                <chain:forwards>
+                    <chain:forward next="requestConvertError" to="errorResponseCreateNode"/>
+                    <chain:forward next="requestConvertSuccess" to="requestValidNode"/>
+                </chain:forwards>
+            </chain:node>
+            <chain:node>
+                <chain:target>
+                    <bean class="org.roof.im.chain.RequestValidNode">
+                        <property name="validator" ref="validator"/>
+                    </bean>
+                </chain:target>
+                <chain:forwards>
+                    <chain:forward next="validateSuccess" to="serverAuthNode"/>
+                    <chain:forward next="validateFail" to="errorResponseCreateNode"/>
+                </chain:forwards>
+            </chain:node>
+            <chain:node>
+                <chain:target>
+                    <bean class="org.roof.im.chain.ServerAuthNode"/>
+                </chain:target>
+                <chain:forwards>
+                    <chain:forward next="authSuccess" to="saveMessageNode"/>
+                </chain:forwards>
+            </chain:node>
+            <chain:node>
+                <chain:target>
+                    <bean class="org.roof.im.chain.SaveMessageNode">
+                        <property name="messageDao" ref="messageDao"/>
+                    </bean>
+                </chain:target>
+                <chain:forwards>
+                    <chain:forward next="messageIsNull" to="failResponseCreateNode"/>
+                    <chain:forward next="messageSaveSuccess" to="messageHandlerNode"/>
+                </chain:forwards>
+            </chain:node>
+            <chain:node>
+                <chain:target>
+                    <bean class="org.roof.im.chain.handler.impl.MessageHandlerNode">
+                        <property name="userService" ref="userService"/>
+                        <property name="userStateService" ref="userStateService"/>
+                    </bean>
+                </chain:target>
+                <chain:forwards>
+                    <chain:forward next="receiverNotExists" to="failResponseCreateNode"/>
+                    <chain:forward next="receiverOffline" to="successResponseCreateNode"/>
+                    <chain:forward next="messageHandleSuccess" to="requestMessagePublishNode"/>
+                </chain:forwards>
+            </chain:node>
+            <chain:node>
+                <chain:target>
+                    <bean class="org.roof.im.chain.RequestMessagePublishNode">
+                        <property name="messagePublisher" ref="messagePublisher"/>
+                    </bean>
+                </chain:target>
+                <chain:forwards>
+                    <chain:forward next="publishSuccess" to="returnMessageExchangeNode"/>
+                    <chain:forward next="publishFail" to="failResponseCreateNode"/>
+                    <chain:forward next="publishError" to="errorResponseCreateNode"/>
+                </chain:forwards>
+            </chain:node>
+            <chain:node>
+                <chain:target>
+                    <bean class="org.roof.im.chain.ReturnMessageExchangeNode">
+                        <property name="returnMessage" value="sendSuccess"/>
+                    </bean>
+                </chain:target>
+                <chain:forwards>
+                    <chain:forward next="sendSuccess" to="successResponseCreateNode"/>
+                </chain:forwards>
+            </chain:node>
+            <chain:node ref="errorResponseCreateNode"/>
+            <chain:node ref="failResponseCreateNode"/>
+            <chain:node ref="successResponseCreateNode"/>
+        </chain:nodes>
+    </chain:chain>
+</beans>

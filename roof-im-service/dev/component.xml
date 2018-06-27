@@ -63,7 +63,7 @@
         <property name="allowNullValues" value="false"/>
         <property name="cacheSpecification" value="expireAfterAccess=20m"/>
     </bean>
-    <bean class="org.springframework.data.redis.cache.RedisCacheManager">
+   <!-- <bean class="org.springframework.data.redis.cache.RedisCacheManager">
         <constructor-arg>
             <bean class="org.springframework.data.redis.cache.DefaultRedisCacheWriter">
 
@@ -75,7 +75,7 @@
             </bean>
         </constructor-arg>
     </bean>
-
+-->
     <bean id="httpClientUtils" class="org.roof.httpclinet.HttpClientUtils">
     </bean>
 

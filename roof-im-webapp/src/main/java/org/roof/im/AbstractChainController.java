@@ -17,9 +17,13 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @since 2018/3/7 0007
  */
 public class AbstractChainController {
-    protected Chain enterChain;
+    Chain enterChain;
 
-    protected Object doChain(@RequestBody String request, Logger logger) {
+    Object doChain(@RequestBody String request, Logger logger) {
+        return doChain(request, logger, enterChain);
+    }
+
+    Object doChain(@RequestBody String request, Logger logger, Chain chain) {
         ValueStack valueStack = new GenericValueStack();
         valueStack.set(ImConstant.TEXT_MESSAGE, request);
         JSONObject jsonObjectMessage;
@@ -31,13 +35,15 @@ public class AbstractChainController {
         }
         valueStack.set(ImConstant.JSON_OBJECT_MESSAGE, jsonObjectMessage);
         try {
-            enterChain.doChain(valueStack);
+            valueStack.set(ImConstant.CONNECT_ID, "UNKNOWN");
+            chain.doChain(valueStack);
             return valueStack.get(ImConstant.RESPONSE);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             return new Response<>(Response.ERROR, e.getMessage());
         }
     }
+
 
     @Autowired
     public void setEnterChain(@Qualifier("enterChain") Chain enterChain) {
