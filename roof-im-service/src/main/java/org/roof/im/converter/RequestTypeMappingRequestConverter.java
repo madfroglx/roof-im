@@ -6,6 +6,7 @@ import org.roof.im.request.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.processing.Messager;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +28,7 @@ public class RequestTypeMappingRequestConverter implements RequestConverter {
         REQUEST_TYPE_MAPPING.put(RequestType.querySession.name(), QuerySessionRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.getTmpSecret.name(), GetTmpSecretRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.heart.name(), HeartRequest.class);
+        REQUEST_TYPE_MAPPING.put(RequestType.systemMessage.name(), MessageRequest.class);
     }
 
 

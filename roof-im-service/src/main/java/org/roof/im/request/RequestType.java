@@ -53,5 +53,9 @@ public enum RequestType {
     /**
      * 心跳
      */
-    heart
+    heart,
+    /**
+     * 系统消息
+     */
+    systemMessage
 }
