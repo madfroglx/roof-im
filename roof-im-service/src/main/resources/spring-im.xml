@@ -6,6 +6,7 @@
     <context:component-scan base-package="org.roof.im.*"/>
     <import resource="component.xml"/>
     <import resource="spring-jdbc.xml"/>
+    <import resource="chain/nodes.xml"/>
     <import resource="chain/*"/>
     <import resource="spring-validator.xml"/>
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

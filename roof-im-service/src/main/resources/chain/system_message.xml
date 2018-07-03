@@ -5,7 +5,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.roof.org/schema/roof-chain http://www.roof.org/schema/roof-chain.xsd">
     <!-- 系统消息 -->
-
     <chain:chain id="systemMessageChain" startNodeName="requestConverterNode">
         <chain:nodes>
             <chain:node>
