@@ -37,6 +37,7 @@ public class Message {
     private int state;
     /**
      * 客户端类型
+     *
      * @see {@link org.roof.im.request.ClientType}
      */
     private String clientType;
@@ -47,6 +48,10 @@ public class Message {
     private String messageKey;
 
     private Long sessionId;
+    /**
+     * 请求类型（系统消息，等等）
+     */
+    private String requestType;
 
     public Long getId() {
         return id;
@@ -111,6 +116,7 @@ public class Message {
     public void setClientType(String clientType) {
         this.clientType = clientType;
     }
+
     public String getMessageKey() {
         return messageKey;
     }
@@ -125,5 +131,13 @@ public class Message {
 
     public Long getSessionId() {
         return sessionId;
+    }
+
+    public void setRequestType(String requestType) {
+        this.requestType = requestType;
+    }
+
+    public String getRequestType() {
+        return requestType;
     }
 }

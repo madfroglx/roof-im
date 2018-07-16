@@ -36,6 +36,7 @@ public class SaveMessageNode {
         message.setType(request.getType().name());
         message.setMessageKey(UserService.joinUsername(receiver, username));
         message.setSessionId(effectiveSession == null ? null : effectiveSession.getId());
+        message.setRequestType(request.getRequestType());
         messageDao.save(message);
         valueStack.set(ImConstant.MESSAGE, message);
         return MESSAGE_SAVE_SUCCESS;
