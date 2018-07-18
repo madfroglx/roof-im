@@ -49,9 +49,9 @@ public class Message {
 
     private Long sessionId;
     /**
-     * 请求类型（系统消息，等等）
+     * 消息来源（系统消息，等等）
      */
-    private String requestType;
+    private String source;
 
     public Long getId() {
         return id;
@@ -133,11 +133,11 @@ public class Message {
         return sessionId;
     }
 
-    public void setRequestType(String requestType) {
-        this.requestType = requestType;
+    public String getSource() {
+        return source;
     }
 
-    public String getRequestType() {
-        return requestType;
+    public void setSource(String source) {
+        this.source = source;
     }
 }

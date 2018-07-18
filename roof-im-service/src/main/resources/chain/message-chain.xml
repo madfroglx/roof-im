@@ -24,6 +24,7 @@
                     <property name="target">
                         <bean class="org.roof.im.chain.SaveMessageNode">
                             <property name="messageDao" ref="messageDao"/>
+                            <property name="source" value="user"/>
                         </bean>
                     </property>
                     <property name="forwards">

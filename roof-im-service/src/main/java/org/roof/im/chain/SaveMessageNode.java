@@ -20,6 +20,7 @@ public class SaveMessageNode {
      */
     private static final String MESSAGE_IS_NULL = "messageIsNull";
     private MessageDao messageDao;
+    private String source; //消息来源
 
     //TODO 保存sessionId
     public String doNode(MessageRequest request, Session effectiveSession, ValueStack valueStack) {
@@ -36,7 +37,7 @@ public class SaveMessageNode {
         message.setType(request.getType().name());
         message.setMessageKey(UserService.joinUsername(receiver, username));
         message.setSessionId(effectiveSession == null ? null : effectiveSession.getId());
-        message.setRequestType(request.getRequestType());
+        message.setSource(source);
         messageDao.save(message);
         valueStack.set(ImConstant.MESSAGE, message);
         return MESSAGE_SAVE_SUCCESS;
@@ -44,5 +45,13 @@ public class SaveMessageNode {
 
     public void setMessageDao(MessageDao messageDao) {
         this.messageDao = messageDao;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 }
