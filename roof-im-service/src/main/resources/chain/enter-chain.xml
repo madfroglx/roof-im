@@ -129,6 +129,9 @@
                                     <entry key="heart">
                                         <ref bean="heartChain"/>
                                     </entry>
+                                    <entry key="startSession">
+                                        <ref bean="startSessionChain"/>
+                                    </entry>
                                 </map>
                             </property>
                             <property name="valueStackKey" value="requestType"/>
