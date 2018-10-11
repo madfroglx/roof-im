@@ -46,9 +46,7 @@ public class StartSessionHandlerNode {
         if (session.getStartTime() == 0) {
             session.setStartTime(startTime);
         }
-        if (session.getEndTime() == 0) {
-            session.setEndTime(endTime);
-        }
+        session.setEndTime(endTime);
         if (session.getStartTime() > session.getEndTime()) {
             return START_TIME_GT_END_TIME;
         }
