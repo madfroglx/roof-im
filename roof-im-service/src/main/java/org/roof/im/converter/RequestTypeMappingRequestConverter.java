@@ -29,6 +29,7 @@ public class RequestTypeMappingRequestConverter implements RequestConverter {
         REQUEST_TYPE_MAPPING.put(RequestType.getTmpSecret.name(), GetTmpSecretRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.heart.name(), HeartRequest.class);
         REQUEST_TYPE_MAPPING.put(RequestType.systemMessage.name(), MessageRequest.class);
+        REQUEST_TYPE_MAPPING.put(RequestType.systemMessage.name(), StartSessionRequest.class);
     }
 
 

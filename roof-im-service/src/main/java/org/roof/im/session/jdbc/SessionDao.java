@@ -24,6 +24,8 @@ public interface SessionDao {
      */
     Session load(long id);
 
+    Integer updateEndTime(@Param("id") long id, @Param("endTime") long endTime);
+
     /**
      * 更新状态
      *

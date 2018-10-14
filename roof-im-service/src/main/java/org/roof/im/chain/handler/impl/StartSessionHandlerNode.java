@@ -50,6 +50,7 @@ public class StartSessionHandlerNode {
         if (session.getStartTime() > session.getEndTime()) {
             return START_TIME_GT_END_TIME;
         }
+        sessionDao.updateEndTime(session.getId(), session.getEndTime());
         return SESSION_START_SUCCESS;
     }
 

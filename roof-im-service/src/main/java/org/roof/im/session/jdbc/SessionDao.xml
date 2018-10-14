@@ -38,6 +38,12 @@
         WHERE id = #{id}
     </select>
 
+    <update id="updateEndTime">
+        UPDATE
+        <include refid="session_table_name"/>
+        SET end_time = #{endTime} WHERE id = #{id}
+    </update>
+
     <select id="updateState" resultType="java.lang.Integer">
         UPDATE
         <include refid="session_table_name"/>
