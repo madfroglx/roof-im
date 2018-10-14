@@ -41,9 +41,9 @@ public class StartSessionHandlerNode {
         if (session == null) {
             return SESSION_NOT_EXISTS;
         }
-        if (!StringUtils.equals(request.getUsername(), session.getReceiver())) {
-            return SESSION_NOT_EXISTS;
-        }
+//        if (!StringUtils.equals(request.getUsername(), session.getReceiver())) {
+//            return SESSION_NOT_EXISTS;
+//        }
         if (session.getState() == 2) {
             return SESSION_IS_CLOSED;
         }
