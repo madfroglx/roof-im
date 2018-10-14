@@ -1,6 +1,7 @@
 package org.roof.im.chain.handler.impl;
 
 import com.roof.chain.api.ValueStack;
+import org.apache.commons.lang3.StringUtils;
 import org.roof.im.request.StartSessionRequest;
 import org.roof.im.session.Session;
 import org.roof.im.session.SessionManager;
@@ -38,6 +39,9 @@ public class StartSessionHandlerNode {
         Long endTime = request.getEndTime();
         Session session = sessionDao.load(sessionId);
         if (session == null) {
+            return SESSION_NOT_EXISTS;
+        }
+        if (!StringUtils.equals(request.getUsername(), session.getReceiver())) {
             return SESSION_NOT_EXISTS;
         }
         if (session.getState() == 2) {
