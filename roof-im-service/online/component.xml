@@ -64,7 +64,7 @@
         <property name="userService" ref="userService"/>
     </bean>
     <bean id="guavaCacheManager" class="org.springframework.cache.guava.GuavaCacheManager">
-        <property name="allowNullValues" value="false"/>
+        <property name="allowNullValues" value="true"/>
         <property name="cacheSpecification" value="expireAfterAccess=20m"/>
     </bean>
 
